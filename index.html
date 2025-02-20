@@ -3,63 +3,126 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Comunicação Inclusiva - Projeto de Jordana</title>
+    <title>Portal Interativo de História</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             text-align: center;
-            background-image: url('https://source.unsplash.com/1600x900/?inclusion,children'); /* Imagem temática */
-            background-size: cover;
+            background-color: #f4f4f4;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        
+        header {
+            background-color: #2c3e50;
             color: white;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
             padding: 20px;
+            font-size: 24px;
         }
-
-        #container {
-            background: rgba(0, 0, 0, 0.6);
+        
+        .container {
+            margin: 20px auto;
+            max-width: 800px;
             padding: 20px;
+            background: white;
             border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
-
+        
         button {
-            background-color: #28a745;
+            background-color: #3498db;
             color: white;
             border: none;
             padding: 10px 20px;
             font-size: 18px;
             cursor: pointer;
             border-radius: 5px;
-            margin-top: 10px;
+            margin: 10px;
         }
 
         button:hover {
-            background-color: #218838;
+            background-color: #2980b9;
+        }
+
+        .content {
+            display: none;
+            font-size: 18px;
+            margin-top: 20px;
+        }
+
+        audio {
+            margin-top: 20px;
+        }
+
+        .image-container {
+            margin-top: 20px;
+        }
+
+        img {
+            width: 100%;
+            border-radius: 10px;
         }
     </style>
 </head>
 <body>
-    <div id="container">
-        <h1>Projeto de Comunicação Inclusiva</h1>
-        <p>Este projeto visa facilitar a interação entre crianças surdas e mudas, seus professores e colegas, promovendo um ambiente mais acessível e inclusivo.</p>
-        <button onclick="mostrarMensagem()">Saiba Mais</button>
-        <p id="mensagem" style="display:none; font-size: 18px; margin-top: 10px;">A comunicação é um direito fundamental. Vamos tornar a educação mais acessível!</p>
+
+<header>Portal Interativo de História</header>
+
+<div class="container">
+    <h2>Bem-vindo ao Portal de História</h2>
+    <p>Explore conteúdos educativos sobre História do Brasil, Mitologia Grega e História Antiga!</p>
+    
+    <button onclick="mostrarConteudo('brasil')">História do Brasil</button>
+    <button onclick="mostrarConteudo('grega')">Mitologia Grega</button>
+    <button onclick="mostrarConteudo('antiga')">História Antiga</button>
+    
+    <div id="brasil" class="content">
+        <h3>História do Brasil</h3>
+        <p>A História do Brasil começa com as civilizações indígenas e segue até a formação da República.</p>
+        <div class="image-container">
+            <img src="https://source.unsplash.com/800x400/?brazil,history" alt="História do Brasil">
+        </div>
+        <audio controls>
+            <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3" type="audio/mp3">
+            Seu navegador não suporta áudio.
+        </audio>
     </div>
 
-    <!-- Música de fundo -->
-    <audio autoplay loop>
-        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mp3">
-        Seu navegador não suporta áudio.
-    </audio>
+    <div id="grega" class="content">
+        <h3>Mitologia Grega</h3>
+        <p>A mitologia grega é cheia de lendas sobre deuses e heróis, como Zeus, Hércules e Atena.</p>
+        <div class="image-container">
+            <img src="https://source.unsplash.com/800x400/?greek,mythology" alt="Mitologia Grega">
+        </div>
+        <audio controls>
+            <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3" type="audio/mp3">
+            Seu navegador não suporta áudio.
+        </audio>
+    </div>
 
-    <script>
-        function mostrarMensagem() {
-            document.getElementById('mensagem').style.display = "block";
+    <div id="antiga" class="content">
+        <h3>História Antiga</h3>
+        <p>Os povos antigos, como os egípcios e romanos, deixaram um grande legado para a civilização.</p>
+        <div class="image-container">
+            <img src="https://source.unsplash.com/800x400/?ancient,history" alt="História Antiga">
+        </div>
+        <audio controls>
+            <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3" type="audio/mp3">
+            Seu navegador não suporta áudio.
+        </audio>
+    </div>
+</div>
+
+<script>
+    function mostrarConteudo(id) {
+        var conteudos = document.getElementsByClassName("content");
+        for (var i = 0; i < conteudos.length; i++) {
+            conteudos[i].style.display = "none";
         }
-    </script>
+        document.getElementById(id).style.display = "block";
+    }
+</script>
+
 </body>
 </html>
