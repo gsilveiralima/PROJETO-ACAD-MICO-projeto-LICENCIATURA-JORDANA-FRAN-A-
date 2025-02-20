@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comunicação Inclusiva - Projeto de Jordana</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-image: url('https://source.unsplash.com/1600x900/?inclusion,children'); /* Imagem temática */
+            background-size: cover;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        #container {
+            background: rgba(0, 0, 0, 0.6);
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        button {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 18px;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <h1>Projeto de Comunicação Inclusiva</h1>
+        <p>Este projeto visa facilitar a interação entre crianças surdas e mudas, seus professores e colegas, promovendo um ambiente mais acessível e inclusivo.</p>
+        <button onclick="mostrarMensagem()">Saiba Mais</button>
+        <p id="mensagem" style="display:none; font-size: 18px; margin-top: 10px;">A comunicação é um direito fundamental. Vamos tornar a educação mais acessível!</p>
+    </div>
+
+    <!-- Música de fundo -->
+    <audio autoplay loop>
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mp3">
+        Seu navegador não suporta áudio.
+    </audio>
+
+    <script>
+        function mostrarMensagem() {
+            document.getElementById('mensagem').style.display = "block";
+        }
+    </script>
+</body>
+</html>
