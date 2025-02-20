@@ -4,123 +4,229 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portal Interativo de História</title>
+    <meta name="description" content="Portal Interativo de História com conteúdos sobre História do Brasil, Mitologia Grega e História Antiga.">
+    <meta name="keywords" content="História, Brasil, Mitologia Grega, História Antiga, Educação, Inclusão">
+    <meta name="author" content="Gabriel Silveira Lima, Jordana França Soares">
     <style>
         body {
-            font-family: Arial, sans-serif;
-            text-align: center;
+            margin: 0;
+            font-family: 'Arial', sans-serif;
             background-color: #f4f4f4;
             color: #333;
-            margin: 0;
-            padding: 0;
+            line-height: 1.6;
         }
-        
         header {
             background-color: #2c3e50;
-            color: white;
-            padding: 20px;
-            font-size: 24px;
+            padding: 15px;
+            color: #fff;
+            text-align: center;
         }
-        
-        .container {
-            margin: 20px auto;
-            max-width: 800px;
-            padding: 20px;
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        nav ul {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin: 0;
         }
-        
-        button {
-            background-color: #3498db;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            font-size: 18px;
-            cursor: pointer;
-            border-radius: 5px;
+        nav ul li {
             margin: 10px;
         }
-
+        nav ul li a {
+            text-decoration: none;
+            color: #fff;
+            font-size: 18px;
+        }
+        nav ul li a:hover {
+            text-decoration: underline;
+        }
+        .container {
+            max-width: 900px;
+            margin: auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .section {
+            display: none;
+            margin-bottom: 40px;
+        }
+        .active {
+            display: block;
+        }
+        h2 {
+            color: #2c3e50;
+            border-bottom: 2px solid #2c3e50;
+            padding-bottom: 10px;
+        }
+        .image-container {
+            margin: 20px 0;
+        }
+        .image-container img {
+            width: 100%;
+            border-radius: 10px;
+        }
+        button {
+            background-color: #3498db;
+            border: none;
+            color: #fff;
+            padding: 10px 20px;
+            margin: 10px 0;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
         button:hover {
             background-color: #2980b9;
         }
-
-        .content {
-            display: none;
-            font-size: 18px;
-            margin-top: 20px;
-        }
-
-        audio {
-            margin-top: 20px;
-        }
-
-        .image-container {
-            margin-top: 20px;
-        }
-
-        img {
+        footer {
+            background-color: #2c3e50;
+            color: #fff;
+            text-align: center;
+            padding: 15px;
+            font-size: 14px;
+            position: fixed;
             width: 100%;
-            border-radius: 10px;
+            bottom: 0;
+        }
+        .author-info {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .author-info div {
+            background-color: #f4f4f4;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .author-info h3 {
+            margin-top: 0;
+        }
+        .author-info p {
+            margin: 5px 0 0 0;
+        }
+        .author-info em {
+            color: #2c3e50;
+        }
+        @media (max-width: 600px) {
+            nav ul {
+                flex-direction: column;
+            }
+            .container {
+                padding: 10px;
+            }
+            header, footer {
+                padding: 10px;
+            }
         }
     </style>
 </head>
 <body>
 
-<header>Portal Interativo de História</header>
+<header>
+    <h1>Portal Interativo de História</h1>
+    <nav>
+        <ul>
+            <li><a href="#" onclick="showSection('home')">Home</a></li>
+            <li><a href="#" onclick="showSection('brasil')">História do Brasil</a></li>
+            <li><a href="#" onclick="showSection('grega')">Mitologia Grega</a></li>
+            <li><a href="#" onclick="showSection('antiga')">História Antiga</a></li>
+            <li><a href="#" onclick="showSection('comunicacao')">Comunicação Inclusiva</a></li>
+            <li><a href="#" onclick="showSection('quiz')">Quiz de História</a></li>
+            <li><a href="#" onclick="showSection('autores')">Sobre os Autores</a></li>
+        </ul>
+    </nav>
+</header>
 
 <div class="container">
-    <h2>Bem-vindo ao Portal de História</h2>
-    <p>Explore conteúdos educativos sobre História do Brasil, Mitologia Grega e História Antiga!</p>
-    
-    <button onclick="mostrarConteudo('brasil')">História do Brasil</button>
-    <button onclick="mostrarConteudo('grega')">Mitologia Grega</button>
-    <button onclick="mostrarConteudo('antiga')">História Antiga</button>
-    
-    <div id="brasil" class="content">
-        <h3>História do Brasil</h3>
-        <p>A História do Brasil começa com as civilizações indígenas e segue até a formação da República.</p>
-        <div class="image-container">
-            <img src="https://source.unsplash.com/800x400/?brazil,history" alt="História do Brasil">
-        </div>
-        <audio controls>
-            <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3" type="audio/mp3">
-            Seu navegador não suporta áudio.
-        </audio>
-    </div>
+    <section id="home" class="section active">
+        <h2>Bem-vindo ao Portal de História</h2>
+        <p>Explore conteúdos interativos e educativos sobre a História do Brasil, Mitologia Grega e História Antiga. Nosso portal é desenvolvido para atender alunos com e sem deficiência, promovendo inclusão e acessibilidade.</p>
+        <button aria-label="Ouvir Introdução" onclick="speakText('Bem-vindo ao Portal de História. Explore conteúdos interativos e educativos.')">Ouvir Introdução</button>
+    </section>
 
-    <div id="grega" class="content">
-        <h3>Mitologia Grega</h3>
-        <p>A mitologia grega é cheia de lendas sobre deuses e heróis, como Zeus, Hércules e Atena.</p>
+    <section id="brasil" class="section">
+        <h2>História do Brasil</h2>
+        <p>Conheça a trajetória do nosso país, desde as civilizações indígenas até a formação da República.</p>
         <div class="image-container">
-            <img src="https://source.unsplash.com/800x400/?greek,mythology" alt="Mitologia Grega">
+            <img src="https://source.unsplash.com/800x400/?brazil,history" alt="Imagem representando a História do Brasil">
         </div>
-        <audio controls>
-            <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3" type="audio/mp3">
-            Seu navegador não suporta áudio.
-        </audio>
-    </div>
+        <button aria-label="Ouvir História do Brasil" onclick="speakText('Conheça a trajetória do Brasil, desde as civilizações indígenas até a formação da República.')">Ouvir História do Brasil</button>
+    </section>
 
-    <div id="antiga" class="content">
-        <h3>História Antiga</h3>
-        <p>Os povos antigos, como os egípcios e romanos, deixaram um grande legado para a civilização.</p>
+    <section id="grega" class="section">
+        <h2>Mitologia Grega</h2>
+        <p>Explore os mitos e lendas da Grécia Antiga. Conheça deuses, heróis e histórias que influenciaram a cultura ocidental.</p>
         <div class="image-container">
-            <img src="https://source.unsplash.com/800x400/?ancient,history" alt="História Antiga">
+            <img src="https://source.unsplash.com/800x400/?greek,mythology" alt="Imagem representando a Mitologia Grega">
         </div>
-        <audio controls>
-            <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3" type="audio/mp3">
-            Seu navegador não suporta áudio.
-        </audio>
-    </div>
+        <button aria-label="Ouvir Mitologia Grega" onclick="speakText('Explore os mitos e lendas da Grécia Antiga.')">Ouvir Mitologia Grega</button>
+    </section>
+
+    <section id="antiga" class="section">
+        <h2>História Antiga</h2>
+        <p>Descubra as civilizações antigas que moldaram o mundo. Conheça os egípcios, romanos, mesopotâmicos e muito mais.</p>
+        <div class="image-container">
+            <img src="https://source.unsplash.com/800x400/?ancient,history" alt="Imagem representando a História Antiga">
+        </div>
+        <button aria-label="Ouvir História Antiga" onclick="speakText('Descubra as civilizações antigas que moldaram o mundo. Conheça os egípcios, romanos, mesopotâmicos e muito mais.')">Ouvir História Antiga</button>
+    </section>
+
+    <section id="comunicacao" class="section">
+        <h2>Comunicação Inclusiva</h2>
+        <p>Entenda a importância da comunicação inclusiva e como ela pode ser aplicada no dia a dia para promover a inclusão de pessoas com deficiência.</p>
+        <div class="image-container">
+            <img src="https://source.unsplash.com/800x400/?inclusive,communication" alt="Imagem representando a Comunicação Inclusiva">
+        </div>
+        <button aria-label="Ouvir Comunicação Inclusiva" onclick="speakText('Entenda a importância da comunicação inclusiva e como ela pode ser aplicada no dia a dia para promover a inclusão de pessoas com deficiência.')">Ouvir Comunicação Inclusiva</button>
+    </section>
+
+    <section id="quiz" class="section">
+        <h2>Quiz de História</h2>
+        <p>Teste seus conhecimentos sobre história com nosso quiz interativo. Desafie-se e aprenda mais!</p>
+        <button aria-label="Iniciar Quiz" onclick="startQuiz()">Iniciar Quiz</button>
+    </section>
+
+    <section id="autores" class="section">
+        <h2>Sobre os Autores</h2>
+        <div class="author-info">
+            <div>
+                <h3>Gabriel Silveira Lima</h3>
+                <p>Especialista em Segurança Pública, Bacharel em Direito pela <em>UNIMAIS - Ponto Universitário de Inhumas</em>, Bacharelando em Ciência da Computação pela <em>GRAM</em>.</p>
+            </div>
+            <div>
+                <h3>Jordana França Soares</h3>
+                <p>Licencianda em História pela <em>PUC-GO</em>, iniciadora de projetos e estudos científicos na área de interação e educação histórica.</p>
+            </div>
+        </div>
+        <button aria-label="Ouvir Sobre os Autores" onclick="speakText('Conheça os autores: Gabriel Silveira Lima e Jordana França Soares.')">Ouvir Sobre os Autores</button>
+    </section>
 </div>
 
+<footer>
+    <p>&copy; 2025 Portal Interativo de História - Todos os direitos reservados.</p>
+</footer>
+
 <script>
-    function mostrarConteudo(id) {
-        var conteudos = document.getElementsByClassName("content");
-        for (var i = 0; i < conteudos.length; i++) {
-            conteudos[i].style.display = "none";
+    const showSection = (sectionId) => {
+        document.querySelectorAll('.section').forEach(section => section.classList.remove('active'));
+        document.getElementById(sectionId).classList.add('active');
+        window.scrollTo(0, 0);
+    }
+
+    const speakText = (text) => {
+        if ('speechSynthesis' in window) {
+            const msg = new SpeechSynthesisUtterance(text);
+            msg.lang = 'pt-BR';
+            window.speechSynthesis.speak(msg);
+        } else {
+            alert("Seu navegador não suporta síntese de fala.");
         }
-        document.getElementById(id).style.display = "block";
+    }
+
+    const startQuiz = () => {
+        alert("Quiz iniciado! (Esta função será implementada futuramente.)");
     }
 </script>
 
