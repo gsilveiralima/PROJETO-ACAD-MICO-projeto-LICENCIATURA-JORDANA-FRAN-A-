@@ -1,704 +1,531 @@
 <!DOCTYPE html>
 <html lang="pt">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Portal Interativo de História - Versão Inclusiva</title>
-  <meta name="description" content="Portal Interativo de História com conteúdos reais e interativos para crianças, incluindo recursos para deficiências visuais, auditivas, autismo e outras necessidades.">
-  <meta name="keywords" content="História, Brasil, Mitologia Grega, História Antiga, Educação, Inclusão, Libras, Braille, Linha do Tempo, Jogo de Memória">
-  <meta name="author" content="Gabriel Silveira Lima, Jordana França Soares">
-  <style>
-    /* Reset e estilos gerais */
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #f4f4f4;
-      color: #333;
-      line-height: 1.6;
-      padding-bottom: 80px;
-      text-align: center;
-    }
-    header {
-      background-color: #2c3e50;
-      padding: 15px;
-      color: #fff;
-      text-align: center;
-    }
-    nav ul {
-      list-style: none;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      padding: 0;
-      margin: 0;
-    }
-    nav ul li { margin: 8px; }
-    nav ul li a {
-      text-decoration: none;
-      color: #fff;
-      font-size: 16px;
-      transition: transform 0.3s ease;
-    }
-    nav ul li a:hover {
-      transform: scale(1.1);
-      text-decoration: underline;
-    }
-    .container {
-      max-width: 950px;
-      margin: 20px auto;
-      padding: 20px;
-      background: #fff;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-      text-align: left;
-    }
-    .section {
-      display: none;
-      margin-bottom: 40px;
-      text-align: left;
-    }
-    .section.active {
-      display: block;
-      animation: fadeIn 0.6s forwards;
-    }
-    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-    h2 {
-      color: #2c3e50;
-      border-bottom: 2px solid #2c3e50;
-      padding-bottom: 10px;
-      margin-bottom: 15px;
-    }
-    p { font-size: 17px; margin-bottom: 15px; text-align: justify; }
-    .image-container {
-      margin: 20px 0;
-      text-align: center;
-    }
-    .image-container img {
-      width: 100%;
-      max-height: 300px;
-      border-radius: 10px;
-      object-fit: cover;
-      transition: transform 0.3s ease;
-    }
-    .image-container img:hover { transform: scale(1.02); }
-    iframe, video, audio {
-      width: 100%;
-      margin-top: 10px;
-      border: none;
-    }
-    button {
-      background-color: #3498db;
-      border: none;
-      color: #fff;
-      padding: 10px 20px;
-      font-size: 16px;
-      border-radius: 5px;
-      margin: 10px;
-      cursor: pointer;
-      transition: background-color 0.3s ease, transform 0.3s ease;
-    }
-    button:hover { background-color: #2980b9; transform: scale(1.05); }
-    .references { margin-top: 15px; font-size: 0.9em; }
-    .references ul { list-style-type: circle; margin-left: 40px; }
-    .curiosidades {
-      background-color: #ecf0f1;
-      padding: 10px;
-      border-radius: 5px;
-      margin: 20px 0;
-    }
-    .curiosidades h4 { color: #2980b9; margin-bottom: 10px; }
-    .curiosidades ul { list-style-type: square; margin-left: 40px; }
-    /* Estilos para Contação de Histórias */
-    .story-container { border: 1px solid #ddd; padding: 15px; border-radius: 8px; margin-top: 10px; }
-    .story-controls { text-align: center; margin-top: 10px; }
-    /* Estilos para Linha do Tempo Interativa */
-    .timeline-container { border: 1px solid #ddd; padding: 15px; border-radius: 8px; margin-top: 10px; }
-    .timeline-buttons { display: flex; justify-content: space-around; margin-bottom: 15px; }
-    .timeline-buttons button { flex: 1; margin: 5px; }
-    /* Estilos para Jogo de Memória */
-    .memory-game { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top: 15px; }
-    .memory-card {
-      background-color: #2980b9;
-      color: #fff;
-      border-radius: 8px;
-      padding: 20px;
-      text-align: center;
-      font-size: 18px;
-      cursor: pointer;
-      user-select: none;
-      transition: transform 0.3s ease;
-    }
-    .memory-card.flipped { background-color: #27ae60; transform: rotateY(180deg); }
-    .memory-card.matched { background-color: #7f8c8d; cursor: default; }
-    /* Responsividade */
-    @media (max-width: 600px) {
-      nav ul { flex-direction: column; }
-      .container { padding: 10px; }
-      header, footer { padding: 10px; }
-      .memory-game { grid-template-columns: repeat(2, 1fr); }
-    }
-    footer {
-      background-color: #2c3e50;
-      color: #fff;
-      text-align: center;
-      padding: 15px;
-      font-size: 14px;
-      position: fixed;
-      width: 100%;
-      bottom: 0;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portal Interativo de História</title>
+    <meta name="description" content="Portal Interativo de História com conteúdos completos e multimídia sobre vários períodos históricos, incluindo Brasil, Mitologia Grega, História Antiga, Idade Média, Renascimento, Iluminismo, História Contemporânea e mais, além de recursos de Braille.">
+    <meta name="keywords" content="História, Brasil, Mitologia Grega, História Antiga, Idade Média, Renascimento, Iluminismo, Educação, Inclusão, Arte, Cultura, Revoluções, Globalização, Braille">
+    <meta name="author" content="Gabriel Silveira Lima, Jordana França Soares">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            line-height: 1.6;
+            text-align: center;
+        }
+        header {
+            background-color: #2c3e50;
+            padding: 15px;
+            color: #fff;
+            text-align: center;
+        }
+        nav ul {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin: 0;
+        }
+        nav ul li {
+            margin: 10px;
+        }
+        nav ul li a {
+            text-decoration: none;
+            color: #fff;
+            font-size: 18px;
+        }
+        nav ul li a:hover {
+            text-decoration: underline;
+        }
+        .container {
+            max-width: 900px;
+            margin: auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .section {
+            display: none;
+            margin-bottom: 40px;
+        }
+        .active {
+            display: block;
+        }
+        h2 {
+            color: #2c3e50;
+            border-bottom: 2px solid #2c3e50;
+            padding-bottom: 10px;
+        }
+        footer {
+            background-color: #2c3e50;
+            color: #fff;
+            text-align: center;
+            padding: 15px;
+            font-size: 14px;
+            width: 100%;
+            bottom: 0;
+        }
+        .image-container {
+            margin: 20px 0;
+        }
+        .image-container img {
+            width: 100%;
+            border-radius: 10px;
+        }
+        video, audio {
+            width: 100%;
+            margin-top: 10px;
+        }
+        button {
+            background-color: #3498db;
+            border: none;
+            color: #fff;
+            padding: 10px 20px;
+            margin: 10px 5px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #2980b9;
+        }
+        /* Braille table styling */
+        .braille-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        .braille-table th, .braille-table td {
+            border: 1px solid #ccc;
+            padding: 8px;
+        }
+        .braille-table th {
+            background-color: #f0f0f0;
+        }
+        .braille-output {
+            margin-top: 10px;
+            padding: 10px;
+            background-color: #eef;
+            border-radius: 5px;
+            min-height: 40px;
+        }
+    </style>
 </head>
 <body>
-
-  <!-- Cabeçalho e Navegação -->
-  <header>
+<header>
     <h1>Portal Interativo de História</h1>
     <nav>
-      <ul>
-        <li><a href="#" onclick="showSection('home')" aria-label="Home">Home</a></li>
-        <li><a href="#" onclick="showSection('brasil')" aria-label="História do Brasil">História do Brasil</a></li>
-        <li><a href="#" onclick="showSection('grega')" aria-label="Mitologia Grega">Mitologia Grega</a></li>
-        <li><a href="#" onclick="showSection('antiga')" aria-label="História Antiga">História Antiga</a></li>
-        <li><a href="#" onclick="showSection('comunicacao')" aria-label="Comunicação Inclusiva">Comunicação Inclusiva</a></li>
-        <li><a href="#" onclick="showSection('libras')" aria-label="Libras">Libras</a></li>
-        <li><a href="#" onclick="showSection('quiz')" aria-label="Quiz de História">Quiz de História</a></li>
-        <li><a href="#" onclick="showSection('atividades')" aria-label="Atividades Interativas">Atividades Interativas</a></li>
-        <li><a href="#" onclick="showSection('historias')" aria-label="Contação de Histórias">Contação de Histórias</a></li>
-        <li><a href="#" onclick="showSection('timeline')" aria-label="Linha do Tempo">Linha do Tempo</a></li>
-        <li><a href="#" onclick="showSection('memoria')" aria-label="Jogo de Memória">Jogo de Memória</a></li>
-        <li><a href="#" onclick="showSection('autores')" aria-label="Sobre os Autores">Sobre os Autores</a></li>
-        <li><a href="#" onclick="showSection('braille')" aria-label="Conversor Braille">Conversor Braille</a></li>
-      </ul>
+        <ul>
+            <li><a href="#" onclick="showSection('home')">Home</a></li>
+            <li><a href="#" onclick="showSection('brasil')">História do Brasil</a></li>
+            <li><a href="#" onclick="showSection('grega')">Mitologia Grega</a></li>
+            <li><a href="#" onclick="showSection('antiga')">História Antiga</a></li>
+            <li><a href="#" onclick="showSection('idadeMedia')">Idade Média</a></li>
+            <li><a href="#" onclick="showSection('renascimento')">Renascimento</a></li>
+            <li><a href="#" onclick="showSection('iluminismo')">Iluminismo</a></li>
+            <li><a href="#" onclick="showSection('contemporanea')">História Contemporânea</a></li>
+            <li><a href="#" onclick="showSection('braille')">Braille</a></li>
+            <li><a href="#" onclick="showSection('quiz')">Quiz de História</a></li>
+        </ul>
     </nav>
-  </header>
+</header>
 
-  <!-- Conteúdo Principal -->
-  <div class="container">
-    
-    <!-- Seção Home -->
+<div class="container">
+    <!-- HOME -->
     <section id="home" class="section active">
-      <h2>Bem-vindo ao Portal de História</h2>
-      <p>
-        Explore conteúdos interativos e educativos sobre História do Brasil, Mitologia Grega, História Antiga e muito mais. Nosso portal promove a inclusão com recursos para crianças com deficiências visuais, auditivas, de fala, autismo e outras necessidades.
-      </p>
-      <div class="image-container">
-        <!-- Imagem do Navio de Cabral -->
-        <img src="media/cabral_ship.jpg" alt="Navio de Cabral navegando">
-      </div>
-      <!-- Vídeo introdutório com legendas e audiodescrição -->
-      <video controls>
-        <source src="media/intro.mp4" type="video/mp4">
-        Seu navegador não suporta o vídeo.
-      </video>
-      <!-- Áudio introdutório -->
-      <audio controls>
-        <source src="media/intro.mp3" type="audio/mp3">
-        Seu navegador não suporta áudio.
-      </audio>
-      <button aria-label="Ouvir Introdução" onclick="speakText('Bem-vindo ao Portal de História. Explore conteúdos interativos e educativos.')">Ouvir Introdução</button>
+        <h2>Bem-vindo ao Portal de História</h2>
+        <p>Descubra uma rica jornada pelo passado da humanidade! Aqui você encontrará conteúdos completos e multimídia sobre a História do Brasil, Mitologia Grega, História Antiga, Idade Média, Renascimento, Iluminismo, História Contemporânea e outras grandes transformações que moldaram o mundo. Aproveite textos, imagens, áudios, vídeos e um quiz interativo para reforçar seus conhecimentos.</p>
+        <div class="image-container">
+            <img src="images/home_intro.jpg" alt="Portal Interativo de História">
+        </div>
+        <video controls>
+            <source src="videos/introducao.mp4" type="video/mp4">
+            <source src="videos/introducao.webm" type="video/webm">
+            <p>Seu navegador não oferece suporte a MP4 ou WebM. Atualize-o ou tente outro navegador.</p>
+        </video>
+        <p>
+            Explore cada seção para conhecer diferentes períodos históricos, curiosidades e personagens marcantes. Você pode navegar pelos botões acima ou simplesmente clicar no tópico que mais lhe interessar.
+        </p>
     </section>
 
-    <!-- Seção História do Brasil -->
+    <!-- HISTÓRIA DO BRASIL -->
     <section id="brasil" class="section">
-      <h2>História do Brasil</h2>
-      <p>
-        A História do Brasil inicia-se com a chegada dos portugueses em 1500, comandados por Pedro Álvares Cabral. Durante o período colonial, a economia era impulsionada pela extração do pau‑brasil, produção de açúcar e mineração – sustentada pela mão de obra escrava. Em 1822, o país conquistou a independência, pavimentando o caminho para a República.
-      </p>
-      <div class="curiosidades">
-        <h4>Curiosidades</h4>
-        <ul>
-          <li>Antes da chegada dos colonizadores, diversos povos indígenas habitavam o território.</li>
-          <li>O pau‑brasil foi um dos primeiros produtos de exportação.</li>
-          <li>A Lei Áurea, de 1888, aboliu oficialmente a escravidão.</li>
-        </ul>
-      </div>
-      <div class="image-container">
-        <!-- Imagem do Mapa do Brasil Colonial -->
-        <img src="media/map_brazil_colonial.jpg" alt="Mapa do Brasil Colonial">
-      </div>
-      <!-- Vídeo educativo sobre História do Brasil -->
-      <video controls>
-        <source src="media/historia_brasil.mp4" type="video/mp4">
-        Seu navegador não suporta o vídeo.
-      </video>
-      <!-- Áudio narrativo do período colonial -->
-      <audio controls>
-        <source src="media/historia_brasil.mp3" type="audio/mp3">
-        Seu navegador não suporta áudio.
-      </audio>
-      <button aria-label="Ouvir História do Brasil" onclick="speakText('Conheça a trajetória do Brasil, desde as civilizações indígenas até a formação da República.')">Ouvir História do Brasil</button>
-      <div class="references">
-        <h4>Fontes</h4>
-        <ul>
-          <li>Fausto, B. – <em>História do Brasil</em>, EdUSP, 2016.</li>
-          <li><a href="https://www.bn.gov.br/" target="_blank">Biblioteca Nacional</a></li>
-        </ul>
-      </div>
+        <h2>História do Brasil</h2>
+        <p>A história do Brasil remonta à chegada dos portugueses em 1500, mas antes disso, inúmeras nações indígenas já habitavam e desenvolviam suas culturas em diferentes regiões, como Tupi, Guarani e muitos outros troncos linguísticos. Durante o período colonial, os portugueses exploraram o pau-brasil, cana-de-açúcar e outros recursos, impactando profundamente as populações locais por meio do escambo e da escravidão. A independência ocorreu em 1822, sob a liderança de Dom Pedro I, dando origem ao Império do Brasil. Em seguida, o país viveu o Segundo Reinado, sob Dom Pedro II, até 1889, quando a República foi proclamada. No século XX, o Brasil passou por fases como a Primeira República, a Era Vargas, o Regime Militar e a redemocratização na década de 1980. Hoje, é uma república federativa, rica em diversidade cultural, econômica e social.</p>
+        <div class="image-container">
+            <img src="images/brasil_historia.jpg" alt="Cenas históricas do Brasil">
+        </div>
+        <video controls>
+            <source src="videos/brasil.mp4" type="video/mp4">
+            <source src="videos/brasil.webm" type="video/webm">
+            <p>Seu navegador não oferece suporte a MP4 ou WebM. Atualize-o ou tente outro navegador.</p>
+        </video>
+        <audio controls>
+            <source src="audios/brasil.mp3" type="audio/mpeg">
+            <p>Seu navegador não oferece suporte a áudio. Atualize-o ou tente outro navegador.</p>
+        </audio>
+        <p>
+            <strong>Colonização e Escravidão:</strong> A economia colonial era sustentada principalmente pela mão de obra escravizada, tanto de indígenas quanto de africanos trazidos pelos colonizadores. <br>
+            <strong>Período Imperial:</strong> (1822 – 1889) Período marcado pelo Primeiro e Segundo Reinado (Dom Pedro I e Dom Pedro II). Houve modernização, mas também tensões como a Guerra do Paraguai. <br>
+            <strong>República:</strong> (1889 – atual) Englobando a Primeira República, Era Vargas, Regime Militar (1964-1985) e a Nova República, cada etapa trazendo mudanças sociais e políticas significativas.
+        </p>
+        <p>
+            <em>Curiosidade:</em> A vinda da Família Real Portuguesa ao Brasil, em 1808, transformou a então colônia, abrindo portos e estimulando o desenvolvimento de instituições como a Biblioteca Nacional.
+        </p>
     </section>
 
-    <!-- Seção Mitologia Grega -->
+    <!-- MITOLOGIA GREGA -->
     <section id="grega" class="section">
-      <h2>Mitologia Grega</h2>
-      <p>
-        A mitologia grega reúne lendas que explicam a origem do mundo e os valores humanos por meio das histórias de deuses, heróis e criaturas fantásticas. Obras clássicas, como <em>A Ilíada</em> e <em>A Odisseia</em>, narram os feitos de Zeus, Hércules, Atena e outros.
-      </p>
-      <div class="curiosidades">
-        <h4>Curiosidades</h4>
-        <ul>
-          <li>O Monte Olimpo era considerado a morada dos deuses.</li>
-          <li>Hércules é celebrado por seus doze trabalhos.</li>
-        </ul>
-      </div>
-      <div class="image-container">
-        <!-- Imagem dos Deuses do Olimpo -->
-        <img src="media/zeus_olympus.jpg" alt="Representação dos deuses do Olimpo">
-      </div>
-      <!-- Vídeo educativo sobre Mitologia Grega -->
-      <video controls>
-        <source src="media/mitologia_grega.mp4" type="video/mp4">
-        Seu navegador não suporta o vídeo.
-      </video>
-      <!-- Áudio narrativo sobre mitos gregos -->
-      <audio controls>
-        <source src="media/mitologia_grega.mp3" type="audio/mp3">
-        Seu navegador não suporta áudio.
-      </audio>
-      <button aria-label="Ouvir Mitologia Grega" onclick="speakText('Explore os mitos e lendas da Grécia Antiga, com histórias de deuses e heróis.')">Ouvir Mitologia Grega</button>
-      <div class="references">
-        <h4>Fontes</h4>
-        <ul>
-          <li>Homero – <em>A Ilíada</em> e <em>A Odisseia</em>.</li>
-          <li>Graves, R. – <em>Os Mitos Gregos</em>, Nova Fronteira, 2013.</li>
-        </ul>
-      </div>
+        <h2>Mitologia Grega</h2>
+        <p>A mitologia grega reúne histórias que explicam fenômenos naturais, a criação do mundo e a interação entre deuses e humanos. Os doze deuses do Olimpo, liderados por Zeus, influenciavam todos os aspectos da vida, enquanto Hades governava o submundo. Heróis como Hércules, Teseu e Perseu enfrentavam desafios épicos, e criaturas como Medusa, Minotauro e Sereias habitavam mitos carregados de simbolismo. A cultura grega, expressa na literatura épica de Homero (A Ilíada e a Odisseia), atravessou séculos, influenciando artes, filosofia e religiões.</p>
+        <div class="image-container">
+            <img src="images/mitologia_grega.jpg" alt="Figuras míticas da Grécia Antiga">
+        </div>
+        <video controls>
+            <source src="videos/mitologia.mp4" type="video/mp4">
+            <source src="videos/mitologia.webm" type="video/webm">
+            <p>Seu navegador não oferece suporte a MP4 ou WebM. Atualize-o ou tente outro navegador.</p>
+        </video>
+        <audio controls>
+            <source src="audios/mitologia.mp3" type="audio/mpeg">
+            <p>Seu navegador não oferece suporte a áudio. Atualize-o ou tente outro navegador.</p>
+        </audio>
+        <p>
+            <strong>Deuses do Olimpo:</strong> Zeus, Hera, Poseidon, Deméter, Atena, Apolo, Ártemis, Ares, Afrodite, Hermes, Hefesto e Dionísio. <br>
+            <strong>Heróis e Criaturas:</strong> Hércules, Perseu, Teseu, Medusa, Minotauro, Centauros, Sereias, Ciclopes. <br>
+            <strong>Influência Cultural:</strong> A Ilíada e a Odisseia inspiraram diversas obras de literatura, teatro, cinema e jogos.
+        </p>
+        <p>
+            <em>Curiosidade:</em> Muitos dos mitos gregos foram adaptados pelos romanos, que atribuíram nomes diferentes aos deuses (por exemplo, Zeus correspondia a Júpiter, e Hera a Juno).
+        </p>
     </section>
 
-    <!-- Seção História Antiga -->
+    <!-- HISTÓRIA ANTIGA -->
     <section id="antiga" class="section">
-      <h2>História Antiga</h2>
-      <p>
-        A História Antiga aborda o surgimento das primeiras civilizações – do Egito, com suas pirâmides e hieróglifos, à Mesopotâmia, berço da escrita, passando pelos impérios grego e romano, que lançaram as bases da cultura e do direito ocidental.
-      </p>
-      <div class="curiosidades">
-        <h4>Curiosidades</h4>
-        <ul>
-          <li>O Código de Hamurábi é um dos primeiros conjuntos de leis registrados.</li>
-          <li>O Egito é famoso por suas imponentes pirâmides e pela escrita hieroglífica.</li>
-        </ul>
-      </div>
-      <div class="image-container">
-        <!-- Imagem da Pirâmide de Gizé -->
-        <img src="media/great_pyramid_of_giza.jpg" alt="Pirâmide de Gizé">
-      </div>
-      <!-- Vídeo educativo sobre Civilizações da Antiguidade -->
-      <video controls>
-        <source src="media/civilizacoes_antigas.mp4" type="video/mp4">
-        Seu navegador não suporta o vídeo.
-      </video>
-      <!-- Áudio explicativo sobre a invenção da escrita -->
-      <audio controls>
-        <source src="media/civilizacoes_antigas.mp3" type="audio/mp3">
-        Seu navegador não suporta áudio.
-      </audio>
-      <button aria-label="Ouvir História Antiga" onclick="speakText('Descubra as civilizações antigas que moldaram o mundo, como os egípcios, mesopotâmicos, gregos e romanos.')">Ouvir História Antiga</button>
-      <div class="references">
-        <h4>Fontes</h4>
-        <ul>
-          <li>Gonçalves, E. – <em>História Antiga: Egito e Mesopotâmia</em>, Contexto, 2019.</li>
-          <li>Bernardini, C. – <em>Mundo Antigo: Grécia e Roma</em>, Sulina, 2020.</li>
-        </ul>
-      </div>
+        <h2>História Antiga</h2>
+        <p>A História Antiga cobre o surgimento das primeiras civilizações, como Egito, Mesopotâmia, Fenícia, Pérsia, Grécia e Roma. Essas sociedades deixaram contribuições em escrita, arquitetura, leis, religião, arte e filosofia. O Egito destacou-se pela construção de pirâmides e pela prática de mumificação. A Mesopotâmia foi pioneira na escrita cuneiforme e criou códigos legais, como o Código de Hamurábi. Fenícios desenvolveram um alfabeto que influenciou diversas línguas modernas. Grécia e Roma moldaram o mundo ocidental, desenvolvendo a democracia, instituições republicanas e legados arquitetônicos e literários que influenciam nossa sociedade até hoje.</p>
+        <div class="image-container">
+            <img src="images/historia_antiga.jpg" alt="Representação de civilizações antigas">
+        </div>
+        <video controls>
+            <source src="videos/antiga.mp4" type="video/mp4">
+            <source src="videos/antiga.webm" type="video/webm">
+            <p>Seu navegador não oferece suporte a MP4 ou WebM. Atualize-o ou tente outro navegador.</p>
+        </video>
+        <audio controls>
+            <source src="audios/antiga.mp3" type="audio/mpeg">
+            <p>Seu navegador não oferece suporte a áudio. Atualize-o ou tente outro navegador.</p>
+        </audio>
+        <p>
+            <strong>Egito:</strong> Construção das pirâmides, culto aos faraós e a escrita hieroglífica. <br>
+            <strong>Mesopotâmia:</strong> Conhecida como "Berço da Civilização", criou as primeiras cidades-estado. <br>
+            <strong>Fenícia:</strong> Um povo de navegadores que estabeleceu rotas comerciais por todo o Mediterrâneo. <br>
+            <strong>Grécia e Roma:</strong> Fundamentos da cultura ocidental, destacando-se na filosofia, direito, engenharia e artes.
+        </p>
+        <p>
+            <em>Curiosidade:</em> A Biblioteca de Alexandria, no Egito Helenístico, foi um dos mais importantes centros de conhecimento da Antiguidade.
+        </p>
     </section>
 
-    <!-- Seção Comunicação Inclusiva -->
-    <section id="comunicacao" class="section">
-      <h2>Comunicação Inclusiva</h2>
-      <p>
-        A comunicação inclusiva é essencial para que todas as crianças tenham acesso à educação. Utilizamos legendas, audiodescrição, Libras e adaptações visuais para garantir a compreensão de todos.
-      </p>
-      <div class="image-container">
-        <!-- Imagem para Comunicação Inclusiva -->
-        <img src="media/comunicacao_inclusiva.jpg" alt="Ilustração de comunicação inclusiva">
-      </div>
-      <button aria-label="Ouvir Comunicação Inclusiva" onclick="speakText('Entenda a importância da comunicação inclusiva para promover a participação de todos.')">Ouvir Comunicação Inclusiva</button>
+    <!-- IDADE MÉDIA -->
+    <section id="idadeMedia" class="section">
+        <h2>Idade Média</h2>
+        <p>Estendendo-se do século V ao XV, a Idade Média começou com a queda do Império Romano do Ocidente e terminou com a tomada de Constantinopla pelos turcos otomanos. Marcada pelo feudalismo, pela forte influência da Igreja Católica e pela formação de reinos, foi também um período de intensas transformações. As Cruzadas, a expansão do Islamismo e o surgimento das primeiras universidades também ocorreram nessa época. A arte medieval inclui a arquitetura românica e gótica, além de manuscritos iluminados e cantigas que expressavam a vida e a religiosidade do período.</p>
+        <div class="image-container">
+            <img src="images/idade_media.jpg" alt="Paisagem medieval européia">
+        </div>
+        <video controls>
+            <source src="videos/idade_media.mp4" type="video/mp4">
+            <source src="videos/idade_media.webm" type="video/webm">
+            <p>Seu navegador não oferece suporte a MP4 ou WebM. Atualize-o ou tente outro navegador.</p>
+        </video>
+        <audio controls>
+            <source src="audios/idade_media.mp3" type="audio/mpeg">
+            <p>Seu navegador não oferece suporte a áudio. Atualize-o ou tente outro navegador.</p>
+        </audio>
+        <p>
+            <strong>Alta Idade Média:</strong> Marcada pelas invasões bárbaras, consolidação do feudalismo e ruralização da economia. <br>
+            <strong>Baixa Idade Média:</strong> Crescimento das cidades, fortalecimento do comércio, surgimento das corporações de ofício e das primeiras universidades. <br>
+            <strong>Religião:</strong> A Igreja Católica era uma instituição extremamente poderosa, influenciando política, cultura e educação.
+        </p>
+        <p>
+            <em>Curiosidade:</em> As Cruzadas foram expedições de caráter militar e religioso com o objetivo de retomar Jerusalém, considerada sagrada para o cristianismo.
+        </p>
     </section>
 
-    <!-- Seção Libras -->
-    <section id="libras" class="section">
-      <h2>Libras – Língua Brasileira de Sinais</h2>
-      <p>
-        Assista a vídeos com interpretação em Libras para acompanhar o conteúdo de forma acessível. Essa seção foi desenvolvida para atender crianças surdas ou com deficiência auditiva.
-      </p>
-      <div class="image-container">
-        <!-- Imagem para Libras -->
-        <img src="media/libras.jpg" alt="Interpretação em Libras">
-      </div>
-      <video controls>
-        <source src="media/libras.mp4" type="video/mp4">
-        Seu navegador não suporta o vídeo.
-      </video>
-      <button aria-label="Ouvir Libras" onclick="speakText('Assista ao vídeo com interpretação em Libras para acompanhar o conteúdo.')">Ouvir Libras</button>
+    <!-- RENASCIMENTO -->
+    <section id="renascimento" class="section">
+        <h2>Renascimento</h2>
+        <p>O Renascimento (séculos XIV a XVI) representou uma retomada dos valores da cultura clássica grega e romana, bem como o surgimento do humanismo e do pensamento científico moderno. Cidades como Florença, Veneza e Roma foram centros de produção artística e intelectual. Grandes nomes como Leonardo da Vinci, Michelangelo, Rafael e Donatello revolucionaram as artes, com obras que exaltavam a beleza e a anatomia humana. Na literatura, Maquiavel, Shakespeare e Camões ganharam destaque. Esse período, marcado pela valorização do homem e da razão, também presenciou transformações religiosas e políticas, como a Reforma Protestante e a expansão marítima.</p>
+        <div class="image-container">
+            <img src="images/renascimento.jpg" alt="Pintura representando o Renascimento">
+        </div>
+        <video controls>
+            <source src="videos/renascimento.mp4" type="video/mp4">
+            <source src="videos/renascimento.webm" type="video/webm">
+            <p>Seu navegador não oferece suporte a MP4 ou WebM. Atualize-o ou tente outro navegador.</p>
+        </video>
+        <audio controls>
+            <source src="audios/renascimento.mp3" type="audio/mpeg">
+            <p>Seu navegador não oferece suporte a áudio. Atualize-o ou tente outro navegador.</p>
+        </audio>
+        <p>
+            <strong>Principais Centros:</strong> Florença, Veneza, Roma. <br>
+            <strong>Humanismo:</strong> Valorização do homem em oposição ao teocentrismo medieval, enfatizando o estudo das letras clássicas. <br>
+            <strong>Ciência:</strong> Copérnico, Galileu, Kepler e outros estudiosos revolucionaram a astronomia e questionaram conceitos tradicionais.
+        </p>
+        <p>
+            <em>Curiosidade:</em> A técnica de perspectiva na pintura, aperfeiçoada no Renascimento, mudou a forma como os artistas representavam profundidade e espaço.
+        </p>
     </section>
 
-    <!-- Seção Quiz de História -->
+    <!-- ILUMINISMO -->
+    <section id="iluminismo" class="section">
+        <h2>Iluminismo</h2>
+        <p>O Iluminismo, ou "Século das Luzes", floresceu no século XVIII e colocou em destaque a razão, a liberdade e o pensamento crítico como bases para o progresso humano. Filósofos iluministas como John Locke, Voltaire, Montesquieu e Rousseau discutiam direitos naturais, separação de poderes, tolerância religiosa e cidadania. As ideias iluministas influenciaram revoluções como a Independência dos Estados Unidos (1776) e a Revolução Francesa (1789), transformando profundamente as estruturas políticas e sociais do Ocidente. As monarquias absolutistas foram questionadas e substituídas, em muitos casos, por repúblicas ou monarquias constitucionais.</p>
+        <div class="image-container">
+            <img src="images/iluminismo.jpg" alt="Representação do Iluminismo">
+        </div>
+        <video controls>
+            <source src="videos/iluminismo.mp4" type="video/mp4">
+            <source src="videos/iluminismo.webm" type="video/webm">
+            <p>Seu navegador não oferece suporte a MP4 ou WebM. Atualize-o ou tente outro navegador.</p>
+        </video>
+        <audio controls>
+            <source src="audios/iluminismo.mp3" type="audio/mpeg">
+            <p>Seu navegador não oferece suporte a áudio. Atualize-o ou tente outro navegador.</p>
+        </audio>
+        <p>
+            <strong>Principais Filósofos:</strong> John Locke, Voltaire, Montesquieu, Jean-Jacques Rousseau. <br>
+            <strong>Ideias Centrais:</strong> Liberdade de expressão, tolerância religiosa, contrato social, separação dos poderes, igualdade jurídica. <br>
+            <strong>Impacto:</strong> Influência em revoluções, na formação de novas constituições e no surgimento de Estados nacionais modernos.
+        </p>
+        <p>
+            <em>Curiosidade:</em> O Dicionário Filosófico de Voltaire e a Enciclopédia de Diderot e d'Alembert foram fundamentais na difusão das ideias iluministas.
+        </p>
+    </section>
+
+    <!-- HISTÓRIA CONTEMPORÂNEA -->
+    <section id="contemporanea" class="section">
+        <h2>História Contemporânea</h2>
+        <p>A História Contemporânea abrange desde o final do século XVIII até os dias atuais. É caracterizada por mudanças aceleradas em âmbito político, social, econômico e tecnológico. A Revolução Francesa (1789) é geralmente considerada o marco inicial, derrubando a monarquia absolutista e influenciando movimentos revolucionários ao redor do mundo. No século XIX, as Revoluções Industriais transformaram radicalmente o processo de produção, dando início a uma era de urbanização e novas relações de trabalho. O século XX foi marcado pelas Guerras Mundiais, a Guerra Fria, descolonização na África e Ásia, o avanço da democracia liberal e a formação de blocos econômicos. No século XXI, a globalização, a Era Digital e os desafios ambientais e geopolíticos definem as pautas de governos e sociedades.</p>
+        <div class="image-container">
+            <img src="images/contemporanea.jpg" alt="Movimentos e fatos da História Contemporânea">
+        </div>
+        <video controls>
+            <source src="videos/contemporanea.mp4" type="video/mp4">
+            <source src="videos/contemporanea.webm" type="video/webm">
+            <p>Seu navegador não oferece suporte a MP4 ou WebM. Atualize-o ou tente outro navegador.</p>
+        </video>
+        <audio controls>
+            <source src="audios/contemporanea.mp3" type="audio/mpeg">
+            <p>Seu navegador não oferece suporte a áudio. Atualize-o ou tente outro navegador.</p>
+        </audio>
+        <p>
+            <strong>Revoluções Industriais:</strong> Introdução das máquinas a vapor, eletricidade, produção em massa, tecnologia digital. <br>
+            <strong>Guerras Mundiais:</strong> Primeira (1914-1918) e Segunda Guerra (1939-1945) redefiniram a geopolítica global, levando à criação da ONU. <br>
+            <strong>Sociedade em Rede:</strong> A internet e as tecnologias de informação remodelaram a economia, a política e a cultura em escala mundial.
+        </p>
+        <p>
+            <em>Curiosidade:</em> A globalização aproximou culturas e mercados, mas também trouxe desafios como desigualdades socioeconômicas e crises climáticas.
+        </p>
+    </section>
+
+    <!-- BRAILLE -->
+    <section id="braille" class="section">
+        <h2>Sistema Braille</h2>
+        <p>O Braille é um sistema de leitura e escrita tátil criado para pessoas com deficiência visual. Cada caractere em Braille é formado por pontos em relevo dispostos em até seis posições, organizados em duas colunas de três pontos cada. A presença ou ausência de cada ponto define a letra, número ou símbolo.</p>
+        <p>Além de letras e números, o Braille também prevê sinais de pontuação, símbolos matemáticos e até representações musicais. Sua adoção é fundamental para a inclusão de pessoas com deficiência visual na educação, trabalho e cultura.</p>
+        <div class="image-container">
+            <img src="images/braille_alphabet.jpg" alt="Alfabeto Braille">
+        </div>
+        <video controls>
+            <source src="videos/braille_exemplo.mp4" type="video/mp4">
+            <source src="videos/braille_exemplo.webm" type="video/webm">
+            <p>Seu navegador não oferece suporte a MP4 ou WebM. Atualize-o ou tente outro navegador.</p>
+        </video>
+        <audio controls>
+            <source src="audios/braille_explicacao.mp3" type="audio/mpeg">
+            <p>Seu navegador não oferece suporte a áudio. Atualize-o ou tente outro navegador.</p>
+        </audio>
+
+        <!-- Exemplo de uma Tabela do Alfabeto Braille -->
+        <table class="braille-table">
+            <thead>
+                <tr>
+                    <th>Letra</th>
+                    <th>Representação em Braille</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>A</td>
+                    <td>⠁</td>
+                </tr>
+                <tr>
+                    <td>B</td>
+                    <td>⠃</td>
+                </tr>
+                <tr>
+                    <td>C</td>
+                    <td>⠉</td>
+                </tr>
+                <tr>
+                    <td>D</td>
+                    <td>⠙</td>
+                </tr>
+                <tr>
+                    <td>E</td>
+                    <td>⠑</td>
+                </tr>
+                <!-- Acrescente mais linhas conforme necessidade -->
+            </tbody>
+        </table>
+
+        <p><em>Experimente converter seu próprio texto para Braille (simplificado) abaixo:</em></p>
+        <textarea id="brailleInput" rows="3" placeholder="Digite algo..."></textarea><br>
+        <button onclick="converterParaBraille()">Converter para Braille Simplificado</button>
+        <div id="brailleOutput" class="braille-output"></div>
+    </section>
+
+    <!-- QUIZ DE HISTÓRIA -->
     <section id="quiz" class="section">
-      <h2>Quiz de História</h2>
-      <p>Teste seus conhecimentos de forma interativa!</p>
-      <div class="quiz-container">
-        <button aria-label="Iniciar Quiz" onclick="startQuiz()">Iniciar Quiz</button>
+        <h2>Quiz de História</h2>
+        <p>Teste seus conhecimentos com nosso quiz interativo! Clique no botão para começar.</p>
+        <button onclick="startQuiz()">Iniciar Quiz</button>
         <p id="quizPergunta"></p>
         <button id="resposta1"></button>
         <button id="resposta2"></button>
         <p id="resultadoQuiz"></p>
-      </div>
     </section>
+</div>
 
-    <!-- Seção Atividades Interativas -->
-    <section id="atividades" class="section">
-      <h2>Atividades Interativas</h2>
-      <p>
-        Divirta-se e aprenda com atividades lúdicas! Explore desafios que estimulam a criatividade e o raciocínio.
-      </p>
-      <button onclick="alert('Atividade: Complete a imagem! (Implementação futura.)')" aria-label="Completar Imagem">Completar Imagem</button>
-      <button onclick="alert('Atividade: Relacione os fatos históricos! (Exemplo de atividade interativa.)')" aria-label="Relacionar Fatos">Relacionar Fatos</button>
-      <button onclick="alert('Atividade: Quebra-cabeça histórico! (Implementação futura.)')" aria-label="Quebra-Cabeça Histórico">Quebra-Cabeça Histórico</button>
-    </section>
-
-    <!-- Seção Contação de Histórias -->
-    <section id="historias" class="section">
-      <h2>Contação de Histórias</h2>
-      <p>Participe de uma aventura interativa! Navegue pelos capítulos da história "A Aventura de Cabral".</p>
-      <div class="story-container" id="storyContainer">
-        <!-- Capítulo atual será exibido aqui -->
-      </div>
-      <div class="story-controls">
-        <button onclick="prevChapter()" aria-label="Capítulo Anterior">Anterior</button>
-        <button onclick="nextChapter()" aria-label="Próximo Capítulo">Próximo</button>
-        <button onclick="speakStory()" aria-label="Ouvir História Atual">Ouvir História</button>
-      </div>
-      <video controls>
-        <source src="media/historia_libras.mp4" type="video/mp4">
-        Seu navegador não suporta o vídeo.
-      </video>
-    </section>
-
-    <!-- Seção Linha do Tempo Interativa -->
-    <section id="timeline" class="section">
-      <h2>Linha do Tempo Interativa</h2>
-      <p>Explore diferentes eras da história através desta linha do tempo interativa.</p>
-      <div class="timeline-buttons">
-        <button onclick="showEra('pre')" aria-label="Pré-História">Pré-História</button>
-        <button onclick="showEra('antiguidade')" aria-label="Antiguidade">Antiguidade</button>
-        <button onclick="showEra('media')" aria-label="Idade Média">Idade Média</button>
-        <button onclick="showEra('moderna')" aria-label="Idade Moderna">Idade Moderna</button>
-        <button onclick="showEra('contemporanea')" aria-label="Idade Contemporânea">Idade Contemporânea</button>
-      </div>
-      <div class="timeline-container" id="eraContainer">
-        <p>Selecione uma era para visualizar detalhes.</p>
-      </div>
-    </section>
-
-    <!-- Seção Jogo de Memória -->
-    <section id="memoria" class="section">
-      <h2>Jogo de Memória</h2>
-      <p>Encontre os pares correspondentes e aprenda sobre ícones históricos.</p>
-      <div class="memory-game" id="memoryGame">
-        <!-- Cartas serão geradas dinamicamente -->
-      </div>
-      <button onclick="resetMemoryGame()" aria-label="Reiniciar Jogo de Memória">Reiniciar Jogo</button>
-    </section>
-
-    <!-- Seção Sobre os Autores -->
-    <section id="autores" class="section">
-      <h2>Sobre os Autores</h2>
-      <div class="author-info">
-        <div>
-          <h3>Gabriel Silveira Lima</h3>
-          <p>Especialista em Segurança Pública, Bacharel em Direito e Bacharelando em Ciência da Computação, com experiência em cibersegurança e hacking ético.</p>
-        </div>
-        <div>
-          <h3>Jordana França Soares</h3>
-          <p>Licencianda em História com ênfase em metodologias interativas e educacionais, atuante em projetos de inclusão e comunicação acessível.</p>
-        </div>
-      </div>
-      <audio controls>
-        <source src="media/autores.mp3" type="audio/mp3">
-        Seu navegador não suporta áudio.
-      </audio>
-      <button aria-label="Ouvir Sobre os Autores" onclick="speakText('Conheça os autores: Gabriel Silveira Lima e Jordana França Soares.')">Ouvir Sobre os Autores</button>
-    </section>
-
-    <!-- Seção Conversor Braille -->
-    <section id="braille" class="section">
-      <h2>Conversor Braille</h2>
-      <p>Digite um texto para convertê-lo em Braille (simplificado), facilitando a leitura para pessoas com deficiência visual.</p>
-      <div class="braille-container">
-        <textarea id="brailleInput" rows="2" placeholder="Digite um texto..." aria-label="Entrada de texto para Braille"></textarea><br>
-        <button onclick="converterParaBraille()" aria-label="Converter para Braille">Converter para Braille</button>
-        <div id="brailleOutput" class="braille-output" style="font-size: 20px; margin-top: 10px;"></div>
-      </div>
-    </section>
-
-  </div>
-
-  <!-- Rodapé -->
-  <footer>
+<footer>
     <p>&copy; 2025 Portal Interativo de História - Todos os direitos reservados.</p>
-  </footer>
+</footer>
 
-  <!-- Scripts JavaScript -->
-  <script>
-    // Alterna entre seções
-    function showSection(sectionId) {
-      const sections = document.getElementsByClassName("section");
-      for (let sec of sections) {
-        sec.classList.remove("active");
-      }
-      document.getElementById(sectionId).classList.add("active");
-      window.scrollTo(0, 0);
+<script>
+    // Função para exibir a seção selecionada
+    const showSection = (sectionId) => {
+        document.querySelectorAll('.section').forEach(section => section.classList.remove('active'));
+        document.getElementById(sectionId).classList.add('active');
+        window.scrollTo(0, 0);
     }
 
-    // Síntese de fala para acessibilidade
-    function speakText(text) {
-      if ('speechSynthesis' in window) {
-        const msg = new SpeechSynthesisUtterance(text);
-        msg.lang = 'pt-BR';
-        window.speechSynthesis.speak(msg);
-      } else {
-        alert("Seu navegador não suporta síntese de fala.");
-      }
-    }
-
-    /* ======== Quiz de História ========= */
-    const quizPerguntas = [
-      { pergunta: "Quem foi o primeiro imperador do Brasil?", respostas: ["Dom Pedro I", "Dom João VI"], correta: 0 },
-      { pergunta: "Qual civilização é conhecida como 'berço da democracia'?", respostas: ["Roma", "Grécia"], correta: 1 },
-      { pergunta: "A Idade Média foi marcada principalmente por qual sistema econômico?", respostas: ["Feudalismo", "Capitalismo"], correta: 0 },
-      { pergunta: "Quem pintou a Mona Lisa?", respostas: ["Michelangelo", "Leonardo da Vinci"], correta: 1 }
+    // Lista de perguntas do quiz
+    const perguntas = [
+        {
+            pergunta: "Qual era o nome do primeiro imperador do Brasil?",
+            respostas: ["Dom Pedro I", "Dom João VI"],
+            correta: 0
+        },
+        {
+            pergunta: "Qual civilização é conhecida como 'berço da democracia'?",
+            respostas: ["Roma", "Grécia"],
+            correta: 1
+        },
+        {
+            pergunta: "A Idade Média teve como principal sistema socioeconômico o...",
+            respostas: ["Feudalismo", "Capitalismo"],
+            correta: 0
+        },
+        {
+            pergunta: "Quem é considerado o deus supremo na Mitologia Grega?",
+            respostas: ["Zeus", "Ares"],
+            correta: 0
+        },
+        {
+            pergunta: "Em que período histórico surgiu o movimento cultural conhecido como Renascimento?",
+            respostas: ["Entre os séculos XIV e XVI", "Entre os séculos X e XII"],
+            correta: 0
+        },
+        {
+            pergunta: "Qual filósofo iluminista defendia a separação dos poderes?",
+            respostas: ["Montesquieu", "Voltaire"],
+            correta: 0
+        },
+        {
+            pergunta: "O que marcou o início da Idade Contemporânea?",
+            respostas: ["Revolução Francesa (1789)", "Queda do Império Romano (476)"],
+            correta: 0
+        }
     ];
-    let quizIndice = 0;
-    let quizPontuacao = 0;
-    function startQuiz() {
-      quizIndice = 0;
-      quizPontuacao = 0;
-      document.getElementById("resultadoQuiz").innerText = "";
-      mostrarPerguntaQuiz();
+
+    let indiceAtual = 0;
+    let pontuacao = 0;
+
+    // Função para iniciar o quiz
+    const startQuiz = () => {
+        indiceAtual = 0;
+        pontuacao = 0;
+        document.getElementById("resultadoQuiz").innerText = "";
+        mostrarPergunta();
     }
-    function mostrarPerguntaQuiz() {
-      if (quizIndice < quizPerguntas.length) {
-        const quest = quizPerguntas[quizIndice];
+
+    // Função para mostrar a pergunta atual
+    const mostrarPergunta = () => {
+        const quest = perguntas[indiceAtual];
         document.getElementById("quizPergunta").innerText = quest.pergunta;
         document.getElementById("resposta1").innerText = quest.respostas[0];
         document.getElementById("resposta2").innerText = quest.respostas[1];
-        document.getElementById("resposta1").style.display = "inline-block";
-        document.getElementById("resposta2").style.display = "inline-block";
-        document.getElementById("resposta1").onclick = () => checarRespostaQuiz(0);
-        document.getElementById("resposta2").onclick = () => checarRespostaQuiz(1);
-      }
-    }
-    function checarRespostaQuiz(r) {
-      const quest = quizPerguntas[quizIndice];
-      if (r === quest.correta) {
-        alert("Muito bem! Resposta certa.");
-        quizPontuacao++;
-      } else {
-        alert("Ops, resposta errada.");
-      }
-      quizIndice++;
-      if (quizIndice < quizPerguntas.length) {
-        mostrarPerguntaQuiz();
-      } else {
-        exibirResultadoQuiz();
-      }
-    }
-    function exibirResultadoQuiz() {
-      document.getElementById("quizPergunta").innerText = "";
-      document.getElementById("resposta1").style.display = "none";
-      document.getElementById("resposta2").style.display = "none";
-      document.getElementById("resultadoQuiz").innerText = `Você acertou ${quizPontuacao} de ${quizPerguntas.length} perguntas!`;
-      const restartButton = document.createElement("button");
-      restartButton.innerText = "Reiniciar Quiz";
-      restartButton.onclick = startQuiz;
-      document.getElementById("resultadoQuiz").appendChild(restartButton);
+        // Define as ações dos botões
+        document.getElementById("resposta1").onclick = function() { checarResposta(0); };
+        document.getElementById("resposta2").onclick = function() { checarResposta(1); };
     }
 
-    /* ======== Contação de Histórias Interativa ========= */
-    const storyChapters = [
-      {
-        titulo: "Capítulo 1: A Partida",
-        texto: "Em 1500, os navegadores portugueses zarparam em direção ao desconhecido, iniciando a aventura que levaria à descoberta do Brasil.",
-        imagem: "media/cabral_ship.jpg"
-      },
-      {
-        titulo: "Capítulo 2: A Chegada",
-        texto: "Após uma longa viagem, a frota avistou novas terras e iniciou o contato com os povos indígenas, dando início a uma história de encontros e desafios.",
-        imagem: "media/map_brazil_colonial.jpg"
-      },
-      {
-        titulo: "Capítulo 3: A Transformação",
-        texto: "Com o tempo, a nova terra passou por profundas transformações culturais, econômicas e sociais, moldando a identidade de um país em construção.",
-        imagem: "media/great_pyramid_of_giza.jpg"
-      }
-    ];
-    let currentChapter = 0;
-    function displayChapter() {
-      const container = document.getElementById("storyContainer");
-      const chapter = storyChapters[currentChapter];
-      container.innerHTML = `
-        <h3>${chapter.titulo}</h3>
-        <p>${chapter.texto}</p>
-        <div class="image-container">
-          <img src="${chapter.imagem}" alt="${chapter.titulo}">
-        </div>
-      `;
-    }
-    function nextChapter() {
-      if (currentChapter < storyChapters.length - 1) {
-        currentChapter++;
-        displayChapter();
-      }
-    }
-    function prevChapter() {
-      if (currentChapter > 0) {
-        currentChapter--;
-        displayChapter();
-      }
-    }
-    function speakStory() {
-      const chapter = storyChapters[currentChapter];
-      speakText(chapter.texto);
-    }
-    // Inicializa o primeiro capítulo
-    displayChapter();
-
-    /* ======== Linha do Tempo Interativa ========= */
-    const eras = {
-      pre: {
-        titulo: "Pré-História",
-        descricao: "Período anterior à escrita, marcado pelas primeiras manifestações culturais e artísticas do homem.",
-        imagem: "media/prehistoric.jpg"
-      },
-      antiguidade: {
-        titulo: "Antiguidade",
-        descricao: "Época das grandes civilizações como a Egípcia, Grega e Romana, que estabeleceram as bases da cultura ocidental.",
-        imagem: "media/ancient.jpg"
-      },
-      media: {
-        titulo: "Idade Média",
-        descricao: "Período marcado pelo feudalismo, pela influência da Igreja e por importantes transformações culturais na Europa.",
-        imagem: "media/medieval.jpg"
-      },
-      moderna: {
-        titulo: "Idade Moderna",
-        descricao: "Período de grandes descobertas, revoluções e o surgimento dos Estados modernos.",
-        imagem: "media/renaissance.jpg"
-      },
-      contemporanea: {
-        titulo: "Idade Contemporânea",
-        descricao: "Época atual, marcada por avanços tecnológicos, transformações sociais e a globalização.",
-        imagem: "media/modern.jpg"
-      }
-    };
-    function showEra(eraKey) {
-      const era = eras[eraKey];
-      const container = document.getElementById("eraContainer");
-      container.innerHTML = `
-        <h3>${era.titulo}</h3>
-        <p>${era.descricao}</p>
-        <div class="image-container">
-          <img src="${era.imagem}" alt="${era.titulo}">
-        </div>
-        <button onclick="speakText('${era.descricao}')" aria-label="Ouvir ${era.titulo}">Ouvir ${era.titulo}</button>
-      `;
+    // Função para checar a resposta e ir para a próxima pergunta
+    const checarResposta = (respostaEscolhida) => {
+        const quest = perguntas[indiceAtual];
+        if (respostaEscolhida === quest.correta) {
+            alert("Resposta correta!");
+            pontuacao++;
+        } else {
+            alert("Resposta incorreta.");
+        }
+        indiceAtual++;
+        if (indiceAtual < perguntas.length) {
+            mostrarPergunta();
+        } else {
+            exibirResultado();
+        }
     }
 
-    /* ======== Jogo de Memória ========= */
-    const memoryCardsData = [
-      { id: 1, conteudo: "⛵", descricao: "Navio de Cabral" },
-      { id: 2, conteudo: "🏺", descricao: "Vaso Antigo" },
-      { id: 3, conteudo: "🏰", descricao: "Castelo Medieval" },
-      { id: 4, conteudo: "🗿", descricao: "Escultura Histórica" }
-    ];
-    let memoryCards = [];
-    let firstCard = null;
-    let secondCard = null;
-    let lockBoard = false;
-    function shuffle(array) {
-      array.sort(() => Math.random() - 0.5);
+    // Função para exibir o resultado final
+    const exibirResultado = () => {
+        document.getElementById("quizPergunta").innerText = "";
+        document.getElementById("resposta1").innerText = "";
+        document.getElementById("resposta2").innerText = "";
+        document.getElementById("resultadoQuiz").innerText = `Você acertou ${pontuacao} de ${perguntas.length} perguntas.`;
     }
-    function generateMemoryCards() {
-      memoryCards = [...memoryCardsData, ...memoryCardsData]; // duplicar os pares
-      shuffle(memoryCards);
-      const gameContainer = document.getElementById("memoryGame");
-      gameContainer.innerHTML = "";
-      memoryCards.forEach((card, index) => {
-        const cardElement = document.createElement("div");
-        cardElement.classList.add("memory-card");
-        cardElement.setAttribute("data-id", card.id);
-        cardElement.setAttribute("aria-label", "Carta virada");
-        cardElement.innerText = "";
-        cardElement.onclick = () => flipCard(cardElement, index);
-        gameContainer.appendChild(cardElement);
-      });
-    }
-    function flipCard(cardElement, index) {
-      if (lockBoard || cardElement.classList.contains("flipped")) return;
-      cardElement.classList.add("flipped");
-      cardElement.innerText = memoryCards[index].conteudo;
-      if (!firstCard) {
-        firstCard = { cardElement, index };
-      } else {
-        secondCard = { cardElement, index };
-        checkForMatch();
-      }
-    }
-    function checkForMatch() {
-      const isMatch = memoryCards[firstCard.index].id === memoryCards[secondCard.index].id;
-      if (isMatch) {
-        firstCard.cardElement.classList.add("matched");
-        secondCard.cardElement.classList.add("matched");
-        resetMemorySelection();
-      } else {
-        lockBoard = true;
-        setTimeout(() => {
-          firstCard.cardElement.classList.remove("flipped");
-          firstCard.cardElement.innerText = "";
-          secondCard.cardElement.classList.remove("flipped");
-          secondCard.cardElement.innerText = "";
-          resetMemorySelection();
-        }, 1000);
-      }
-    }
-    function resetMemorySelection() {
-      [firstCard, secondCard] = [null, null];
-      lockBoard = false;
-    }
-    function resetMemoryGame() {
-      generateMemoryCards();
-    }
-    // Inicializa o jogo de memória
-    generateMemoryCards();
 
-    /* ======== Conversor Braille ========= */
+    // Conversor Braille Simplificado
+    // Mapeamento simples de A-Z para símbolos Braille (simbólicos apenas para visualização)
     const brailleMap = {
-      'a': '⠁', 'b': '⠃', 'c': '⠉', 'd': '⠙', 'e': '⠑', 'f': '⠋', 'g': '⠛',
-      'h': '⠓', 'i': '⠊', 'j': '⠚', 'k': '⠅', 'l': '⠇', 'm': '⠍', 'n': '⠝',
-      'o': '⠕', 'p': '⠏', 'q': '⠟', 'r': '⠗', 's': '⠎', 't': '⠞', 'u': '⠥',
-      'v': '⠧', 'w': '⠺', 'x': '⠭', 'y': '⠽', 'z': '⠵',
-      '1': '⠼⠁', '2': '⠼⠃', '3': '⠼⠉', '4': '⠼⠙', '5': '⠼⠑',
-      '6': '⠼⠋', '7': '⠼⠛', '8': '⠼⠓', '9': '⠼⠊', '0': '⠼⠚',
-      '.': '⠲', ',': '⠂', '?': '⠦', '!': '⠖', ' ': ' '
+        'a': '⠁', 'b': '⠃', 'c': '⠉', 'd': '⠙', 'e': '⠑', 'f': '⠋', 'g': '⠛',
+        'h': '⠓', 'i': '⠊', 'j': '⠚', 'k': '⠅', 'l': '⠇', 'm': '⠍', 'n': '⠝',
+        'o': '⠕', 'p': '⠏', 'q': '⠟', 'r': '⠗', 's': '⠎', 't': '⠞', 'u': '⠥',
+        'v': '⠧', 'w': '⠺', 'x': '⠭', 'y': '⠽', 'z': '⠵',
+        ' ': ' ' // espaço
     };
-    function converterParaBraille() {
-      let input = document.getElementById('brailleInput').value;
-      let output = '';
-      for (let c of input.toLowerCase()) {
-        output += brailleMap[c] || c;
-      }
-      document.getElementById('brailleOutput').innerText = output;
+
+    const converterParaBraille = () => {
+        const input = document.getElementById('brailleInput').value;
+        let saida = '';
+        for (let char of input.toLowerCase()) {
+            if (brailleMap[char]) {
+                saida += brailleMap[char];
+            } else {
+                // Se não existir no dicionário, mantém o caractere original
+                saida += char;
+            }
+        }
+        document.getElementById('brailleOutput').innerText = saida;
     }
-  </script>
-  
+</script>
 </body>
 </html>
