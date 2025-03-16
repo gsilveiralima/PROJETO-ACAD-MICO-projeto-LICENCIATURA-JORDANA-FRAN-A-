@@ -14,6 +14,7 @@
             background-color: #f4f4f4;
             color: #333;
             line-height: 1.6;
+            text-align: center;
         }
         header {
             background-color: #2c3e50;
@@ -86,28 +87,8 @@
             text-align: center;
             padding: 15px;
             font-size: 14px;
-            position: fixed;
             width: 100%;
             bottom: 0;
-        }
-        .author-info {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-        .author-info div {
-            background-color: #f4f4f4;
-            padding: 10px;
-            border-radius: 5px;
-        }
-        .author-info h3 {
-            margin-top: 0;
-        }
-        .author-info p {
-            margin: 5px 0 0 0;
-        }
-        .author-info em {
-            color: #2c3e50;
         }
         @media (max-width: 600px) {
             nav ul {
@@ -119,6 +100,10 @@
             header, footer {
                 padding: 10px;
             }
+        }
+        video, audio {
+            width: 100%;
+            margin-top: 10px;
         }
     </style>
 </head>
@@ -135,6 +120,7 @@
             <li><a href="#" onclick="showSection('comunicacao')">Comunicação Inclusiva</a></li>
             <li><a href="#" onclick="showSection('quiz')">Quiz de História</a></li>
             <li><a href="#" onclick="showSection('autores')">Sobre os Autores</a></li>
+            <li><a href="#" onclick="showSection('braille')">Linguagem em Braille</a></li>
         </ul>
     </nav>
 </header>
@@ -143,7 +129,10 @@
     <section id="home" class="section active">
         <h2>Bem-vindo ao Portal de História</h2>
         <p>Explore conteúdos interativos e educativos sobre a História do Brasil, Mitologia Grega e História Antiga. Nosso portal é desenvolvido para atender alunos com e sem deficiência, promovendo inclusão e acessibilidade.</p>
-        <button aria-label="Ouvir Introdução" onclick="speakText('Bem-vindo ao Portal de História. Explore conteúdos interativos e educativos.')">Ouvir Introdução</button>
+        <div class="image-container">
+            <img src="A_historical_scene_depicting_early_civilizations,_.png" alt="Cena histórica com civilizações antigas">
+        </div>
+        <button onclick="speakText('Bem-vindo ao Portal de História. Explore conteúdos interativos e educativos.')">Ouvir Introdução</button>
     </section>
 
     <section id="brasil" class="section">
@@ -153,6 +142,14 @@
             <img src="https://source.unsplash.com/800x400/?brazil,history" alt="Imagem representando a História do Brasil">
         </div>
         <button aria-label="Ouvir História do Brasil" onclick="speakText('Conheça a trajetória do Brasil, desde as civilizações indígenas até a formação da República.')">Ouvir História do Brasil</button>
+        <video controls>
+            <source src="video_libras_brasil.mp4" type="video/mp4">
+            Seu navegador não suporta vídeos.
+        </video>
+        <audio controls>
+            <source src="audio_brasil.mp3" type="audio/mpeg">
+            Seu navegador não suporta áudio.
+        </audio>
     </section>
 
     <section id="grega" class="section">
@@ -162,6 +159,14 @@
             <img src="https://source.unsplash.com/800x400/?greek,mythology" alt="Imagem representando a Mitologia Grega">
         </div>
         <button aria-label="Ouvir Mitologia Grega" onclick="speakText('Explore os mitos e lendas da Grécia Antiga.')">Ouvir Mitologia Grega</button>
+        <video controls>
+            <source src="video_libras_mitologia.mp4" type="video/mp4">
+            Seu navegador não suporta vídeos.
+        </video>
+        <audio controls>
+            <source src="audio_mitologia.mp3" type="audio/mpeg">
+            Seu navegador não suporta áudio.
+        </audio>
     </section>
 
     <section id="antiga" class="section">
@@ -171,6 +176,14 @@
             <img src="https://source.unsplash.com/800x400/?ancient,history" alt="Imagem representando a História Antiga">
         </div>
         <button aria-label="Ouvir História Antiga" onclick="speakText('Descubra as civilizações antigas que moldaram o mundo. Conheça os egípcios, romanos, mesopotâmicos e muito mais.')">Ouvir História Antiga</button>
+        <video controls>
+            <source src="video_libras_antiga.mp4" type="video/mp4">
+            Seu navegador não suporta vídeos.
+        </video>
+        <audio controls>
+            <source src="audio_antiga.mp3" type="audio/mpeg">
+            Seu navegador não suporta áudio.
+        </audio>
     </section>
 
     <section id="comunicacao" class="section">
@@ -186,6 +199,15 @@
         <h2>Quiz de História</h2>
         <p>Teste seus conhecimentos sobre história com nosso quiz interativo. Desafie-se e aprenda mais!</p>
         <button aria-label="Iniciar Quiz" onclick="startQuiz()">Iniciar Quiz</button>
+        <p id="quizPergunta"></p>
+        <button id="resposta1"></button>
+        <button id="resposta2"></button>
+    </section>
+
+    <section id="braille" class="section">
+        <h2>Linguagem em Braille</h2>
+        <p>Conheça o sistema Braille e aprenda como utilizá-lo.</p>
+        <button onclick="window.open('braille_guia.pdf')">Baixar Guia em Braille</button>
     </section>
 
     <section id="autores" class="section">
@@ -226,7 +248,20 @@
     }
 
     const startQuiz = () => {
-        alert("Quiz iniciado! (Esta função será implementada futuramente.)");
+        let pergunta = "Qual era o nome do primeiro imperador do Brasil?";
+        let respostas = ["Dom Pedro I", "Dom João VI"];
+        let correta = 0;
+
+        document.getElementById("quizPergunta").innerText = pergunta;
+        document.getElementById("resposta1").innerText = respostas[0];
+        document.getElementById("resposta2").innerText = respostas[1];
+
+        document.getElementById("resposta1").onclick = function() {
+            alert("Correto!");
+        };
+        document.getElementById("resposta2").onclick = function() {
+            alert("Errado! Tente novamente.");
+        };
     }
 </script>
 
