@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Portal Interativo de História - Versão Inclusiva</title>
-  <meta name="description" content="Portal Interativo de História com conteúdos reais e interativos para crianças, incluindo recursos para deficiências visuais, auditivas e autismo.">
+  <meta name="description" content="Portal Interativo de História com conteúdos reais e interativos para crianças, incluindo recursos para deficiências visuais, auditivas, autismo e outras necessidades.">
   <meta name="keywords" content="História, Brasil, Mitologia Grega, História Antiga, Educação, Inclusão, Libras, Braille, Linha do Tempo, Jogo de Memória">
   <meta name="author" content="Gabriel Silveira Lima, Jordana França Soares">
   <style>
@@ -180,7 +180,7 @@
     <section id="home" class="section active">
       <h2>Bem-vindo ao Portal de História</h2>
       <p>
-        Explore conteúdos interativos e educativos sobre História do Brasil, Mitologia Grega, História Antiga e muito mais. Nosso portal promove a inclusão com recursos para crianças com deficiências visuais, auditivas, de fala, autismo e outros desafios.
+        Explore conteúdos interativos e educativos sobre História do Brasil, Mitologia Grega, História Antiga e muito mais. Nosso portal promove a inclusão com recursos para crianças com deficiências visuais, auditivas, de fala, autismo e outras necessidades.
       </p>
       <div class="image-container">
         <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Cabral_ship.jpg/800px-Cabral_ship.jpg" alt="Navio de Cabral navegando">
@@ -343,14 +343,14 @@
       <h2>Contação de Histórias</h2>
       <p>Participe de uma aventura interativa! Navegue pelos capítulos da história "A Aventura de Cabral".</p>
       <div class="story-container" id="storyContainer">
-        <!-- O conteúdo do capítulo será inserido dinamicamente -->
+        <!-- Capítulo atual será exibido aqui -->
       </div>
       <div class="story-controls">
         <button onclick="prevChapter()" aria-label="Capítulo Anterior">Anterior</button>
         <button onclick="nextChapter()" aria-label="Próximo Capítulo">Próximo</button>
         <button onclick="speakStory()" aria-label="Ouvir História Atual">Ouvir História</button>
       </div>
-      <!-- Vídeo de interpretação em Libras para a história -->
+      <!-- Vídeo com interpretação em Libras para a história -->
       <iframe src="https://www.youtube.com/embed/9ImEC9Rdb70" allowfullscreen title="Interpretação em Libras - História"></iframe>
     </section>
 
@@ -366,7 +366,6 @@
         <button onclick="showEra('contemporanea')" aria-label="Idade Contemporânea">Idade Contemporânea</button>
       </div>
       <div class="timeline-container" id="eraContainer">
-        <!-- Conteúdo da era selecionada será exibido aqui -->
         <p>Selecione uma era para visualizar detalhes.</p>
       </div>
     </section>
@@ -376,7 +375,7 @@
       <h2>Jogo de Memória</h2>
       <p>Encontre os pares correspondentes e aprenda sobre ícones históricos.</p>
       <div class="memory-game" id="memoryGame">
-        <!-- Cartas do jogo serão geradas dinamicamente -->
+        <!-- Cartas serão geradas dinamicamente -->
       </div>
       <button onclick="resetMemoryGame()" aria-label="Reiniciar Jogo de Memória">Reiniciar Jogo</button>
     </section>
@@ -421,7 +420,7 @@
 
   <!-- Scripts JavaScript -->
   <script>
-    // Função para alternar entre seções
+    // Alternar seções
     function showSection(sectionId) {
       const sections = document.getElementsByClassName("section");
       for (let sec of sections) {
@@ -541,7 +540,7 @@
       const chapter = storyChapters[currentChapter];
       speakText(chapter.texto);
     }
-    // Inicializa o primeiro capítulo ao entrar na seção
+    // Inicializa o primeiro capítulo
     displayChapter();
 
     /* ======== Linha do Tempo Interativa ========= */
