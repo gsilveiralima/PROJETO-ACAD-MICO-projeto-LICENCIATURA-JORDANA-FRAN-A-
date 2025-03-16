@@ -1,531 +1,769 @@
 <!DOCTYPE html>
 <html lang="pt">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portal Interativo de História</title>
-    <meta name="description" content="Portal Interativo de História com conteúdos completos e multimídia sobre vários períodos históricos, incluindo Brasil, Mitologia Grega, História Antiga, Idade Média, Renascimento, Iluminismo, História Contemporânea e mais, além de recursos de Braille.">
-    <meta name="keywords" content="História, Brasil, Mitologia Grega, História Antiga, Idade Média, Renascimento, Iluminismo, Educação, Inclusão, Arte, Cultura, Revoluções, Globalização, Braille">
-    <meta name="author" content="Gabriel Silveira Lima, Jordana França Soares">
-    <style>
-        body {
-            margin: 0;
-            font-family: 'Arial', sans-serif;
-            background-color: #f4f4f4;
-            color: #333;
-            line-height: 1.6;
-            text-align: center;
-        }
-        header {
-            background-color: #2c3e50;
-            padding: 15px;
-            color: #fff;
-            text-align: center;
-        }
-        nav ul {
-            list-style: none;
-            padding: 0;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            margin: 0;
-        }
-        nav ul li {
-            margin: 10px;
-        }
-        nav ul li a {
-            text-decoration: none;
-            color: #fff;
-            font-size: 18px;
-        }
-        nav ul li a:hover {
-            text-decoration: underline;
-        }
-        .container {
-            max-width: 900px;
-            margin: auto;
-            padding: 20px;
-            background-color: #fff;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-        .section {
-            display: none;
-            margin-bottom: 40px;
-        }
-        .active {
-            display: block;
-        }
-        h2 {
-            color: #2c3e50;
-            border-bottom: 2px solid #2c3e50;
-            padding-bottom: 10px;
-        }
-        footer {
-            background-color: #2c3e50;
-            color: #fff;
-            text-align: center;
-            padding: 15px;
-            font-size: 14px;
-            width: 100%;
-            bottom: 0;
-        }
-        .image-container {
-            margin: 20px 0;
-        }
-        .image-container img {
-            width: 100%;
-            border-radius: 10px;
-        }
-        video, audio {
-            width: 100%;
-            margin-top: 10px;
-        }
-        button {
-            background-color: #3498db;
-            border: none;
-            color: #fff;
-            padding: 10px 20px;
-            margin: 10px 5px;
-            font-size: 16px;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-        button:hover {
-            background-color: #2980b9;
-        }
-        /* Braille table styling */
-        .braille-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 20px 0;
-        }
-        .braille-table th, .braille-table td {
-            border: 1px solid #ccc;
-            padding: 8px;
-        }
-        .braille-table th {
-            background-color: #f0f0f0;
-        }
-        .braille-output {
-            margin-top: 10px;
-            padding: 10px;
-            background-color: #eef;
-            border-radius: 5px;
-            min-height: 40px;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <title>Portal Interativo de História – Versão para Crianças</title>
+  <meta name="description" content="Portal Interativo de História adaptado para crianças com diferentes necessidades, em um único arquivo HTML, contendo placeholders de mídias em Base64.">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    /* ESTILOS GERAIS */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f5f5f5;
+      color: #333;
+      line-height: 1.6;
+      text-align: center;
+    }
+    header {
+      background-color: #2c3e50;
+      padding: 15px;
+      color: #fff;
+    }
+    nav ul {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin: 0;
+    }
+    nav ul li {
+      margin: 10px;
+    }
+    nav ul li a {
+      text-decoration: none;
+      color: #fff;
+      font-size: 18px;
+      transition: transform 0.3s ease;
+    }
+    nav ul li a:hover {
+      text-decoration: underline;
+      transform: scale(1.1);
+    }
+    .container {
+      max-width: 900px;
+      margin: auto;
+      padding: 20px;
+      background-color: #fff;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      margin-bottom: 60px;
+    }
+    .section {
+      display: none;
+      margin-bottom: 40px;
+    }
+    .section.active {
+      display: block;
+      animation: fadeIn 0.6s forwards;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0;}
+      to { opacity: 1;}
+    }
+    h2 {
+      color: #2c3e50;
+      border-bottom: 2px solid #2c3e50;
+      padding-bottom: 10px;
+    }
+    .image-container {
+      margin: 20px 0;
+    }
+    .image-container img {
+      width: 100%;
+      max-height: 280px;
+      border-radius: 10px;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+    .image-container img:hover {
+      transform: scale(1.02);
+    }
+    video, audio {
+      width: 100%;
+      margin-top: 10px;
+    }
+    button {
+      background-color: #3498db;
+      border: none;
+      color: #fff;
+      padding: 10px 20px;
+      margin: 10px 5px;
+      font-size: 16px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+    button:hover {
+      background-color: #2980b9;
+      transform: scale(1.05);
+    }
+    footer {
+      background-color: #2c3e50;
+      color: #fff;
+      text-align: center;
+      padding: 15px;
+      font-size: 14px;
+      width: 100%;
+      position: relative;
+    }
+    .braille-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+    }
+    .braille-table th, .braille-table td {
+      border: 1px solid #ccc;
+      padding: 8px;
+    }
+    .braille-table th {
+      background-color: #f0f0f0;
+    }
+    .braille-output {
+      margin-top: 10px;
+      padding: 10px;
+      background-color: #eef;
+      border-radius: 5px;
+      min-height: 40px;
+    }
+    .video-links {
+      text-align: left;
+      margin-top: 20px;
+    }
+    .video-links ul {
+      list-style-type: disc;
+      margin-left: 40px;
+      text-align: left;
+    }
+    .video-links ul li a {
+      color: #3498db;
+      text-decoration: none;
+    }
+    .video-links ul li a:hover {
+      text-decoration: underline;
+    }
+    .references {
+      text-align: left;
+      margin-top: 15px;
+      font-size: 0.9em;
+    }
+    .references ul {
+      list-style-type: circle;
+      margin-left: 40px;
+    }
+    .curiosidades {
+      background-color: #ecf0f1;
+      padding: 10px;
+      border-radius: 5px;
+      margin: 20px 0;
+      text-align: left;
+    }
+    .curiosidades h4 {
+      color: #2980b9;
+      margin-bottom: 10px;
+    }
+    .curiosidades ul {
+      list-style-type: square;
+      margin-left: 40px;
+    }
+    /* Adaptações de Fonte para Crianças com Dificuldade Visual */
+    .section p {
+      font-size: 17px;
+      line-height: 1.5;
+    }
+  </style>
 </head>
 <body>
+
 <header>
-    <h1>Portal Interativo de História</h1>
-    <nav>
-        <ul>
-            <li><a href="#" onclick="showSection('home')">Home</a></li>
-            <li><a href="#" onclick="showSection('brasil')">História do Brasil</a></li>
-            <li><a href="#" onclick="showSection('grega')">Mitologia Grega</a></li>
-            <li><a href="#" onclick="showSection('antiga')">História Antiga</a></li>
-            <li><a href="#" onclick="showSection('idadeMedia')">Idade Média</a></li>
-            <li><a href="#" onclick="showSection('renascimento')">Renascimento</a></li>
-            <li><a href="#" onclick="showSection('iluminismo')">Iluminismo</a></li>
-            <li><a href="#" onclick="showSection('contemporanea')">História Contemporânea</a></li>
-            <li><a href="#" onclick="showSection('braille')">Braille</a></li>
-            <li><a href="#" onclick="showSection('quiz')">Quiz de História</a></li>
-        </ul>
-    </nav>
+  <h1>Portal Interativo de História</h1>
+  <nav>
+    <ul>
+      <li><a href="#" onclick="showSection('home')">Home</a></li>
+      <li><a href="#" onclick="showSection('brasil')">História do Brasil</a></li>
+      <li><a href="#" onclick="showSection('grega')">Mitologia Grega</a></li>
+      <li><a href="#" onclick="showSection('antiga')">História Antiga</a></li>
+      <li><a href="#" onclick="showSection('idadeMedia')">Idade Média</a></li>
+      <li><a href="#" onclick="showSection('renascimento')">Renascimento</a></li>
+      <li><a href="#" onclick="showSection('iluminismo')">Iluminismo</a></li>
+      <li><a href="#" onclick="showSection('contemporanea')">História Contemporânea</a></li>
+      <li><a href="#" onclick="showSection('braille')">Braille</a></li>
+      <li><a href="#" onclick="showSection('quiz')">Quiz de História</a></li>
+    </ul>
+  </nav>
 </header>
 
 <div class="container">
-    <!-- HOME -->
-    <section id="home" class="section active">
-        <h2>Bem-vindo ao Portal de História</h2>
-        <p>Descubra uma rica jornada pelo passado da humanidade! Aqui você encontrará conteúdos completos e multimídia sobre a História do Brasil, Mitologia Grega, História Antiga, Idade Média, Renascimento, Iluminismo, História Contemporânea e outras grandes transformações que moldaram o mundo. Aproveite textos, imagens, áudios, vídeos e um quiz interativo para reforçar seus conhecimentos.</p>
-        <div class="image-container">
-            <img src="images/home_intro.jpg" alt="Portal Interativo de História">
-        </div>
-        <video controls>
-            <source src="videos/introducao.mp4" type="video/mp4">
-            <source src="videos/introducao.webm" type="video/webm">
-            <p>Seu navegador não oferece suporte a MP4 ou WebM. Atualize-o ou tente outro navegador.</p>
-        </video>
-        <p>
-            Explore cada seção para conhecer diferentes períodos históricos, curiosidades e personagens marcantes. Você pode navegar pelos botões acima ou simplesmente clicar no tópico que mais lhe interessar.
-        </p>
-    </section>
 
-    <!-- HISTÓRIA DO BRASIL -->
-    <section id="brasil" class="section">
-        <h2>História do Brasil</h2>
-        <p>A história do Brasil remonta à chegada dos portugueses em 1500, mas antes disso, inúmeras nações indígenas já habitavam e desenvolviam suas culturas em diferentes regiões, como Tupi, Guarani e muitos outros troncos linguísticos. Durante o período colonial, os portugueses exploraram o pau-brasil, cana-de-açúcar e outros recursos, impactando profundamente as populações locais por meio do escambo e da escravidão. A independência ocorreu em 1822, sob a liderança de Dom Pedro I, dando origem ao Império do Brasil. Em seguida, o país viveu o Segundo Reinado, sob Dom Pedro II, até 1889, quando a República foi proclamada. No século XX, o Brasil passou por fases como a Primeira República, a Era Vargas, o Regime Militar e a redemocratização na década de 1980. Hoje, é uma república federativa, rica em diversidade cultural, econômica e social.</p>
-        <div class="image-container">
-            <img src="images/brasil_historia.jpg" alt="Cenas históricas do Brasil">
-        </div>
-        <video controls>
-            <source src="videos/brasil.mp4" type="video/mp4">
-            <source src="videos/brasil.webm" type="video/webm">
-            <p>Seu navegador não oferece suporte a MP4 ou WebM. Atualize-o ou tente outro navegador.</p>
-        </video>
-        <audio controls>
-            <source src="audios/brasil.mp3" type="audio/mpeg">
-            <p>Seu navegador não oferece suporte a áudio. Atualize-o ou tente outro navegador.</p>
-        </audio>
-        <p>
-            <strong>Colonização e Escravidão:</strong> A economia colonial era sustentada principalmente pela mão de obra escravizada, tanto de indígenas quanto de africanos trazidos pelos colonizadores. <br>
-            <strong>Período Imperial:</strong> (1822 – 1889) Período marcado pelo Primeiro e Segundo Reinado (Dom Pedro I e Dom Pedro II). Houve modernização, mas também tensões como a Guerra do Paraguai. <br>
-            <strong>República:</strong> (1889 – atual) Englobando a Primeira República, Era Vargas, Regime Militar (1964-1985) e a Nova República, cada etapa trazendo mudanças sociais e políticas significativas.
-        </p>
-        <p>
-            <em>Curiosidade:</em> A vinda da Família Real Portuguesa ao Brasil, em 1808, transformou a então colônia, abrindo portos e estimulando o desenvolvimento de instituições como a Biblioteca Nacional.
-        </p>
-    </section>
+  <!-- HOME -->
+  <section id="home" class="section active">
+    <h2>Bem-vindo!</h2>
+    <p>
+      Este portal é feito para crianças do Ensino Fundamental, incluindo quem é cego, surdo, mudo, autista ou sem deficiência.
+      Aqui existem imagens, vídeos e áudios (em Libras, legendados e audiodescrição) para aprender História de forma divertida.
+    </p>
+    <div class="image-container">
+      <img 
+        alt="Home Interativa"
+        src="data:image/jpeg;base64,/9j/HOMEFAKEFORCHILD..."
+      >
+    </div>
+    <video controls>
+      <source
+        src="data:video/mp4;base64,HOMEVIDFAKEFORCHILD..."
+        type="video/mp4">
+      <p>Seu navegador não suporta vídeo.</p>
+    </video>
+    <p>
+      Escolha um tema acima para descobrir curiosidades e fatos históricos. No final, há um Quiz para testar conhecimentos!
+    </p>
+  </section>
 
-    <!-- MITOLOGIA GREGA -->
-    <section id="grega" class="section">
-        <h2>Mitologia Grega</h2>
-        <p>A mitologia grega reúne histórias que explicam fenômenos naturais, a criação do mundo e a interação entre deuses e humanos. Os doze deuses do Olimpo, liderados por Zeus, influenciavam todos os aspectos da vida, enquanto Hades governava o submundo. Heróis como Hércules, Teseu e Perseu enfrentavam desafios épicos, e criaturas como Medusa, Minotauro e Sereias habitavam mitos carregados de simbolismo. A cultura grega, expressa na literatura épica de Homero (A Ilíada e a Odisseia), atravessou séculos, influenciando artes, filosofia e religiões.</p>
-        <div class="image-container">
-            <img src="images/mitologia_grega.jpg" alt="Figuras míticas da Grécia Antiga">
-        </div>
-        <video controls>
-            <source src="videos/mitologia.mp4" type="video/mp4">
-            <source src="videos/mitologia.webm" type="video/webm">
-            <p>Seu navegador não oferece suporte a MP4 ou WebM. Atualize-o ou tente outro navegador.</p>
-        </video>
-        <audio controls>
-            <source src="audios/mitologia.mp3" type="audio/mpeg">
-            <p>Seu navegador não oferece suporte a áudio. Atualize-o ou tente outro navegador.</p>
-        </audio>
-        <p>
-            <strong>Deuses do Olimpo:</strong> Zeus, Hera, Poseidon, Deméter, Atena, Apolo, Ártemis, Ares, Afrodite, Hermes, Hefesto e Dionísio. <br>
-            <strong>Heróis e Criaturas:</strong> Hércules, Perseu, Teseu, Medusa, Minotauro, Centauros, Sereias, Ciclopes. <br>
-            <strong>Influência Cultural:</strong> A Ilíada e a Odisseia inspiraram diversas obras de literatura, teatro, cinema e jogos.
-        </p>
-        <p>
-            <em>Curiosidade:</em> Muitos dos mitos gregos foram adaptados pelos romanos, que atribuíram nomes diferentes aos deuses (por exemplo, Zeus correspondia a Júpiter, e Hera a Juno).
-        </p>
-    </section>
+  <!-- HISTÓRIA DO BRASIL -->
+  <section id="brasil" class="section">
+    <h2>História do Brasil</h2>
+    <p>
+      A história do Brasil começou há muitos anos, com povos indígenas que já moravam aqui antes de 1500.
+      Quando os portugueses chegaram, eles exploraram o pau-brasil e, depois, a cana-de-açúcar e o ouro.
+      Houve muito sofrimento por conta da escravidão. Em 1822, aconteceu a Independência e surgiu o Império.
+      Mais tarde, em 1889, proclamou-se a República.
+    </p>
+    <div class="curiosidades">
+      <h4>Curiosidades</h4>
+      <ul>
+        <li>No começo, o pau-brasil era trocado por objetos com os indígenas.</li>
+        <li>A cana-de-açúcar fez o Brasil ficar famoso na Europa por muito tempo.</li>
+        <li>A escravidão só acabou em 1888, com a Lei Áurea.</li>
+      </ul>
+    </div>
+    <div class="image-container">
+      <img 
+        alt="Brasil Intro"
+        src="data:image/jpeg;base64,/9j/BRASILFAKECHILD..."
+      >
+    </div>
+    <video controls>
+      <source
+        src="data:video/mp4;base64,BRASILVIDCHILDFAKE..."
+        type="video/mp4">
+    </video>
+    <audio controls>
+      <source
+        src="data:audio/mpeg;base64,//BRASILAUDIOCHILDFAKE..."
+        type="audio/mpeg">
+    </audio>
+    <p>
+      <strong>Destaques:</strong> exploração colonial, escravidão, Independência (1822), Império, República (1889).
+    </p>
 
-    <!-- HISTÓRIA ANTIGA -->
-    <section id="antiga" class="section">
-        <h2>História Antiga</h2>
-        <p>A História Antiga cobre o surgimento das primeiras civilizações, como Egito, Mesopotâmia, Fenícia, Pérsia, Grécia e Roma. Essas sociedades deixaram contribuições em escrita, arquitetura, leis, religião, arte e filosofia. O Egito destacou-se pela construção de pirâmides e pela prática de mumificação. A Mesopotâmia foi pioneira na escrita cuneiforme e criou códigos legais, como o Código de Hamurábi. Fenícios desenvolveram um alfabeto que influenciou diversas línguas modernas. Grécia e Roma moldaram o mundo ocidental, desenvolvendo a democracia, instituições republicanas e legados arquitetônicos e literários que influenciam nossa sociedade até hoje.</p>
-        <div class="image-container">
-            <img src="images/historia_antiga.jpg" alt="Representação de civilizações antigas">
-        </div>
-        <video controls>
-            <source src="videos/antiga.mp4" type="video/mp4">
-            <source src="videos/antiga.webm" type="video/webm">
-            <p>Seu navegador não oferece suporte a MP4 ou WebM. Atualize-o ou tente outro navegador.</p>
-        </video>
-        <audio controls>
-            <source src="audios/antiga.mp3" type="audio/mpeg">
-            <p>Seu navegador não oferece suporte a áudio. Atualize-o ou tente outro navegador.</p>
-        </audio>
-        <p>
-            <strong>Egito:</strong> Construção das pirâmides, culto aos faraós e a escrita hieroglífica. <br>
-            <strong>Mesopotâmia:</strong> Conhecida como "Berço da Civilização", criou as primeiras cidades-estado. <br>
-            <strong>Fenícia:</strong> Um povo de navegadores que estabeleceu rotas comerciais por todo o Mediterrâneo. <br>
-            <strong>Grécia e Roma:</strong> Fundamentos da cultura ocidental, destacando-se na filosofia, direito, engenharia e artes.
-        </p>
-        <p>
-            <em>Curiosidade:</em> A Biblioteca de Alexandria, no Egito Helenístico, foi um dos mais importantes centros de conhecimento da Antiguidade.
-        </p>
-    </section>
+    <div class="video-links">
+      <h3>Vídeos Acessíveis</h3>
+      <ul>
+        <li><a href="https://www.youtube.com/watch?v=IbjaFCxCz-0" target="_blank">História do Brasil em Libras</a></li>
+        <li><a href="https://www.youtube.com/watch?v=CMdlcAPcXWA" target="_blank">Brasil Colonial (animação)</a></li>
+      </ul>
+    </div>
 
-    <!-- IDADE MÉDIA -->
-    <section id="idadeMedia" class="section">
-        <h2>Idade Média</h2>
-        <p>Estendendo-se do século V ao XV, a Idade Média começou com a queda do Império Romano do Ocidente e terminou com a tomada de Constantinopla pelos turcos otomanos. Marcada pelo feudalismo, pela forte influência da Igreja Católica e pela formação de reinos, foi também um período de intensas transformações. As Cruzadas, a expansão do Islamismo e o surgimento das primeiras universidades também ocorreram nessa época. A arte medieval inclui a arquitetura românica e gótica, além de manuscritos iluminados e cantigas que expressavam a vida e a religiosidade do período.</p>
-        <div class="image-container">
-            <img src="images/idade_media.jpg" alt="Paisagem medieval européia">
-        </div>
-        <video controls>
-            <source src="videos/idade_media.mp4" type="video/mp4">
-            <source src="videos/idade_media.webm" type="video/webm">
-            <p>Seu navegador não oferece suporte a MP4 ou WebM. Atualize-o ou tente outro navegador.</p>
-        </video>
-        <audio controls>
-            <source src="audios/idade_media.mp3" type="audio/mpeg">
-            <p>Seu navegador não oferece suporte a áudio. Atualize-o ou tente outro navegador.</p>
-        </audio>
-        <p>
-            <strong>Alta Idade Média:</strong> Marcada pelas invasões bárbaras, consolidação do feudalismo e ruralização da economia. <br>
-            <strong>Baixa Idade Média:</strong> Crescimento das cidades, fortalecimento do comércio, surgimento das corporações de ofício e das primeiras universidades. <br>
-            <strong>Religião:</strong> A Igreja Católica era uma instituição extremamente poderosa, influenciando política, cultura e educação.
-        </p>
-        <p>
-            <em>Curiosidade:</em> As Cruzadas foram expedições de caráter militar e religioso com o objetivo de retomar Jerusalém, considerada sagrada para o cristianismo.
-        </p>
-    </section>
+    <div class="references">
+      <h4>Fontes</h4>
+      <ul>
+        <li>FAUSTO, Boris. <em>História do Brasil</em>. 2016.</li>
+        <li>FUNDAÇÃO BIBLIOTECA NACIONAL: <a href="https://www.bn.gov.br/" target="_blank">https://www.bn.gov.br/</a></li>
+      </ul>
+    </div>
+  </section>
 
-    <!-- RENASCIMENTO -->
-    <section id="renascimento" class="section">
-        <h2>Renascimento</h2>
-        <p>O Renascimento (séculos XIV a XVI) representou uma retomada dos valores da cultura clássica grega e romana, bem como o surgimento do humanismo e do pensamento científico moderno. Cidades como Florença, Veneza e Roma foram centros de produção artística e intelectual. Grandes nomes como Leonardo da Vinci, Michelangelo, Rafael e Donatello revolucionaram as artes, com obras que exaltavam a beleza e a anatomia humana. Na literatura, Maquiavel, Shakespeare e Camões ganharam destaque. Esse período, marcado pela valorização do homem e da razão, também presenciou transformações religiosas e políticas, como a Reforma Protestante e a expansão marítima.</p>
-        <div class="image-container">
-            <img src="images/renascimento.jpg" alt="Pintura representando o Renascimento">
-        </div>
-        <video controls>
-            <source src="videos/renascimento.mp4" type="video/mp4">
-            <source src="videos/renascimento.webm" type="video/webm">
-            <p>Seu navegador não oferece suporte a MP4 ou WebM. Atualize-o ou tente outro navegador.</p>
-        </video>
-        <audio controls>
-            <source src="audios/renascimento.mp3" type="audio/mpeg">
-            <p>Seu navegador não oferece suporte a áudio. Atualize-o ou tente outro navegador.</p>
-        </audio>
-        <p>
-            <strong>Principais Centros:</strong> Florença, Veneza, Roma. <br>
-            <strong>Humanismo:</strong> Valorização do homem em oposição ao teocentrismo medieval, enfatizando o estudo das letras clássicas. <br>
-            <strong>Ciência:</strong> Copérnico, Galileu, Kepler e outros estudiosos revolucionaram a astronomia e questionaram conceitos tradicionais.
-        </p>
-        <p>
-            <em>Curiosidade:</em> A técnica de perspectiva na pintura, aperfeiçoada no Renascimento, mudou a forma como os artistas representavam profundidade e espaço.
-        </p>
-    </section>
+  <!-- MITOLOGIA GREGA -->
+  <section id="grega" class="section">
+    <h2>Mitologia Grega</h2>
+    <p>
+      Mitologia Grega são histórias sobre deuses poderosos como Zeus, Hera, Poseidon, e heróis como Hércules e Perseu.
+      Essas lendas explicam fenômenos e ensinam valores. A Ilíada e a Odisseia contam grandes aventuras e batalhas.
+    </p>
+    <div class="curiosidades">
+      <h4>Curiosidades</h4>
+      <ul>
+        <li>Zeus é o “chefe” do Monte Olimpo.</li>
+        <li>Hércules fez 12 trabalhos muito difíceis.</li>
+        <li>O Minotauro era meio homem, meio touro.</li>
+      </ul>
+    </div>
+    <div class="image-container">
+      <img
+        alt="Mitologia Grega para Crianças"
+        src="data:image/jpeg;base64,/9j/GREGACHPICFAKE..."
+      >
+    </div>
+    <video controls>
+      <source
+        src="data:video/mp4;base64,GREGAVIDCHILDFAKE..."
+        type="video/mp4">
+    </video>
+    <audio controls>
+      <source
+        src="data:audio/mpeg;base64,//GRECHILDAUDIOFAKE..."
+        type="audio/mpeg">
+    </audio>
+    <p>
+      <strong>Deuses:</strong> Zeus (céu), Hera (família), Poseidon (mar)... <br>
+      <strong>Heróis:</strong> Hércules, Perseu, Teseu.
+    </p>
 
-    <!-- ILUMINISMO -->
-    <section id="iluminismo" class="section">
-        <h2>Iluminismo</h2>
-        <p>O Iluminismo, ou "Século das Luzes", floresceu no século XVIII e colocou em destaque a razão, a liberdade e o pensamento crítico como bases para o progresso humano. Filósofos iluministas como John Locke, Voltaire, Montesquieu e Rousseau discutiam direitos naturais, separação de poderes, tolerância religiosa e cidadania. As ideias iluministas influenciaram revoluções como a Independência dos Estados Unidos (1776) e a Revolução Francesa (1789), transformando profundamente as estruturas políticas e sociais do Ocidente. As monarquias absolutistas foram questionadas e substituídas, em muitos casos, por repúblicas ou monarquias constitucionais.</p>
-        <div class="image-container">
-            <img src="images/iluminismo.jpg" alt="Representação do Iluminismo">
-        </div>
-        <video controls>
-            <source src="videos/iluminismo.mp4" type="video/mp4">
-            <source src="videos/iluminismo.webm" type="video/webm">
-            <p>Seu navegador não oferece suporte a MP4 ou WebM. Atualize-o ou tente outro navegador.</p>
-        </video>
-        <audio controls>
-            <source src="audios/iluminismo.mp3" type="audio/mpeg">
-            <p>Seu navegador não oferece suporte a áudio. Atualize-o ou tente outro navegador.</p>
-        </audio>
-        <p>
-            <strong>Principais Filósofos:</strong> John Locke, Voltaire, Montesquieu, Jean-Jacques Rousseau. <br>
-            <strong>Ideias Centrais:</strong> Liberdade de expressão, tolerância religiosa, contrato social, separação dos poderes, igualdade jurídica. <br>
-            <strong>Impacto:</strong> Influência em revoluções, na formação de novas constituições e no surgimento de Estados nacionais modernos.
-        </p>
-        <p>
-            <em>Curiosidade:</em> O Dicionário Filosófico de Voltaire e a Enciclopédia de Diderot e d'Alembert foram fundamentais na difusão das ideias iluministas.
-        </p>
-    </section>
+    <div class="video-links">
+      <h3>Vídeos Acessíveis</h3>
+      <ul>
+        <li><a href="https://www.youtube.com/watch?v=LkC7MuHbPIs" target="_blank">Mitologia em Libras</a></li>
+        <li><a href="https://www.youtube.com/watch?v=OZf0xcjbNc4" target="_blank">Legendas e Audiodescrição</a></li>
+      </ul>
+    </div>
 
-    <!-- HISTÓRIA CONTEMPORÂNEA -->
-    <section id="contemporanea" class="section">
-        <h2>História Contemporânea</h2>
-        <p>A História Contemporânea abrange desde o final do século XVIII até os dias atuais. É caracterizada por mudanças aceleradas em âmbito político, social, econômico e tecnológico. A Revolução Francesa (1789) é geralmente considerada o marco inicial, derrubando a monarquia absolutista e influenciando movimentos revolucionários ao redor do mundo. No século XIX, as Revoluções Industriais transformaram radicalmente o processo de produção, dando início a uma era de urbanização e novas relações de trabalho. O século XX foi marcado pelas Guerras Mundiais, a Guerra Fria, descolonização na África e Ásia, o avanço da democracia liberal e a formação de blocos econômicos. No século XXI, a globalização, a Era Digital e os desafios ambientais e geopolíticos definem as pautas de governos e sociedades.</p>
-        <div class="image-container">
-            <img src="images/contemporanea.jpg" alt="Movimentos e fatos da História Contemporânea">
-        </div>
-        <video controls>
-            <source src="videos/contemporanea.mp4" type="video/mp4">
-            <source src="videos/contemporanea.webm" type="video/webm">
-            <p>Seu navegador não oferece suporte a MP4 ou WebM. Atualize-o ou tente outro navegador.</p>
-        </video>
-        <audio controls>
-            <source src="audios/contemporanea.mp3" type="audio/mpeg">
-            <p>Seu navegador não oferece suporte a áudio. Atualize-o ou tente outro navegador.</p>
-        </audio>
-        <p>
-            <strong>Revoluções Industriais:</strong> Introdução das máquinas a vapor, eletricidade, produção em massa, tecnologia digital. <br>
-            <strong>Guerras Mundiais:</strong> Primeira (1914-1918) e Segunda Guerra (1939-1945) redefiniram a geopolítica global, levando à criação da ONU. <br>
-            <strong>Sociedade em Rede:</strong> A internet e as tecnologias de informação remodelaram a economia, a política e a cultura em escala mundial.
-        </p>
-        <p>
-            <em>Curiosidade:</em> A globalização aproximou culturas e mercados, mas também trouxe desafios como desigualdades socioeconômicas e crises climáticas.
-        </p>
-    </section>
+    <div class="references">
+      <h4>Fontes</h4>
+      <ul>
+        <li>HOMERO. <em>A Ilíada</em> &amp; <em>A Odisseia</em>.</li>
+        <li>GRAVES, Robert. <em>Os Mitos Gregos</em>.</li>
+      </ul>
+    </div>
+  </section>
 
-    <!-- BRAILLE -->
-    <section id="braille" class="section">
-        <h2>Sistema Braille</h2>
-        <p>O Braille é um sistema de leitura e escrita tátil criado para pessoas com deficiência visual. Cada caractere em Braille é formado por pontos em relevo dispostos em até seis posições, organizados em duas colunas de três pontos cada. A presença ou ausência de cada ponto define a letra, número ou símbolo.</p>
-        <p>Além de letras e números, o Braille também prevê sinais de pontuação, símbolos matemáticos e até representações musicais. Sua adoção é fundamental para a inclusão de pessoas com deficiência visual na educação, trabalho e cultura.</p>
-        <div class="image-container">
-            <img src="images/braille_alphabet.jpg" alt="Alfabeto Braille">
-        </div>
-        <video controls>
-            <source src="videos/braille_exemplo.mp4" type="video/mp4">
-            <source src="videos/braille_exemplo.webm" type="video/webm">
-            <p>Seu navegador não oferece suporte a MP4 ou WebM. Atualize-o ou tente outro navegador.</p>
-        </video>
-        <audio controls>
-            <source src="audios/braille_explicacao.mp3" type="audio/mpeg">
-            <p>Seu navegador não oferece suporte a áudio. Atualize-o ou tente outro navegador.</p>
-        </audio>
+  <!-- HISTÓRIA ANTIGA -->
+  <section id="antiga" class="section">
+    <h2>História Antiga</h2>
+    <p>
+      Na História Antiga, surgiram as primeiras civilizações, como Egito (pirâmides e múmias), 
+      Mesopotâmia (cidades-estado e leis), Fenícia (alfabeto e comércio) e Roma (grandes estradas 
+      e império). A Grécia influenciou filosofia e teatro, enquanto Roma criou as bases do direito.
+    </p>
+    <div class="curiosidades">
+      <h4>Curiosidades</h4>
+      <ul>
+        <li>Egito tinha um deus para quase tudo, como Rá (Sol) e Anúbis (morte).</li>
+        <li>Mesopotâmia é chamada de “berço da civilização”.</li>
+        <li>Roma construiu estradas tão boas que algumas ainda existem hoje.</li>
+      </ul>
+    </div>
+    <div class="image-container">
+      <img
+        alt="História Antiga Kids"
+        src="data:image/jpeg;base64,/9j/ANTIGACHILDSFAKE..."
+      >
+    </div>
+    <video controls>
+      <source
+        src="data:video/mp4;base64,ANTIGAVIDCHILDSFAKE..."
+        type="video/mp4">
+    </video>
+    <audio controls>
+      <source
+        src="data:audio/mpeg;base64,//ANTIGACHILDAUDIOFAKE..."
+        type="audio/mpeg">
+    </audio>
 
-        <!-- Exemplo de uma Tabela do Alfabeto Braille -->
-        <table class="braille-table">
-            <thead>
-                <tr>
-                    <th>Letra</th>
-                    <th>Representação em Braille</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>A</td>
-                    <td>⠁</td>
-                </tr>
-                <tr>
-                    <td>B</td>
-                    <td>⠃</td>
-                </tr>
-                <tr>
-                    <td>C</td>
-                    <td>⠉</td>
-                </tr>
-                <tr>
-                    <td>D</td>
-                    <td>⠙</td>
-                </tr>
-                <tr>
-                    <td>E</td>
-                    <td>⠑</td>
-                </tr>
-                <!-- Acrescente mais linhas conforme necessidade -->
-            </tbody>
-        </table>
+    <p><strong>Egito:</strong> pirâmides, faraós, múmias. <br>
+      <strong>Mesopotâmia:</strong> cuneiforme, leis antigas. <br>
+      <strong>Grécia e Roma:</strong> arte, filosofia, direito.
+    </p>
 
-        <p><em>Experimente converter seu próprio texto para Braille (simplificado) abaixo:</em></p>
-        <textarea id="brailleInput" rows="3" placeholder="Digite algo..."></textarea><br>
-        <button onclick="converterParaBraille()">Converter para Braille Simplificado</button>
-        <div id="brailleOutput" class="braille-output"></div>
-    </section>
+    <div class="video-links">
+      <h3>Vídeos Acessíveis</h3>
+      <ul>
+        <li><a href="https://www.youtube.com/watch?v=sb9S3oPtmYs" target="_blank">História Antiga em Libras</a></li>
+      </ul>
+    </div>
 
-    <!-- QUIZ DE HISTÓRIA -->
-    <section id="quiz" class="section">
-        <h2>Quiz de História</h2>
-        <p>Teste seus conhecimentos com nosso quiz interativo! Clique no botão para começar.</p>
-        <button onclick="startQuiz()">Iniciar Quiz</button>
-        <p id="quizPergunta"></p>
-        <button id="resposta1"></button>
-        <button id="resposta2"></button>
-        <p id="resultadoQuiz"></p>
-    </section>
+    <div class="references">
+      <h4>Fontes</h4>
+      <ul>
+        <li>GONÇALVES, E. <em>História Antiga para Crianças</em>. 2019.</li>
+        <li>BERNARDINI, C. <em>Mundo Antigo: Grécia e Roma</em>. 2020.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- IDADE MÉDIA -->
+  <section id="idadeMedia" class="section">
+    <h2>Idade Média</h2>
+    <p>
+      A Idade Média foi de mais ou menos 476 d.C. até 1453. Teve castelos, cavaleiros e a Igreja Católica 
+      era bem forte. O sistema feudal mandava na economia. As Cruzadas tentavam retomar Jerusalém. As primeiras 
+      universidades surgiram, e a cultura medieval incluiu construções góticas (catedrais altas) e livros 
+      escritos à mão (iluminuras).
+    </p>
+    <div class="curiosidades">
+      <h4>Curiosidades</h4>
+      <ul>
+        <li>Alguns castelos medievais ainda existem e podem ser visitados hoje.</li>
+        <li>Os monges copiavam livros pacientemente, pois não havia impressão.</li>
+      </ul>
+    </div>
+    <div class="image-container">
+      <img
+        alt="Idade Média Kids"
+        src="data:image/jpeg;base64,/9j/IDADEMCHFAKE..."
+      >
+    </div>
+    <video controls>
+      <source
+        src="data:video/mp4;base64,IDADEMEDVIDCHFAKE..."
+        type="video/mp4">
+    </video>
+    <audio controls>
+      <source
+        src="data:audio/mpeg;base64,//IDAMEDIAAUDIOCHFAKE..."
+        type="audio/mpeg">
+    </audio>
+    <p>
+      <strong>Alta Idade Média:</strong> consolidação do feudalismo. <br>
+      <strong>Baixa Idade Média:</strong> mais cidades, comércio e universidades.
+    </p>
+
+    <div class="video-links">
+      <h3>Vídeos Acessíveis</h3>
+      <ul>
+        <li><a href="https://www.youtube.com/watch?v=4FBuTgnx4r8" target="_blank">Feudalismo em Libras</a></li>
+      </ul>
+    </div>
+
+    <div class="references">
+      <h4>Fontes</h4>
+      <ul>
+        <li>LE GOFF, J. <em>Civilização do Ocidente Medieval</em>. 2012.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- RENASCIMENTO -->
+  <section id="renascimento" class="section">
+    <h2>Renascimento</h2>
+    <p>
+      O Renascimento foi um movimento cultural (séc. XIV–XVI) que recuperou ideias da Grécia e de Roma. 
+      Artistas como Leonardo da Vinci e Michelangelo criaram obras muito famosas. Na ciência, Galileu usou 
+      observações para entender o universo, e Copérnico disse que a Terra gira em volta do Sol.
+    </p>
+    <div class="curiosidades">
+      <h4>Curiosidades</h4>
+      <ul>
+        <li>Leonardo da Vinci pintou a Mona Lisa e fez desenhos de máquinas voadoras.</li>
+        <li>Michelangelo pintou o teto da Capela Sistina, em Roma.</li>
+      </ul>
+    </div>
+    <div class="image-container">
+      <img
+        alt="Renascimento Kids"
+        src="data:image/jpeg;base64,/9j/RENASCHFAKE..."
+      >
+    </div>
+    <video controls>
+      <source
+        src="data:video/mp4;base64,RENASCVIDCHFAKE..."
+        type="video/mp4">
+    </video>
+    <audio controls>
+      <source
+        src="data:audio/mpeg;base64,//RENASCHILDAUDIOFAKE..."
+        type="audio/mpeg">
+    </audio>
+    <p>
+      <strong>Centros:</strong> Florença, Veneza, Roma. <br>
+      <strong>Humanismo:</strong> valoriza o ser humano e a razão.
+    </p>
+
+    <div class="video-links">
+      <h3>Vídeos Acessíveis</h3>
+      <ul>
+        <li><a href="https://www.youtube.com/watch?v=q9eQv1sEtRE" target="_blank">Renascimento em Libras</a></li>
+      </ul>
+    </div>
+
+    <div class="references">
+      <h4>Fontes</h4>
+      <ul>
+        <li>BURKE, P. <em>O Renascimento Italiano</em>. 2013.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ILUMINISMO -->
+  <section id="iluminismo" class="section">
+    <h2>Iluminismo</h2>
+    <p>
+      O Iluminismo (séc. XVIII) destacou a razão e a liberdade. Pensadores como John Locke, 
+      Montesquieu e Rousseau questionaram os reis absolutos e defenderam direitos humanos, 
+      inspirando revoluções. A Enciclopédia publicou muitos conhecimentos, ajudando a espalhar 
+      as ideias de mudança.
+    </p>
+    <div class="curiosidades">
+      <h4>Curiosidades</h4>
+      <ul>
+        <li>Montesquieu disse que o poder precisa ser dividido (executivo, legislativo, judiciário).</li>
+        <li>Voltaire defendeu a liberdade de expressão.</li>
+      </ul>
+    </div>
+    <div class="image-container">
+      <img
+        alt="Iluminismo Kids"
+        src="data:image/jpeg;base64,/9j/ILUMINISMCHFAKE..."
+      >
+    </div>
+    <video controls>
+      <source
+        src="data:video/mp4;base64,ILUMINVIDCHFAKE..."
+        type="video/mp4">
+    </video>
+    <audio controls>
+      <source
+        src="data:audio/mpeg;base64,//ILUMINAUDIOCHFAKE..."
+        type="audio/mpeg">
+    </audio>
+    <p>
+      <strong>Filósofos:</strong> Locke, Montesquieu, Rousseau, Voltaire. <br>
+      <strong>Ideias Centrais:</strong> razão, liberdade, direitos naturais.
+    </p>
+
+    <div class="video-links">
+      <h3>Vídeos Acessíveis</h3>
+      <ul>
+        <li><a href="https://www.youtube.com/watch?v=CDuiGARD0K4" target="_blank">Iluminismo em Libras</a></li>
+      </ul>
+    </div>
+
+    <div class="references">
+      <h4>Fontes</h4>
+      <ul>
+        <li>GAY, P. <em>O Iluminismo</em>. 2016.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- HISTÓRIA CONTEMPORÂNEA -->
+  <section id="contemporanea" class="section">
+    <h2>História Contemporânea</h2>
+    <p>
+      Essa fase começa no final do séc. XVIII, com a Revolução Francesa (1789). Depois, ocorreram 
+      as Revoluções Industriais (máquinas a vapor, eletricidade e produção em massa). O século XX 
+      teve duas Guerras Mundiais, a Guerra Fria e as independências de países da África e Ásia.
+    </p>
+    <p>
+      Hoje, a globalização e a internet conectam o mundo inteiro, mas também surgem problemas, 
+      como desigualdades e mudanças climáticas. É importante aprender o passado para agir no presente.
+    </p>
+    <div class="curiosidades">
+      <h4>Curiosidades</h4>
+      <ul>
+        <li>A Primeira Guerra Mundial foi de 1914 a 1918.</li>
+        <li>A Segunda Guerra Mundial foi de 1939 a 1945.</li>
+        <li>A internet começou a crescer muito a partir dos anos 1990.</li>
+      </ul>
+    </div>
+    <div class="image-container">
+      <img
+        alt="História Contemporânea Kids"
+        src="data:image/jpeg;base64,/9j/CONTEMPCHILDFAKE..."
+      >
+    </div>
+    <video controls>
+      <source
+        src="data:video/mp4;base64,CONTEMPVIDCHILDFAKE..."
+        type="video/mp4">
+    </video>
+    <audio controls>
+      <source
+        src="data:audio/mpeg;base64,//CONTEMPAUDIOCHILDFAKE..."
+        type="audio/mpeg">
+    </audio>
+    <p>
+      <strong>Revoluções Industriais:</strong> mudaram a forma de produzir. <br>
+      <strong>Guerras Mundiais:</strong> grandes conflitos do séc. XX. <br>
+      <strong>Globalização:</strong> mundo conectado, internet.
+    </p>
+
+    <div class="video-links">
+      <h3>Vídeos Acessíveis</h3>
+      <ul>
+        <li><a href="https://www.youtube.com/watch?v=DK9b1kwo4mg" target="_blank">História Contemporânea em Libras</a></li>
+      </ul>
+    </div>
+
+    <div class="references">
+      <h4>Fontes</h4>
+      <ul>
+        <li>HOBSBAWM, E. <em>A Era das Revoluções</em>, etc.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- BRAILLE -->
+  <section id="braille" class="section">
+    <h2>Sistema Braille</h2>
+    <p>
+      O Braille ajuda pessoas cegas ou com baixa visão a ler e escrever. Foi criado por Louis Braille, 
+      que organizou pontos em relevo para representar letras e números. Hoje, é usado em livros, sinalizações 
+      e até rótulos de produtos, permitindo mais autonomia para todo mundo.
+    </p>
+    <div class="curiosidades">
+      <h4>Curiosidades</h4>
+      <ul>
+        <li>Cada célula do Braille tem até 6 pontos em relevo.</li>
+        <li>Existem inclusive partituras musicais em Braille.</li>
+      </ul>
+    </div>
+    <div class="image-container">
+      <img
+        alt="Braille Kids"
+        src="data:image/jpeg;base64,/9j/BRAILLECHILDFAKE..."
+      >
+    </div>
+    <video controls>
+      <source
+        src="data:video/mp4;base64,BRAILLEVIDCHFAKE..."
+        type="video/mp4">
+    </video>
+    <audio controls>
+      <source
+        src="data:audio/mpeg;base64,//BRAILLEAUDIOCHFAKE..."
+        type="audio/mpeg">
+    </audio>
+    <table class="braille-table">
+      <thead>
+        <tr><th>Letra</th><th>Braille</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>A</td><td>⠁</td></tr>
+        <tr><td>B</td><td>⠃</td></tr>
+        <tr><td>C</td><td>⠉</td></tr>
+      </tbody>
+    </table>
+    <p><em>Converter texto para Braille simplificado:</em></p>
+    <textarea id="brailleInput" rows="2"></textarea><br>
+    <button onclick="converterParaBraille()">Converter</button>
+    <div id="brailleOutput" class="braille-output"></div>
+
+    <div class="references">
+      <h4>Fontes</h4>
+      <ul>
+        <li>ORGANIZAÇÃO NACIONAL DE CEGOS DO BRASIL (ONCB): <a href="https://www.oncb.org.br/" target="_blank">oncb.org.br</a></li>
+        <li>RELVAS, Paulo. <em>Braille: Leitura e Escrita</em>. 2017.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- QUIZ DE HISTÓRIA -->
+  <section id="quiz" class="section">
+    <h2>Quiz de História</h2>
+    <p>Clique no botão para começar o quiz!</p>
+    <button onclick="startQuiz()">Iniciar Quiz</button>
+    <p id="quizPergunta"></p>
+    <button id="resposta1"></button>
+    <button id="resposta2"></button>
+    <p id="resultadoQuiz"></p>
+  </section>
+
 </div>
 
 <footer>
-    <p>&copy; 2025 Portal Interativo de História - Todos os direitos reservados.</p>
+  <p>&copy; 2025 Portal Interativo de História – Versão para Crianças</p>
 </footer>
 
 <script>
-    // Função para exibir a seção selecionada
-    const showSection = (sectionId) => {
-        document.querySelectorAll('.section').forEach(section => section.classList.remove('active'));
-        document.getElementById(sectionId).classList.add('active');
-        window.scrollTo(0, 0);
+  // Alternar seções com transição
+  function showSection(sectionId){
+    document.querySelectorAll('.section').forEach(sec => sec.classList.remove('active'));
+    document.getElementById(sectionId).classList.add('active');
+    window.scrollTo(0,0);
+  }
+
+  // Quiz
+  const perguntas = [
+    {
+      pergunta:"Quem foi o primeiro imperador do Brasil?",
+      respostas:["Dom Pedro I","Dom João VI"],
+      correta:0
+    },
+    {
+      pergunta:"Qual deus é o “chefe” do Olimpo na Mitologia Grega?",
+      respostas:["Poseidon","Zeus"],
+      correta:1
+    },
+    {
+      pergunta:"Qual era o sistema mais comum na Idade Média?",
+      respostas:["Feudalismo","Capitalismo"],
+      correta:0
+    },
+    {
+      pergunta:"Quem pintou a Mona Lisa, um grande artista do Renascimento?",
+      respostas:["Michelangelo","Leonardo da Vinci"],
+      correta:1
+    },
+    {
+      pergunta:"Qual filósofo iluminista falou sobre separação de poderes?",
+      respostas:["Montesquieu","Voltaire"],
+      correta:0
     }
+  ];
+  let indiceAtual=0;
+  let pontuacao=0;
 
-    // Lista de perguntas do quiz
-    const perguntas = [
-        {
-            pergunta: "Qual era o nome do primeiro imperador do Brasil?",
-            respostas: ["Dom Pedro I", "Dom João VI"],
-            correta: 0
-        },
-        {
-            pergunta: "Qual civilização é conhecida como 'berço da democracia'?",
-            respostas: ["Roma", "Grécia"],
-            correta: 1
-        },
-        {
-            pergunta: "A Idade Média teve como principal sistema socioeconômico o...",
-            respostas: ["Feudalismo", "Capitalismo"],
-            correta: 0
-        },
-        {
-            pergunta: "Quem é considerado o deus supremo na Mitologia Grega?",
-            respostas: ["Zeus", "Ares"],
-            correta: 0
-        },
-        {
-            pergunta: "Em que período histórico surgiu o movimento cultural conhecido como Renascimento?",
-            respostas: ["Entre os séculos XIV e XVI", "Entre os séculos X e XII"],
-            correta: 0
-        },
-        {
-            pergunta: "Qual filósofo iluminista defendia a separação dos poderes?",
-            respostas: ["Montesquieu", "Voltaire"],
-            correta: 0
-        },
-        {
-            pergunta: "O que marcou o início da Idade Contemporânea?",
-            respostas: ["Revolução Francesa (1789)", "Queda do Império Romano (476)"],
-            correta: 0
-        }
-    ];
+  function startQuiz(){
+    indiceAtual=0;
+    pontuacao=0;
+    document.getElementById("resultadoQuiz").innerText="";
+    mostrarPergunta();
+  }
 
-    let indiceAtual = 0;
-    let pontuacao = 0;
+  function mostrarPergunta(){
+    const quest = perguntas[indiceAtual];
+    document.getElementById("quizPergunta").innerText=quest.pergunta;
+    document.getElementById("resposta1").innerText=quest.respostas[0];
+    document.getElementById("resposta2").innerText=quest.respostas[1];
+    document.getElementById("resposta1").onclick=()=>checarResposta(0);
+    document.getElementById("resposta2").onclick=()=>checarResposta(1);
+  }
 
-    // Função para iniciar o quiz
-    const startQuiz = () => {
-        indiceAtual = 0;
-        pontuacao = 0;
-        document.getElementById("resultadoQuiz").innerText = "";
-        mostrarPergunta();
+  function checarResposta(r){
+    const quest = perguntas[indiceAtual];
+    if(r===quest.correta){
+      alert("Muito bem! Resposta certa.");
+      pontuacao++;
+    } else {
+      alert("Ops, resposta errada...");
     }
-
-    // Função para mostrar a pergunta atual
-    const mostrarPergunta = () => {
-        const quest = perguntas[indiceAtual];
-        document.getElementById("quizPergunta").innerText = quest.pergunta;
-        document.getElementById("resposta1").innerText = quest.respostas[0];
-        document.getElementById("resposta2").innerText = quest.respostas[1];
-        // Define as ações dos botões
-        document.getElementById("resposta1").onclick = function() { checarResposta(0); };
-        document.getElementById("resposta2").onclick = function() { checarResposta(1); };
+    indiceAtual++;
+    if(indiceAtual<perguntas.length){
+      mostrarPergunta();
+    } else {
+      exibirResultado();
     }
+  }
 
-    // Função para checar a resposta e ir para a próxima pergunta
-    const checarResposta = (respostaEscolhida) => {
-        const quest = perguntas[indiceAtual];
-        if (respostaEscolhida === quest.correta) {
-            alert("Resposta correta!");
-            pontuacao++;
-        } else {
-            alert("Resposta incorreta.");
-        }
-        indiceAtual++;
-        if (indiceAtual < perguntas.length) {
-            mostrarPergunta();
-        } else {
-            exibirResultado();
-        }
+  function exibirResultado(){
+    document.getElementById("quizPergunta").innerText="";
+    document.getElementById("resposta1").innerText="";
+    document.getElementById("resposta2").innerText="";
+    document.getElementById("resultadoQuiz").innerText = 
+      `Você acertou ${pontuacao} de ${perguntas.length} perguntas!`;
+  }
+
+  // Conversor Braille Simplificado
+  const brailleMap = {
+    'a':'⠁','b':'⠃','c':'⠉','d':'⠙','e':'⠑','f':'⠋','g':'⠛',
+    'h':'⠓','i':'⠊','j':'⠚','k':'⠅','l':'⠇','m':'⠍','n':'⠝',
+    'o':'⠕','p':'⠏','q':'⠟','r':'⠗','s':'⠎','t':'⠞','u':'⠥',
+    'v':'⠧','w':'⠺','x':'⠭','y':'⠽','z':'⠵',' ':' '
+  };
+
+  function converterParaBraille(){
+    let input = document.getElementById('brailleInput').value;
+    let saida = '';
+    for(let c of input.toLowerCase()){
+      saida += (brailleMap[c] || c);
     }
-
-    // Função para exibir o resultado final
-    const exibirResultado = () => {
-        document.getElementById("quizPergunta").innerText = "";
-        document.getElementById("resposta1").innerText = "";
-        document.getElementById("resposta2").innerText = "";
-        document.getElementById("resultadoQuiz").innerText = `Você acertou ${pontuacao} de ${perguntas.length} perguntas.`;
-    }
-
-    // Conversor Braille Simplificado
-    // Mapeamento simples de A-Z para símbolos Braille (simbólicos apenas para visualização)
-    const brailleMap = {
-        'a': '⠁', 'b': '⠃', 'c': '⠉', 'd': '⠙', 'e': '⠑', 'f': '⠋', 'g': '⠛',
-        'h': '⠓', 'i': '⠊', 'j': '⠚', 'k': '⠅', 'l': '⠇', 'm': '⠍', 'n': '⠝',
-        'o': '⠕', 'p': '⠏', 'q': '⠟', 'r': '⠗', 's': '⠎', 't': '⠞', 'u': '⠥',
-        'v': '⠧', 'w': '⠺', 'x': '⠭', 'y': '⠽', 'z': '⠵',
-        ' ': ' ' // espaço
-    };
-
-    const converterParaBraille = () => {
-        const input = document.getElementById('brailleInput').value;
-        let saida = '';
-        for (let char of input.toLowerCase()) {
-            if (brailleMap[char]) {
-                saida += brailleMap[char];
-            } else {
-                // Se não existir no dicionário, mantém o caractere original
-                saida += char;
-            }
-        }
-        document.getElementById('brailleOutput').innerText = saida;
-    }
+    document.getElementById('brailleOutput').innerText = saida;
+  }
 </script>
+
 </body>
 </html>
