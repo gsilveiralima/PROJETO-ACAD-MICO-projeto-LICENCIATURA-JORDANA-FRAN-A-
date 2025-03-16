@@ -1,1 +1,297 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portal Interativo de História</title>
+    <meta name="description" content="Portal Interativo de História com conteúdos completos e multimídia sobre vários períodos históricos, incluindo Brasil, Mitologia Grega, História Antiga, Idade Média, Renascimento, Iluminismo, História Contemporânea e mais, além de recursos de Braille.">
+    <meta name="keywords" content="História, Brasil, Mitologia Grega, História Antiga, Idade Média, Renascimento, Iluminismo, Educação, Inclusão, Arte, Cultura, Revoluções, Globalização, Braille">
+    <meta name="author" content="Gabriel Silveira Lima, Jordana França Soares">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            line-height: 1.6;
+            text-align: center;
+        }
+        header {
+            background-color: #2c3e50;
+            padding: 15px;
+            color: #fff;
+            text-align: center;
+        }
+        nav ul {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin: 0;
+        }
+        nav ul li {
+            margin: 10px;
+        }
+        nav ul li a {
+            text-decoration: none;
+            color: #fff;
+            font-size: 18px;
+        }
+        nav ul li a:hover {
+            text-decoration: underline;
+        }
+        .container {
+            max-width: 900px;
+            margin: auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .section {
+            display: none;
+            margin-bottom: 40px;
+        }
+        .active {
+            display: block;
+        }
+        h2 {
+            color: #2c3e50;
+            border-bottom: 2px solid #2c3e50;
+            padding-bottom: 10px;
+        }
+        footer {
+            background-color: #2c3e50;
+            color: #fff;
+            text-align: center;
+            padding: 15px;
+            font-size: 14px;
+            width: 100%;
+            bottom: 0;
+        }
+        .image-container {
+            margin: 20px 0;
+        }
+        .image-container img {
+            width: 100%;
+            border-radius: 10px;
+        }
+        video, audio {
+            width: 100%;
+            margin-top: 10px;
+        }
+        button {
+            background-color: #3498db;
+            border: none;
+            color: #fff;
+            padding: 10px 20px;
+            margin: 10px 5px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #2980b9;
+        }
+        /* Braille table styling */
+        .braille-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        .braille-table th, .braille-table td {
+            border: 1px solid #ccc;
+            padding: 8px;
+        }
+        .braille-table th {
+            background-color: #f0f0f0;
+        }
+        .braille-output {
+            margin-top: 10px;
+            padding: 10px;
+            background-color: #eef;
+            border-radius: 5px;
+            min-height: 40px;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <h1>Portal Interativo de História</h1>
+    <nav>
+        <ul>
+            <li><a href="#" onclick="showSection('home')">Home</a></li>
+            <li><a href="#" onclick="showSection('brasil')">História do Brasil</a></li>
+            <li><a href="#" onclick="showSection('grega')">Mitologia Grega</a></li>
+            <li><a href="#" onclick="showSection('antiga')">História Antiga</a></li>
+            <li><a href="#" onclick="showSection('idadeMedia')">Idade Média</a></li>
+            <li><a href="#" onclick="showSection('renascimento')">Renascimento</a></li>
+            <li><a href="#" onclick="showSection('iluminismo')">Iluminismo</a></li>
+            <li><a href="#" onclick="showSection('contemporanea')">História Contemporânea</a></li>
+            <li><a href="#" onclick="showSection('braille')">Braille</a></li>
+            <li><a href="#" onclick="showSection('quiz')">Quiz de História</a></li>
+        </ul>
+    </nav>
+</header>
 
+<div class="container">
+    <!-- HOME -->
+    <section id="home" class="section active">
+        <h2>Bem-vindo ao Portal de História</h2>
+        <p>Descubra uma rica jornada pelo passado da humanidade! Aqui você encontrará conteúdos completos e multimídia sobre a História do Brasil, Mitologia Grega, História Antiga, Idade Média, Renascimento, Iluminismo, História Contemporânea e outras grandes transformações que moldaram o mundo. Aproveite textos, imagens, áudios, vídeos e um quiz interativo para reforçar seus conhecimentos.</p>
+        <div class="image-container">
+            <img src="images/home_intro.jpg" alt="Portal Interativo de História">
+        </div>
+        <video controls>
+            <source src="videos/introducao.mp4" type="video/mp4">
+            Seu navegador não suporta vídeos.
+        </video>
+        <p>
+            Explore cada seção para conhecer diferentes períodos históricos, curiosidades e personagens marcantes. Você pode navegar pelos botões acima ou simplesmente clicar no tópico que mais lhe interessar.
+        </p>
+    </section>
+
+    <!-- HISTÓRIA DO BRASIL -->
+    <section id="brasil" class="section">
+        <h2>História do Brasil</h2>
+        <p>A história do Brasil remonta à chegada dos portugueses em 1500, mas antes disso, inúmeras nações indígenas já habitavam e desenvolviam suas culturas em diferentes regiões, como Tupi, Guarani e muitos outros troncos linguísticos. Durante o período colonial, os portugueses exploraram o pau-brasil, cana-de-açúcar e outros recursos, impactando profundamente as populações locais por meio do escambo e da escravidão. A independência ocorreu em 1822, sob a liderança de Dom Pedro I, dando origem ao Império do Brasil. Em seguida, o país viveu o Segundo Reinado, sob Dom Pedro II, até 1889, quando a República foi proclamada. No século XX, o Brasil passou por fases como a Primeira República, a Era Vargas, o Regime Militar e a redemocratização na década de 1980. Hoje, é uma república federativa, rica em diversidade cultural, econômica e social.</p>
+        <div class="image-container">
+            <img src="images/brasil_historia.jpg" alt="Cenas históricas do Brasil">
+        </div>
+        <video controls>
+            <source src="videos/brasil.mp4" type="video/mp4">
+            Seu navegador não suporta vídeos.
+        </video>
+        <audio controls>
+            <source src="audios/brasil.mp3" type="audio/mpeg">
+            Seu navegador não suporta áudio.
+        </audio>
+        <p>
+            <strong>Colonização e Escravidão:</strong> A economia colonial era sustentada principalmente pela mão de obra escravizada, tanto de indígenas quanto de africanos trazidos pelos colonizadores. <br>
+            <strong>Período Imperial:</strong> (1822 – 1889) Período marcado pelo Primeiro e Segundo Reinado (Dom Pedro I e Dom Pedro II). Houve modernização, mas também tensões como a Guerra do Paraguai. <br>
+            <strong>República:</strong> (1889 – atual) Englobando a Primeira República, Era Vargas, Regime Militar (1964-1985) e a Nova República, cada etapa trazendo mudanças sociais e políticas significativas.
+        </p>
+        <p>
+            <em>Curiosidade:</em> A vinda da Família Real Portuguesa ao Brasil, em 1808, transformou a então colônia, abrindo portos e estimulando o desenvolvimento de instituições como a Biblioteca Nacional.
+        </p>
+    </section>
+
+    <!-- MITOLOGIA GREGA -->
+    <section id="grega" class="section">
+        <h2>Mitologia Grega</h2>
+        <p>A mitologia grega reúne histórias que explicam fenômenos naturais, a criação do mundo e a interação entre deuses e humanos. Os doze deuses do Olimpo, liderados por Zeus, influenciavam todos os aspectos da vida, enquanto Hades governava o submundo. Heróis como Hércules, Teseu e Perseu enfrentavam desafios épicos, e criaturas como Medusa, Minotauro e Sereias habitavam mitos carregados de simbolismo. A cultura grega, expressa na literatura épica de Homero (A Ilíada e a Odisseia), atravessou séculos, influenciando artes, filosofia e religiões.</p>
+        <div class="image-container">
+            <img src="images/mitologia_grega.jpg" alt="Figuras míticas da Grécia Antiga">
+        </div>
+        <video controls>
+            <source src="videos/mitologia.mp4" type="video/mp4">
+            Seu navegador não suporta vídeos.
+        </video>
+        <audio controls>
+            <source src="audios/mitologia.mp3" type="audio/mpeg">
+            Seu navegador não suporta áudio.
+        </audio>
+        <p>
+            <strong>Deuses do Olimpo:</strong> Zeus, Hera, Poseidon, Deméter, Atena, Apolo, Ártemis, Ares, Afrodite, Hermes, Hefesto e Dionísio. <br>
+            <strong>Heróis e Criaturas:</strong> Hércules, Perseu, Teseu, Medusa, Minotauro, Centauros, Sereias, Ciclopes. <br>
+            <strong>Influência Cultural:</strong> A Ilíada e a Odisseia inspiraram diversas obras de literatura, teatro, cinema e jogos.
+        </p>
+        <p>
+            <em>Curiosidade:</em> Muitos dos mitos gregos foram adaptados pelos romanos, que atribuíram nomes diferentes aos deuses (por exemplo, Zeus correspondia a Júpiter, e Hera a Juno).
+        </p>
+    </section>
+
+    <!-- HISTÓRIA ANTIGA -->
+    <section id="antiga" class="section">
+        <h2>História Antiga</h2>
+        <p>A História Antiga cobre o surgimento das primeiras civilizações, como Egito, Mesopotâmia, Fenícia, Pérsia, Grécia e Roma. Essas sociedades deixaram contribuições em escrita, arquitetura, leis, religião, arte e filosofia. O Egito destacou-se pela construção de pirâmides e pela prática de mumificação. A Mesopotâmia foi pioneira na escrita cuneiforme e criou códigos legais, como o Código de Hamurábi. Fenícios desenvolveram um alfabeto que influenciou diversas línguas modernas. Grécia e Roma moldaram o mundo ocidental, desenvolvendo a democracia, instituições republicanas e legados arquitetônicos e literários que influenciam nossa sociedade até hoje.</p>
+        <div class="image-container">
+            <img src="images/historia_antiga.jpg" alt="Representação de civilizações antigas">
+        </div>
+        <video controls>
+            <source src="videos/antiga.mp4" type="video/mp4">
+            Seu navegador não suporta vídeos.
+        </video>
+        <audio controls>
+            <source src="audios/antiga.mp3" type="audio/mpeg">
+            Seu navegador não suporta áudio.
+        </audio>
+        <p>
+            <strong>Egito:</strong> Construção das pirâmides, culto aos faraós e a escrita hieroglífica. <br>
+            <strong>Mesopotâmia:</strong> Conhecida como "Berço da Civilização", criou as primeiras cidades-estado. <br>
+            <strong>Fenícia:</strong> Um povo de navegadores que estabeleceu rotas comerciais por todo o Mediterrâneo. <br>
+            <strong>Grécia e Roma:</strong> Fundamentos da cultura ocidental, destacando-se na filosofia, direito, engenharia e artes.
+        </p>
+        <p>
+            <em>Curiosidade:</em> A Biblioteca de Alexandria, no Egito Helenístico, foi um dos mais importantes centros de conhecimento da Antiguidade.
+        </p>
+    </section>
+
+    <!-- IDADE MÉDIA -->
+    <section id="idadeMedia" class="section">
+        <h2>Idade Média</h2>
+        <p>Estendendo-se do século V ao XV, a Idade Média começou com a queda do Império Romano do Ocidente e terminou com a tomada de Constantinopla pelos turcos otomanos. Marcada pelo feudalismo, pela forte influência da Igreja Católica e pela formação de reinos, foi também um período de intensas transformações. As Cruzadas, a expansão do Islamismo e o surgimento das primeiras universidades também ocorreram nessa época. A arte medieval inclui a arquitetura românica e gótica, além de manuscritos iluminados e cantigas que expressavam a vida e a religiosidade do período.</p>
+        <div class="image-container">
+            <img src="images/idade_media.jpg" alt="Paisagem medieval européia">
+        </div>
+        <video controls>
+            <source src="videos/idade_media.mp4" type="video/mp4">
+            Seu navegador não suporta vídeos.
+        </video>
+        <audio controls>
+            <source src="audios/idade_media.mp3" type="audio/mpeg">
+            Seu navegador não suporta áudio.
+        </audio>
+        <p>
+            <strong>Alta Idade Média:</strong> Marcada pelas invasões bárbaras, consolidação do feudalismo e ruralização da economia. <br>
+            <strong>Baixa Idade Média:</strong> Crescimento das cidades, fortalecimento do comércio, surgimento das corporações de ofício e das primeiras universidades. <br>
+            <strong>Religião:</strong> A Igreja Católica era uma instituição extremamente poderosa, influenciando política, cultura e educação.
+        </p>
+        <p>
+            <em>Curiosidade:</em> As Cruzadas foram expedições de caráter militar e religioso com o objetivo de retomar Jerusalém, considerada sagrada para o cristianismo.
+        </p>
+    </section>
+
+    <!-- RENASCIMENTO -->
+    <section id="renascimento" class="section">
+        <h2>Renascimento</h2>
+        <p>O Renascimento (séculos XIV a XVI) representou uma retomada dos valores da cultura clássica grega e romana, bem como o surgimento do humanismo e do pensamento científico moderno. Cidades como Florença, Veneza e Roma foram centros de produção artística e intelectual. Grandes nomes como Leonardo da Vinci, Michelangelo, Rafael e Donatello revolucionaram as artes, com obras que exaltavam a beleza e a anatomia humana. Na literatura, Maquiavel, Shakespeare e Camões ganharam destaque. Esse período, marcado pela valorização do homem e da razão, também presenciou transformações religiosas e políticas, como a Reforma Protestante e a expansão marítima.</p>
+        <div class="image-container">
+            <img src="images/renascimento.jpg" alt="Pintura representando o Renascimento">
+        </div>
+        <video controls>
+            <source src="videos/renascimento.mp4" type="video/mp4">
+            Seu navegador não suporta vídeos.
+        </video>
+        <audio controls>
+            <source src="audios/renascimento.mp3" type="audio/mpeg">
+            Seu navegador não suporta áudio.
+        </audio>
+        <p>
+            <strong>Principais Centros:</strong> Florença, Veneza, Roma. <br>
+            <strong>Humanismo:</strong> Valorização do homem em oposição ao teocentrismo medieval, enfatizando o estudo das letras clássicas. <br>
+            <strong>Ciência:</strong> Copérnico, Galileu, Kepler e outros estudiosos revolucionaram a astronomia e questionaram conceitos tradicionais.
+        </p>
+        <p>
+            <em>Curiosidade:</em> A técnica de perspectiva na pintura, aperfeiçoada no Renascimento, mudou a forma como os artistas representavam profundidade e espaço.
+        </p>
+    </section>
+
+    <!-- ILUMINISMO -->
+    <section id="iluminismo" class="section">
+        <h2>Iluminismo</h2>
+        <p>O Iluminismo, ou "Século das Luzes", floresceu no século XVIII e colocou em destaque a razão, a liberdade e o pensamento crítico como bases para o progresso humano. Filósofos iluministas como John Locke, Voltaire, Montesquieu e Rousseau discutiam direitos naturais, separação de poderes, tolerância religiosa e cidadania. As ideias iluministas influenciaram revoluções como a Independência dos Estados Unidos (1776) e a Revolução Francesa (1789), transformando profundamente as estruturas políticas e sociais do Ocidente. As monarquias absolutistas foram questionadas e substituídas, em muitos casos, por repúblicas ou monarquias constitucionais.</p>
+        <div class="image-container">
+            <img src="images/iluminismo.jpg" alt="Representação do Iluminismo">
+        </div>
+        <video controls>
+            <source src="videos/iluminismo.mp4" type="video/mp4">
+            Seu navegador não suporta vídeos.
+        </video>
+        <audio controls>
+            <source src="audios/iluminismo.mp3" type="audio/mpeg">
+            Seu navegador não suporta áudio.
+        </audio>
+        <p>
+            <strong>Principais Filósofos:</strong> John Locke, Voltaire, Montesquieu
