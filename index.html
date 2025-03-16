@@ -294,4 +294,231 @@
             Seu navegador não suporta áudio.
         </audio>
         <p>
-            <strong>Principais Filósofos:</strong> John Locke, Voltaire, Montesquieu
+            <strong>Principais Filósofos:</strong> John Locke, Voltaire, Montesquieu, Jean-Jacques Rousseau. <br>
+            <strong>Ideias Centrais:</strong> Liberdade de expressão, tolerância religiosa, contrato social, separação dos poderes, igualdade jurídica. <br>
+            <strong>Impacto:</strong> Influência em revoluções, na formação de novas constituições e no surgimento de Estados nacionais modernos.
+        </p>
+        <p>
+            <em>Curiosidade:</em> O Dicionário Filosófico de Voltaire e a Enciclopédia de Diderot e d'Alembert foram fundamentais na difusão das ideias iluministas.
+        </p>
+    </section>
+
+    <!-- HISTÓRIA CONTEMPORÂNEA -->
+    <section id="contemporanea" class="section">
+        <h2>História Contemporânea</h2>
+        <p>A História Contemporânea abrange desde o final do século XVIII até os dias atuais. É caracterizada por mudanças aceleradas em âmbito político, social, econômico e tecnológico. A Revolução Francesa (1789) é geralmente considerada o marco inicial, derrubando a monarquia absolutista e influenciando movimentos revolucionários ao redor do mundo. No século XIX, as Revoluções Industriais transformaram radicalmente o processo de produção, dando início a uma era de urbanização e novas relações de trabalho. O século XX foi marcado pelas Guerras Mundiais, a Guerra Fria, descolonização na África e Ásia, o avanço da democracia liberal e a formação de blocos econômicos. No século XXI, a globalização, a Era Digital e os desafios ambientais e geopolíticos definem as pautas de governos e sociedades.</p>
+        <div class="image-container">
+            <img src="images/contemporanea.jpg" alt="Movimentos e fatos da História Contemporânea">
+        </div>
+        <video controls>
+            <source src="videos/contemporanea.mp4" type="video/mp4">
+            Seu navegador não suporta vídeos.
+        </video>
+        <audio controls>
+            <source src="audios/contemporanea.mp3" type="audio/mpeg">
+            Seu navegador não suporta áudio.
+        </audio>
+        <p>
+            <strong>Revoluções Industriais:</strong> Introdução das máquinas a vapor, eletricidade, produção em massa, tecnologia digital. <br>
+            <strong>Guerras Mundiais:</strong> Primeira (1914-1918) e Segunda Guerra (1939-1945) redefiniram a geopolítica global, levando à criação da ONU. <br>
+            <strong>Sociedade em Rede:</strong> A internet e as tecnologias de informação remodelaram a economia, a política e a cultura em escala mundial.
+        </p>
+        <p>
+            <em>Curiosidade:</em> A globalização aproximou culturas e mercados, mas também trouxe desafios como desigualdades socioeconômicas e crises climáticas.
+        </p>
+    </section>
+
+    <!-- BRAILLE -->
+    <section id="braille" class="section">
+        <h2>Sistema Braille</h2>
+        <p>O Braille é um sistema de leitura e escrita tátil criado para pessoas com deficiência visual. Cada caractere em Braille é formado por pontos em relevo dispostos em até seis posições, organizados em duas colunas de três pontos cada. A presença ou ausência de cada ponto define a letra, número ou símbolo.</p>
+        <p>Além de letras e números, o Braille também prevê sinais de pontuação, símbolos matemáticos e até representações musicais. Sua adoção é fundamental para a inclusão de pessoas com deficiência visual na educação, trabalho e cultura.</p>
+        <div class="image-container">
+            <img src="images/braille_alphabet.jpg" alt="Alfabeto Braille">
+        </div>
+        <video controls>
+            <source src="videos/braille_exemplo.mp4" type="video/mp4">
+            Seu navegador não suporta vídeos.
+        </video>
+        <audio controls>
+            <source src="audios/braille_explicacao.mp3" type="audio/mpeg">
+            Seu navegador não suporta áudio.
+        </audio>
+
+        <!-- Exemplo de uma Tabela do Alfabeto Braille -->
+        <table class="braille-table">
+            <thead>
+                <tr>
+                    <th>Letra</th>
+                    <th>Representação em Braille</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>A</td>
+                    <td>⠁</td>
+                </tr>
+                <tr>
+                    <td>B</td>
+                    <td>⠃</td>
+                </tr>
+                <tr>
+                    <td>C</td>
+                    <td>⠉</td>
+                </tr>
+                <tr>
+                    <td>D</td>
+                    <td>⠙</td>
+                </tr>
+                <tr>
+                    <td>E</td>
+                    <td>⠑</td>
+                </tr>
+                <!-- Acrescente mais linhas conforme necessidade -->
+            </tbody>
+        </table>
+
+        <p><em>Experimente converter seu próprio texto para Braille (simplificado) abaixo:</em></p>
+        <textarea id="brailleInput" rows="3" placeholder="Digite algo..."></textarea><br>
+        <button onclick="converterParaBraille()">Converter para Braille Simplificado</button>
+        <div id="brailleOutput" class="braille-output"></div>
+    </section>
+
+    <!-- QUIZ DE HISTÓRIA -->
+    <section id="quiz" class="section">
+        <h2>Quiz de História</h2>
+        <p>Teste seus conhecimentos com nosso quiz interativo! Clique no botão para começar.</p>
+        <button onclick="startQuiz()">Iniciar Quiz</button>
+        <p id="quizPergunta"></p>
+        <button id="resposta1"></button>
+        <button id="resposta2"></button>
+        <p id="resultadoQuiz"></p>
+    </section>
+</div>
+
+<footer>
+    <p>&copy; 2025 Portal Interativo de História - Todos os direitos reservados.</p>
+</footer>
+
+<script>
+    // Função para exibir a seção selecionada
+    const showSection = (sectionId) => {
+        document.querySelectorAll('.section').forEach(section => section.classList.remove('active'));
+        document.getElementById(sectionId).classList.add('active');
+        window.scrollTo(0, 0);
+    }
+
+    // Lista de perguntas do quiz
+    const perguntas = [
+        {
+            pergunta: "Qual era o nome do primeiro imperador do Brasil?",
+            respostas: ["Dom Pedro I", "Dom João VI"],
+            correta: 0
+        },
+        {
+            pergunta: "Qual civilização é conhecida como 'berço da democracia'?",
+            respostas: ["Roma", "Grécia"],
+            correta: 1
+        },
+        {
+            pergunta: "A Idade Média teve como principal sistema socioeconômico o...",
+            respostas: ["Feudalismo", "Capitalismo"],
+            correta: 0
+        },
+        {
+            pergunta: "Quem é considerado o deus supremo na Mitologia Grega?",
+            respostas: ["Zeus", "Ares"],
+            correta: 0
+        },
+        {
+            pergunta: "Em que período histórico surgiu o movimento cultural conhecido como Renascimento?",
+            respostas: ["Entre os séculos XIV e XVI", "Entre os séculos X e XII"],
+            correta: 0
+        },
+        {
+            pergunta: "Qual filósofo iluminista defendia a separação dos poderes?",
+            respostas: ["Montesquieu", "Voltaire"],
+            correta: 0
+        },
+        {
+            pergunta: "O que marcou o início da Idade Contemporânea?",
+            respostas: ["Revolução Francesa (1789)", "Queda do Império Romano (476)"]
+            ,
+            correta: 0
+        }
+    ];
+
+    let indiceAtual = 0;
+    let pontuacao = 0;
+
+    // Função para iniciar o quiz
+    const startQuiz = () => {
+        indiceAtual = 0;
+        pontuacao = 0;
+        document.getElementById("resultadoQuiz").innerText = "";
+        mostrarPergunta();
+    }
+
+    // Função para mostrar a pergunta atual
+    const mostrarPergunta = () => {
+        const quest = perguntas[indiceAtual];
+        document.getElementById("quizPergunta").innerText = quest.pergunta;
+        document.getElementById("resposta1").innerText = quest.respostas[0];
+        document.getElementById("resposta2").innerText = quest.respostas[1];
+        // Define as ações dos botões
+        document.getElementById("resposta1").onclick = function() { checarResposta(0); };
+        document.getElementById("resposta2").onclick = function() { checarResposta(1); };
+    }
+
+    // Função para checar a resposta e ir para a próxima pergunta
+    const checarResposta = (respostaEscolhida) => {
+        const quest = perguntas[indiceAtual];
+        if (respostaEscolhida === quest.correta) {
+            alert("Resposta correta!");
+            pontuacao++;
+        } else {
+            alert("Resposta incorreta.");
+        }
+        indiceAtual++;
+        if (indiceAtual < perguntas.length) {
+            mostrarPergunta();
+        } else {
+            exibirResultado();
+        }
+    }
+
+    // Função para exibir o resultado final
+    const exibirResultado = () => {
+        document.getElementById("quizPergunta").innerText = "";
+        document.getElementById("resposta1").innerText = "";
+        document.getElementById("resposta2").innerText = "";
+        document.getElementById("resultadoQuiz").innerText = `Você acertou ${pontuacao} de ${perguntas.length} perguntas.`;
+    }
+
+    // Conversor Braille Simplificado
+    // Mapeamento simples de A-Z para símbolos Braille (simbólicos apenas para visualização)
+    const brailleMap = {
+        'a': '⠁', 'b': '⠃', 'c': '⠉', 'd': '⠙', 'e': '⠑', 'f': '⠋', 'g': '⠛',
+        'h': '⠓', 'i': '⠊', 'j': '⠚', 'k': '⠅', 'l': '⠇', 'm': '⠍', 'n': '⠝',
+        'o': '⠕', 'p': '⠏', 'q': '⠟', 'r': '⠗', 's': '⠎', 't': '⠞', 'u': '⠥',
+        'v': '⠧', 'w': '⠺', 'x': '⠭', 'y': '⠽', 'z': '⠵',
+        ' ': ' ' // espaço
+    };
+
+    const converterParaBraille = () => {
+        const input = document.getElementById('brailleInput').value;
+        let saida = '';
+        for (let char of input.toLowerCase()) {
+            if (brailleMap[char]) {
+                saida += brailleMap[char];
+            } else {
+                // Se não existir no dicionário, mantém o caractere original
+                saida += char;
+            }
+        }
+        document.getElementById('brailleOutput').innerText = saida;
+    }
+</script>
+
+</body>
+</html>
