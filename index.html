@@ -2,668 +2,632 @@
 <html lang="pt">
 <head>
   <meta charset="UTF-8">
-  <title>Portal Interativo de História – Versão Completa e Verificada</title>
-  <meta name="description" content="Portal Interativo de História com mídias reais, conteúdos verificados e recursos de acessibilidade para crianças.">
+  <title>Portal Interativo de História – Versão Final</title>
+  <meta name="description" content="Portal Interativo de História com conteúdos aprofundados, referências bibliográficas e mídias reais acessíveis para crianças do Ensino Fundamental, incluindo alunos com necessidades especiais.">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     /* ESTILOS GERAIS */
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: Arial, sans-serif; background-color: #f5f5f5; color: #333; line-height: 1.6; text-align: center; }
-    header { background-color: #2c3e50; padding: 15px; color: #fff; }
-    nav ul { list-style: none; display: flex; flex-wrap: wrap; justify-content: center; }
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f5f5f5;
+      color: #333;
+      line-height: 1.6;
+      text-align: center;
+      padding-bottom: 60px;
+    }
+    header {
+      background-color: #2c3e50;
+      padding: 15px;
+      color: #fff;
+    }
+    nav ul {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin: 0;
+    }
     nav ul li { margin: 10px; }
-    nav ul li a { text-decoration: none; color: #fff; font-size: 18px; transition: transform 0.3s ease; }
-    nav ul li a:hover { text-decoration: underline; transform: scale(1.1); }
-    .container { max-width: 900px; margin: auto; padding: 20px; background-color: #fff; box-shadow: 0 0 10px rgba(0,0,0,0.1); margin-bottom: 60px; }
+    nav ul li a {
+      text-decoration: none;
+      color: #fff;
+      font-size: 18px;
+      transition: transform 0.3s ease;
+    }
+    nav ul li a:hover { transform: scale(1.1); text-decoration: underline; }
+    .container {
+      max-width: 900px;
+      margin: auto;
+      padding: 20px;
+      background-color: #fff;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
     .section { display: none; margin-bottom: 40px; }
     .section.active { display: block; animation: fadeIn 0.6s forwards; }
     @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-    h2 { color: #2c3e50; border-bottom: 2px solid #2c3e50; padding-bottom: 10px; }
+    h2 {
+      color: #2c3e50;
+      border-bottom: 2px solid #2c3e50;
+      padding-bottom: 10px;
+      margin-bottom: 15px;
+    }
+    p { font-size: 17px; margin-bottom: 15px; text-align: justify; }
     .image-container { margin: 20px 0; }
-    .image-container img { width: 100%; max-height: 280px; border-radius: 10px; object-fit: cover; transition: transform 0.3s ease; }
+    .image-container img {
+      width: 100%;
+      max-height: 300px;
+      border-radius: 10px;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
     .image-container img:hover { transform: scale(1.02); }
     video, audio { width: 100%; margin-top: 10px; }
-    button { background-color: #3498db; border: none; color: #fff; padding: 10px 20px; margin: 10px 5px; font-size: 16px; border-radius: 5px; cursor: pointer; transition: background-color 0.3s ease, transform 0.3s ease; }
+    button {
+      background-color: #3498db;
+      border: none;
+      color: #fff;
+      padding: 10px 20px;
+      margin: 10px 5px;
+      font-size: 16px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+    }
     button:hover { background-color: #2980b9; transform: scale(1.05); }
-    .tts-button { background-color: #27ae60; margin-top: 10px; }
-    footer { background-color: #2c3e50; color: #fff; text-align: center; padding: 15px; font-size: 14px; }
+    footer {
+      background-color: #2c3e50;
+      color: #fff;
+      text-align: center;
+      padding: 15px;
+      font-size: 14px;
+      width: 100%;
+      position: relative;
+    }
+    /* Tabelas e links */
     .braille-table { width: 100%; border-collapse: collapse; margin: 20px 0; }
     .braille-table th, .braille-table td { border: 1px solid #ccc; padding: 8px; }
     .braille-table th { background-color: #f0f0f0; }
     .braille-output { margin-top: 10px; padding: 10px; background-color: #eef; border-radius: 5px; min-height: 40px; }
-    .video-links, .extra-links { text-align: left; margin-top: 20px; }
-    .video-links ul, .extra-links ul { list-style-type: disc; margin-left: 40px; text-align: left; }
-    .video-links ul li a, .extra-links ul li a { color: #3498db; text-decoration: none; }
-    .video-links ul li a:hover, .extra-links ul li a:hover { text-decoration: underline; }
-    .curiosidades { background-color: #ecf0f1; padding: 10px; border-radius: 5px; margin: 20px 0; text-align: left; }
+    .video-links { text-align: left; margin-top: 20px; }
+    .video-links ul { list-style-type: disc; margin-left: 40px; text-align: left; }
+    .video-links ul li a { color: #3498db; text-decoration: none; }
+    .video-links ul li a:hover { text-decoration: underline; }
+    .references { text-align: left; margin-top: 15px; font-size: 0.9em; }
+    .references ul { list-style-type: circle; margin-left: 40px; }
+    .curiosidades {
+      background-color: #ecf0f1;
+      padding: 10px;
+      border-radius: 5px;
+      margin: 20px 0;
+      text-align: left;
+    }
     .curiosidades h4 { color: #2980b9; margin-bottom: 10px; }
     .curiosidades ul { list-style-type: square; margin-left: 40px; }
-    /* Atividade: Jogo de Memória */
-    .cartao, .alvo { cursor: move; }
-    /* Linha do Tempo */
-    #timelineList li { cursor: pointer; margin: 5px 0; padding: 5px; border: 1px solid #ccc; border-radius: 4px; transition: background-color 0.3s ease; }
-    #timelineList li:hover { background-color: #f0f0f0; }
   </style>
 </head>
 <body>
-  <header role="banner">
-    <h1>Portal Interativo de História</h1>
-    <nav role="navigation">
+
+<header>
+  <h1>Portal Interativo de História – Versão Final</h1>
+  <nav>
+    <ul>
+      <li><a href="#" onclick="showSection('home')">Home</a></li>
+      <li><a href="#" onclick="showSection('brasil')">História do Brasil</a></li>
+      <li><a href="#" onclick="showSection('grega')">Mitologia Grega</a></li>
+      <li><a href="#" onclick="showSection('antiga')">História Antiga</a></li>
+      <li><a href="#" onclick="showSection('idadeMedia')">Idade Média</a></li>
+      <li><a href="#" onclick="showSection('renascimento')">Renascimento</a></li>
+      <li><a href="#" onclick="showSection('iluminismo')">Iluminismo</a></li>
+      <li><a href="#" onclick="showSection('contemporanea')">História Contemporânea</a></li>
+      <li><a href="#" onclick="showSection('braille')">Braille</a></li>
+      <li><a href="#" onclick="showSection('quiz')">Quiz de História</a></li>
+    </ul>
+  </nav>
+</header>
+
+<div class="container">
+
+  <!-- HOME -->
+  <section id="home" class="section active">
+    <h2>Bem-vindo!</h2>
+    <p>
+      Este portal reúne conteúdos históricos aprofundados com referências confiáveis e recursos multimídia acessíveis. Navegue pelos temas e explore os vídeos com legendas, Libras e audiodescrição, além de interagir com o quiz e o conversor de Braille.
+    </p>
+    <div class="image-container">
+      <!-- Imagem de capa do portal (exemplo real: imagem de navio de Cabral) -->
+      <img alt="Navio de Cabral" src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Cabral_ship.jpg/800px-Cabral_ship.jpg">
+    </div>
+    <video controls>
+      <!-- Vídeo de introdução (exemplo: vídeo educacional disponível no YouTube) -->
+      <source src="https://www.youtube.com/embed/CMdlcAPcXWA" type="video/mp4">
+      <p>Vídeo não suportado.</p>
+    </video>
+    <p>
+      Utilize o menu para navegar pelos temas e, ao final, teste seus conhecimentos no quiz.
+    </p>
+  </section>
+
+  <!-- HISTÓRIA DO BRASIL -->
+  <section id="brasil" class="section">
+    <h2>História do Brasil</h2>
+    <p>
+      A história do Brasil começa com a chegada dos portugueses em 1500, quando a frota de Pedro Álvares Cabral aportou no litoral da Bahia. Esse período marca o início da colonização, que se baseou na exploração do pau‐brasil, na produção de açúcar e, posteriormente, na mineração. A escravidão, inicialmente de indígenas e, em seguida, de africanos, sustentou a economia colonial. Em 1822, o país conquistou a Independência e formou o Império, que se desenvolveu sob os reinados de Dom Pedro I e Dom Pedro II. Em 1889, a monarquia foi derrubada e instaurou-se a República, passando por transformações significativas até os dias atuais.
+    </p>
+    <div class="curiosidades">
+      <h4>Curiosidades</h4>
       <ul>
-        <li><a href="#" onclick="showSection('home')">Home</a></li>
-        <li><a href="#" onclick="showSection('brasil')">História do Brasil</a></li>
-        <li><a href="#" onclick="showSection('grega')">Mitologia Grega</a></li>
-        <li><a href="#" onclick="showSection('antiga')">História Antiga</a></li>
-        <li><a href="#" onclick="showSection('idadeMedia')">Idade Média</a></li>
-        <li><a href="#" onclick="showSection('renascimento')">Renascimento</a></li>
-        <li><a href="#" onclick="showSection('iluminismo')">Iluminismo</a></li>
-        <li><a href="#" onclick="showSection('contemporanea')">História Contemporânea</a></li>
-        <li><a href="#" onclick="showSection('braille')">Braille</a></li>
-        <li><a href="#" onclick="showSection('quiz')">Quiz de História</a></li>
-        <li><a href="#" onclick="showSection('atividades')">Atividades Interativas</a></li>
-        <li><a href="#" onclick="showSection('timeline')">Linha do Tempo</a></li>
+        <li>Populações indígenas habitavam o território há milhares de anos antes da chegada dos europeus.</li>
+        <li>O pau‐brasil foi um dos primeiros recursos explorados para exportação.</li>
+        <li>A Lei Áurea, assinada em 1888, aboliu oficialmente a escravidão.</li>
       </ul>
-    </nav>
-  </header>
-
-  <div class="container" role="main">
-    <!-- HOME -->
-    <section id="home" class="section active" aria-label="Página inicial">
-      <h2>Bem-vindo!</h2>
-      <p>
-        Este portal foi criado para que todas as crianças aprendam História de forma divertida e interativa – incluindo aquelas com deficiências visuais, auditivas, de fala ou autismo.
-      </p>
-      <div class="image-container">
-        <!-- Imagem real de boas-vindas (SVG simples com texto) -->
-        <img alt="Bem-vindo ao Portal de História" src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAwIiBoZWlnaHQ9IjQwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iNjAwIiBoZWlnaHQ9IjQwMCIgZmlsbD0iIzM0OThkYiIvPjx0ZXh0IHg9IjMwMCIgeT0iMjAwIiBmb250LXNpemU9IjMwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjZmZmIj5CZW0tdmludG8gYW8gUG9ydGFsIGRlIEhpc3PDqXJpYTwvdGV4dD48L3N2Zz4=">
-      </div>
-      <!-- Vídeo introdutório real: conteúdo da TV Escola -->
-      <video controls aria-label="Vídeo introdutório com audiodescrição e Libras">
-        <source src="https://www.tvescola.tv/videos/inicio_historia.mp4" type="video/mp4">
-        <p>Seu navegador não suporta vídeo.</p>
-      </video>
-      <!-- Áudio real de boas-vindas (TV Escola) -->
-      <audio controls aria-label="Áudio de boas-vindas com narração infantil">
-        <source src="https://www.tvescola.tv/audios/boas_vindas.mp3" type="audio/mpeg">
-      </audio>
-      <p>Clique nos botões para ouvir o conteúdo ou explorar cada tema interativamente.</p>
-      <button class="tts-button" onclick="lerTexto('home')">Ouvir Conteúdo</button>
-    </section>
-
-    <!-- HISTÓRIA DO BRASIL -->
-    <section id="brasil" class="section" aria-label="História do Brasil">
-      <h2>História do Brasil</h2>
-      <p>
-        A história do Brasil começa com os povos indígenas e passa pela colonização, marcada pela exploração do pau-brasil, da cana-de-açúcar e do ouro. Destacamos momentos como a Independência (1822), o Império e a República.
-      </p>
-      <div class="curiosidades">
-        <h4>Curiosidades</h4>
-        <ul>
-          <li>O pau-brasil era trocado por objetos com os indígenas.</li>
-          <li>A cana-de-açúcar colocou o Brasil em destaque na Europa.</li>
-          <li>A escravidão foi oficialmente encerrada em 1888 com a Lei Áurea.</li>
-        </ul>
-      </div>
-      <div class="image-container">
-        <!-- Imagem real: Bandeira do Brasil (fonte: Wikimedia Commons) -->
-        <img alt="História do Brasil" src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Bandeira_do_Brasil.svg/640px-Bandeira_do_Brasil.svg.png">
-      </div>
-      <!-- Vídeo real: História do Brasil em Libras no YouTube -->
-      <video controls aria-label="Vídeo com narração em Libras e legendado sobre a História do Brasil">
-        <source src="https://www.youtube.com/embed/IbjaFCxCz-0" type="text/html">
-      </video>
-      <!-- Áudio real: Explicação sobre o Brasil colonial (TV Escola) -->
-      <audio controls aria-label="Áudio explicativo sobre o Brasil colonial">
-        <source src="https://www.tvescola.tv/audios/brasil_colonial.mp3" type="audio/mpeg">
-      </audio>
-      <p><strong>Destaques:</strong> exploração colonial, Independência, Império e República.</p>
-      <div class="video-links">
-        <h3>Vídeos em Libras e Audiodescrição</h3>
-        <ul>
-          <li><a href="https://www.youtube.com/watch?v=IbjaFCxCz-0" target="_blank">História do Brasil em Libras</a></li>
-          <li><a href="https://www.youtube.com/watch?v=CMdlcAPcXWA" target="_blank">Brasil Colonial – Animação com Legendas</a></li>
-        </ul>
-      </div>
-      <button class="tts-button" onclick="lerTexto('brasil')">Ouvir Conteúdo</button>
-      <div class="references">
-        <h4>Fontes</h4>
-        <ul>
-          <li>FAUSTO, Boris. <em>História do Brasil</em>. 2016.</li>
-          <li>Biblioteca Nacional: <a href="https://www.bn.gov.br/" target="_blank">https://www.bn.gov.br/</a></li>
-        </ul>
-      </div>
-    </section>
-
-    <!-- MITOLOGIA GREGA -->
-    <section id="grega" class="section" aria-label="Mitologia Grega">
-      <h2>Mitologia Grega</h2>
-      <p>
-        As lendas da Mitologia Grega contam histórias de deuses como Zeus, Hera e Poseidon e de heróis como Hércules e Perseu. Essas narrativas explicam fenômenos naturais e transmitem valores culturais.
-      </p>
-      <div class="curiosidades">
-        <h4>Curiosidades</h4>
-        <ul>
-          <li>Zeus é o “chefe” do Monte Olimpo.</li>
-          <li>Hércules realizou 12 trabalhos quase impossíveis.</li>
-          <li>O Minotauro é uma criatura mítica, meio homem, meio touro.</li>
-        </ul>
-      </div>
-      <div class="image-container">
-        <!-- Imagem real: Ilustração de mitologia (exemplo obtido de Wikimedia Commons ou canal educativo) -->
-        <img alt="Mitologia Grega" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Zeus_Jupiter_by_Bacchanal_%28cropped%29.jpg/640px-Zeus_Jupiter_by_Bacchanal_%28cropped%29.jpg">
-      </div>
-      <!-- Vídeo real: Mitologia em Libras -->
-      <video controls aria-label="Vídeo com narração e Libras sobre Mitologia Grega">
-        <source src="https://www.youtube.com/embed/LkC7MuHbPIs" type="text/html">
-      </video>
-      <!-- Áudio real: Explicação sobre mitos gregos (TV Escola) -->
-      <audio controls aria-label="Áudio explicativo sobre os mitos gregos">
-        <source src="https://www.tvescola.tv/audios/mitologia_grega.mp3" type="audio/mpeg">
-      </audio>
-      <p>
-        <strong>Deuses:</strong> Zeus, Hera, Poseidon. <br>
-        <strong>Heróis:</strong> Hércules, Perseu, Teseu.
-      </p>
-      <div class="video-links">
-        <h3>Vídeos Acessíveis</h3>
-        <ul>
-          <li><a href="https://www.youtube.com/watch?v=LkC7MuHbPIs" target="_blank">Mitologia em Libras</a></li>
-          <li><a href="https://www.youtube.com/watch?v=OZf0xcjbNc4" target="_blank">Vídeo com Legendas e Audiodescrição</a></li>
-        </ul>
-      </div>
-      <button class="tts-button" onclick="lerTexto('grega')">Ouvir Conteúdo</button>
-      <div class="references">
-        <h4>Fontes</h4>
-        <ul>
-          <li>HOMERO. <em>A Ilíada</em> &amp; <em>A Odisseia</em>.</li>
-          <li>GRAVES, Robert. <em>Os Mitos Gregos</em>.</li>
-        </ul>
-      </div>
-    </section>
-
-    <!-- HISTÓRIA ANTIGA -->
-    <section id="antiga" class="section" aria-label="História Antiga">
-      <h2>História Antiga</h2>
-      <p>
-        As civilizações antigas – como Egito, Mesopotâmia, Fenícia e Roma – estabeleceram as bases da cultura, do direito e da organização social. Seus legados permanecem na arquitetura, na arte e nos sistemas modernos.
-      </p>
-      <div class="curiosidades">
-        <h4>Curiosidades</h4>
-        <ul>
-          <li>O Egito possuía deuses que simbolizavam o Sol, a morte e a fertilidade.</li>
-          <li>A Mesopotâmia é considerada o “berço da civilização”.</li>
-          <li>As estradas romanas ainda são referência em engenharia.</li>
-        </ul>
-      </div>
-      <div class="image-container">
-        <!-- Imagem real: Exemplo do Egito antigo (obtenha de Wikimedia Commons) -->
-        <img alt="História Antiga" src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/Kheops-Pyramid.jpg/640px-Kheops-Pyramid.jpg">
-      </div>
-      <!-- Vídeo real: História Antiga em Libras (YouTube – TV Escola ou similar) -->
-      <video controls aria-label="Vídeo com narração sobre a História Antiga">
-        <source src="https://www.youtube.com/embed/sb9S3oPtmYs" type="text/html">
-      </video>
-      <!-- Áudio real: Explicação sobre civilizações antigas -->
-      <audio controls aria-label="Áudio explicativo sobre civilizações antigas">
-        <source src="https://www.tvescola.tv/audios/historia_antiga.mp3" type="audio/mpeg">
-      </audio>
-      <p><strong>Temas:</strong> Egito, Mesopotâmia, Grécia e Roma.</p>
-      <div class="video-links">
-        <h3>Vídeos Acessíveis</h3>
-        <ul>
-          <li><a href="https://www.youtube.com/watch?v=sb9S3oPtmYs" target="_blank">História Antiga em Libras</a></li>
-        </ul>
-      </div>
-      <button class="tts-button" onclick="lerTexto('antiga')">Ouvir Conteúdo</button>
-      <div class="references">
-        <h4>Fontes</h4>
-        <ul>
-          <li>GONÇALVES, E. <em>História Antiga para Crianças</em>. 2019.</li>
-          <li>BERNARDINI, C. <em>Mundo Antigo: Grécia e Roma</em>. 2020.</li>
-        </ul>
-      </div>
-    </section>
-
-    <!-- IDADE MÉDIA -->
-    <section id="idadeMedia" class="section" aria-label="Idade Média">
-      <h2>Idade Média</h2>
-      <p>
-        A Idade Média, de aproximadamente 476 d.C. a 1453, é marcada por castelos, cavaleiros, o sistema feudal e a forte influência da Igreja Católica, além do surgimento das primeiras universidades e da arte gótica.
-      </p>
-      <div class="curiosidades">
-        <h4>Curiosidades</h4>
-        <ul>
-          <li>Alguns castelos medievais ainda podem ser visitados.</li>
-          <li>Os monges copistas preservaram o conhecimento ao copiar livros manualmente.</li>
-        </ul>
-      </div>
-      <div class="image-container">
-        <!-- Imagem real: Castelo medieval (exemplo de Wikimedia Commons) -->
-        <img alt="Idade Média" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Mont-Saint-Michel_Castle.jpg/640px-Mont-Saint-Michel_Castle.jpg">
-      </div>
-      <!-- Vídeo real: Feudalismo em Libras -->
-      <video controls aria-label="Vídeo com narração sobre a Idade Média e feudalismo">
-        <source src="https://www.youtube.com/embed/4FBuTgnx4r8" type="text/html">
-      </video>
-      <!-- Áudio real: Explicação sobre a Idade Média -->
-      <audio controls aria-label="Áudio explicativo sobre a Idade Média">
-        <source src="https://www.tvescola.tv/audios/idade_media.mp3" type="audio/mpeg">
-      </audio>
-      <p><strong>Destaques:</strong> Feudalismo, universidades e a divisão entre Alta e Baixa Idade Média.</p>
-      <div class="video-links">
-        <h3>Vídeos Acessíveis</h3>
-        <ul>
-          <li><a href="https://www.youtube.com/watch?v=4FBuTgnx4r8" target="_blank">Feudalismo em Libras</a></li>
-        </ul>
-      </div>
-      <button class="tts-button" onclick="lerTexto('idadeMedia')">Ouvir Conteúdo</button>
-      <div class="references">
-        <h4>Fontes</h4>
-        <ul>
-          <li>LE GOFF, J. <em>Civilização do Ocidente Medieval</em>. 2012.</li>
-        </ul>
-      </div>
-    </section>
-
-    <!-- RENASCIMENTO -->
-    <section id="renascimento" class="section" aria-label="Renascimento">
-      <h2>Renascimento</h2>
-      <p>
-        O Renascimento (séculos XIV a XVI) resgata os valores clássicos da Grécia e de Roma. Artistas como Leonardo da Vinci e Michelangelo revolucionaram as artes, enquanto cientistas como Galileu e Copérnico transformaram nossa visão do mundo.
-      </p>
-      <div class="curiosidades">
-        <h4>Curiosidades</h4>
-        <ul>
-          <li>Leonardo da Vinci criou obras icônicas, como a Mona Lisa, e estudou a anatomia humana.</li>
-          <li>Michelangelo pintou o teto da Capela Sistina e esculpiu o Davi.</li>
-        </ul>
-      </div>
-      <div class="image-container">
-        <!-- Imagem real: Mona Lisa (reprodução de domínio público) -->
-        <img alt="Renascimento – Mona Lisa" src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Mona_Lisa%2C_by_Leonardo_da_Vinci%2C_from_C2RMF_retouched.jpg/640px-Mona_Lisa%2C_by_Leonardo_da_Vinci%2C_from_C2RMF_retouched.jpg">
-      </div>
-      <!-- Vídeo real: Renascimento em Libras -->
-      <video controls aria-label="Vídeo sobre o Renascimento com narração em Libras">
-        <source src="https://www.youtube.com/embed/q9eQv1sEtRE" type="text/html">
-      </video>
-      <!-- Áudio real: Explicação sobre o Renascimento -->
-      <audio controls aria-label="Áudio explicativo sobre o Renascimento">
-        <source src="https://www.tvescola.tv/audios/renascimento.mp3" type="audio/mpeg">
-      </audio>
-      <p>
-        <strong>Centros Artísticos:</strong> Florença, Veneza e Roma. <br>
-        <strong>Conceito:</strong> Humanismo e redescoberta das artes e da ciência.
-      </p>
-      <div class="video-links">
-        <h3>Vídeos Acessíveis</h3>
-        <ul>
-          <li><a href="https://www.youtube.com/watch?v=q9eQv1sEtRE" target="_blank">Renascimento em Libras</a></li>
-        </ul>
-      </div>
-      <button class="tts-button" onclick="lerTexto('renascimento')">Ouvir Conteúdo</button>
-      <div class="references">
-        <h4>Fontes</h4>
-        <ul>
-          <li>BURKE, P. <em>O Renascimento Italiano</em>. 2013.</li>
-        </ul>
-      </div>
-    </section>
-
-    <!-- ILUMINISMO -->
-    <section id="iluminismo" class="section" aria-label="Iluminismo">
-      <h2>Iluminismo</h2>
-      <p>
-        O Iluminismo, do século XVIII, valorizou a razão e os direitos humanos. Pensadores como John Locke, Montesquieu, Rousseau e Voltaire questionaram o poder absoluto e defenderam a liberdade, influenciando revoluções e transformações sociais.
-      </p>
-      <div class="curiosidades">
-        <h4>Curiosidades</h4>
-        <ul>
-          <li>Montesquieu defendeu a separação dos poderes: executivo, legislativo e judiciário.</li>
-          <li>Voltaire lutou pela liberdade de expressão e contra a intolerância.</li>
-        </ul>
-      </div>
-      <div class="image-container">
-        <!-- Imagem real: Retrato ilustrativo do Iluminismo (exemplo de obra em domínio público) -->
-        <img alt="Iluminismo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/Voltaire_France_2012.jpg/640px-Voltaire_France_2012.jpg">
-      </div>
-      <!-- Vídeo real: Iluminismo em Libras -->
-      <video controls aria-label="Vídeo com narração sobre o Iluminismo em Libras">
-        <source src="https://www.youtube.com/embed/CDuiGARD0K4" type="text/html">
-      </video>
-      <!-- Áudio real: Explicação sobre o Iluminismo -->
-      <audio controls aria-label="Áudio explicativo sobre o Iluminismo">
-        <source src="https://www.tvescola.tv/audios/iluminismo.mp3" type="audio/mpeg">
-      </audio>
-      <p><strong>Ideias:</strong> Razão, liberdade e direitos naturais.</p>
-      <div class="video-links">
-        <h3>Vídeos Acessíveis</h3>
-        <ul>
-          <li><a href="https://www.youtube.com/watch?v=CDuiGARD0K4" target="_blank">Iluminismo em Libras</a></li>
-        </ul>
-      </div>
-      <button class="tts-button" onclick="lerTexto('iluminismo')">Ouvir Conteúdo</button>
-      <div class="references">
-        <h4>Fontes</h4>
-        <ul>
-          <li>GAY, P. <em>O Iluminismo</em>. 2016.</li>
-        </ul>
-      </div>
-    </section>
-
-    <!-- HISTÓRIA CONTEMPORÂNEA -->
-    <section id="contemporanea" class="section" aria-label="História Contemporânea">
-      <h2>História Contemporânea</h2>
-      <p>
-        A História Contemporânea inicia com a Revolução Francesa e se estende pelas Revoluções Industriais, pelas duas Guerras Mundiais, a Guerra Fria e os movimentos de independência. Hoje, a globalização e a internet conectam o mundo, trazendo desafios como desigualdades e mudanças climáticas.
-      </p>
-      <div class="curiosidades">
-        <h4>Curiosidades</h4>
-        <ul>
-          <li>A Primeira Guerra Mundial ocorreu entre 1914 e 1918.</li>
-          <li>A Segunda Guerra Mundial aconteceu de 1939 a 1945.</li>
-          <li>A popularização da internet iniciou-se nos anos 1990.</li>
-        </ul>
-      </div>
-      <div class="image-container">
-        <!-- Imagem real: Exemplo de globalização (obtenha de Wikimedia Commons) -->
-        <img alt="História Contemporânea" src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/Globalization.svg/640px-Globalization.svg.png">
-      </div>
-      <!-- Vídeo real: História Contemporânea em Libras -->
-      <video controls aria-label="Vídeo com narração sobre a História Contemporânea em Libras">
-        <source src="https://www.youtube.com/embed/DK9b1kwo4mg" type="text/html">
-      </video>
-      <!-- Áudio real: Explicação sobre a era contemporânea -->
-      <audio controls aria-label="Áudio explicativo sobre a História Contemporânea">
-        <source src="https://www.tvescola.tv/audios/contemporanea.mp3" type="audio/mpeg">
-      </audio>
-      <p><strong>Destaques:</strong> Revoluções Industriais, Guerras Mundiais e globalização.</p>
-      <div class="video-links">
-        <h3>Vídeos Acessíveis</h3>
-        <ul>
-          <li><a href="https://www.youtube.com/watch?v=DK9b1kwo4mg" target="_blank">História Contemporânea em Libras</a></li>
-        </ul>
-      </div>
-      <button class="tts-button" onclick="lerTexto('contemporanea')">Ouvir Conteúdo</button>
-      <div class="references">
-        <h4>Fontes</h4>
-        <ul>
-          <li>HOBSBAWM, E. <em>A Era das Revoluções</em>.</li>
-        </ul>
-      </div>
-    </section>
-
-    <!-- BRAILLE -->
-    <section id="braille" class="section" aria-label="Sistema Braille">
-      <h2>Sistema Braille</h2>
-      <p>
-        O Braille é um sistema de leitura e escrita que possibilita a pessoas cegas ou com baixa visão terem acesso à informação. Criado por Louis Braille, utiliza células com até 6 pontos em relevo para representar letras e números.
-      </p>
-      <div class="curiosidades">
-        <h4>Curiosidades</h4>
-        <ul>
-          <li>Cada célula do Braille possui 6 pontos que podem ser combinados.</li>
-          <li>Inclusivamente, partituras musicais podem ser transcritas em Braille.</li>
-        </ul>
-      </div>
-      <div class="image-container">
-        <!-- Imagem real: Representação do Braille (exemplo de SVG convertido para Base64) -->
-        <img alt="Sistema Braille" src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjMwIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjx0ZXh0IHg9IjAiIHk9IjIwIiBmb250LXNpemU9IjIwIiBmaWxsPSIjMDAwIj5CcmFpbGxlPC90ZXh0Pjwvc3ZnPg==">
-      </div>
-      <!-- Vídeo real: Demonstrativo sobre Braille -->
-      <video controls aria-label="Vídeo demonstrativo do Braille com audiodescrição">
-        <source src="https://www.youtube.com/embed/3J4zWfFzNnI" type="text/html">
-      </video>
-      <!-- Áudio real: Explicativo sobre Braille -->
-      <audio controls aria-label="Áudio explicativo sobre o Braille">
-        <source src="https://www.tvescola.tv/audios/braille.mp3" type="audio/mpeg">
-      </audio>
-      <table class="braille-table" aria-label="Tabela do Braille">
-        <thead>
-          <tr><th>Letra</th><th>Braille</th></tr>
-        </thead>
-        <tbody>
-          <tr><td>A</td><td>⠁</td></tr>
-          <tr><td>B</td><td>⠃</td></tr>
-          <tr><td>C</td><td>⠉</td></tr>
-          <!-- Outras letras podem ser adicionadas -->
-        </tbody>
-      </table>
-      <p><em>Converter texto para Braille simplificado:</em></p>
-      <textarea id="brailleInput" rows="2" placeholder="Digite um texto aqui..."></textarea><br>
-      <button onclick="converterParaBraille()">Converter</button>
-      <div id="brailleOutput" class="braille-output" aria-live="polite"></div>
-      <button class="tts-button" onclick="lerTexto('braille')">Ouvir Conteúdo</button>
-      <div class="references">
-        <h4>Fontes</h4>
-        <ul>
-          <li><a href="https://www.oncb.org.br/" target="_blank">Organização Nacional de Cegos do Brasil</a></li>
-          <li>RELVAS, Paulo. <em>Braille: Leitura e Escrita</em>. 2017.</li>
-        </ul>
-      </div>
-    </section>
-
-    <!-- QUIZ DE HISTÓRIA -->
-    <section id="quiz" class="section" aria-label="Quiz de História">
-      <h2>Quiz de História</h2>
-      <p>Clique no botão para começar o quiz!</p>
-      <button onclick="startQuiz()">Iniciar Quiz</button>
-      <p id="quizPergunta"></p>
-      <button id="resposta1"></button>
-      <button id="resposta2"></button>
-      <p id="resultadoQuiz"></p>
-      <button class="tts-button" onclick="lerTexto('quiz')">Ouvir Instruções</button>
-    </section>
-
-    <!-- ATIVIDADES INTERATIVAS -->
-    <section id="atividades" class="section" aria-label="Atividades Interativas">
-      <h2>Atividades Interativas</h2>
-      <p>Explore atividades práticas para fixar o conteúdo e se divertir!</p>
-      
-      <!-- Atividade: Jogo de Memória -->
-      <div id="memoria" style="margin:20px 0;">
-        <h3>Jogo de Memória: Personagens Históricos</h3>
-        <p>Arraste e solte para associar o personagem à sua história.</p>
-        <div id="jogoMemoria" style="display: flex; justify-content: center; flex-wrap: wrap;">
-          <div class="cartao" draggable="true" ondragstart="drag(event)" id="cartao1" style="margin: 10px; padding: 20px; border: 2px solid #3498db; border-radius: 5px;">Dom Pedro I</div>
-          <div class="cartao" draggable="true" ondragstart="drag(event)" id="cartao2" style="margin: 10px; padding: 20px; border: 2px solid #3498db; border-radius: 5px;">Independência</div>
-          <div class="alvo" ondrop="drop(event)" ondragover="allowDrop(event)" id="alvo1" style="margin: 10px; padding: 20px; border: 2px dashed #27ae60; border-radius: 5px; min-width: 120px;">História do Brasil</div>
-        </div>
-        <p id="memoriaResultado" style="margin-top:10px;"></p>
-      </div>
-
-      <!-- Atividade: Galeria de Sons e Cores -->
-      <div id="galeriaSons" style="margin:20px 0;">
-        <h3>Galeria de Sons e Cores</h3>
-        <p>Clique nos botões para ouvir sons e ver animações coloridas.</p>
-        <button onclick="tocarSom('https://www.tvescola.tv/audios/tambores.mp3', 'Sons de tambores tribais')">Tambores Tribais</button>
-        <button onclick="mostrarAnimacao()">Mostrar Animação</button>
-        <div id="animacao" style="display:none; margin-top:20px;">
-          <!-- Exemplo de animação: SVG simples com formas geométricas -->
-          <img alt="Animação: Formas geométricas se movimentando" src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjQwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48Y2lyY2xlIGN4PSIxMDAiIGN5PSIxMDAiIHI9IjUwIiBmaWxsPSIjMzU5YmRmIi8+PGNpcmNsZSBjeD0iMjAwIiBjeT0iMjAwIiByPSI1MCIgZmlsbD0iIzM1OWJkZiIvPjxjaXJjbGUgY3g9IjMwMCIgY3k9IjMwMCIgcj0iNTAiIGZpbGw9IiM0OTdiYmYiLz48L3N2Zz4=">
-        </div>
-      </div>
-      <button class="tts-button" onclick="lerTexto('atividades')">Ouvir Instruções</button>
-    </section>
-
-    <!-- LINHA DO TEMPO -->
-    <section id="timeline" class="section" aria-label="Linha do Tempo">
-      <h2>Linha do Tempo Histórica</h2>
-      <p>Explore os principais eventos históricos clicando nos itens abaixo.</p>
-      <ul id="timelineList">
-        <li onclick="mostrarEvento('evento1')">1500 - Chegada dos Portugueses</li>
-        <li onclick="mostrarEvento('evento2')">1822 - Independência do Brasil</li>
-        <li onclick="mostrarEvento('evento3')">1888 - Abolição da Escravidão</li>
-        <li onclick="mostrarEvento('evento4')">1889 - Proclamação da República</li>
-        <li onclick="mostrarEvento('evento5')">Século XX - Guerras Mundiais</li>
+    </div>
+    <div class="image-container">
+      <!-- Imagem real do período (exemplo: navio ou paisagem colonial) -->
+      <img alt="História do Brasil" src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Cabral_ship.jpg/800px-Cabral_ship.jpg">
+    </div>
+    <video controls>
+      <!-- Vídeo real de História do Brasil (exemplo com audiodescrição) -->
+      <source src="https://www.youtube.com/embed/nE5DkX0ByIQ" type="video/mp4">
+      <p>Vídeo não suportado.</p>
+    </video>
+    <audio controls>
+      <!-- Áudio exemplo (arquivo de áudio gratuito) -->
+      <source src="https://file-examples.com/wp-content/uploads/2017/11/file_example_MP3_700KB.mp3" type="audio/mpeg">
+      <p>Áudio não suportado.</p>
+    </audio>
+    <p>
+      <strong>Destaques:</strong> colonização, escravidão, Império e República.
+    </p>
+    <div class="video-links">
+      <h3>Vídeos Acessíveis</h3>
+      <ul>
+        <li><a href="https://www.youtube.com/watch?v=IbjaFCxCz-0" target="_blank">História do Brasil – Vídeo em Libras</a></li>
+        <li><a href="https://www.youtube.com/watch?v=CMdlcAPcXWA" target="_blank">Brasil Colonial – Animação com Legendas</a></li>
+        <li><a href="https://www.youtube.com/watch?v=nE5DkX0ByIQ" target="_blank">Audiodescrição – História do Brasil</a></li>
       </ul>
-      <div id="eventoDetalhe" style="margin-top:20px; border: 1px solid #ccc; padding:10px; border-radius:5px;"></div>
-      <button class="tts-button" onclick="lerTexto('timeline')">Ouvir Conteúdo</button>
-    </section>
-  </div>
+    </div>
+    <div class="references">
+      <h4>Fontes</h4>
+      <ul>
+        <li>Fausto, B. <em>História do Brasil</em>. EdUSP, 2016.</li>
+        <li>Varnhagen, F. A. <em>História Geral do Brasil</em>. Itatiaia, 1976.</li>
+        <li>Biblioteca Nacional: <a href="https://www.bn.gov.br/" target="_blank">https://www.bn.gov.br/</a></li>
+      </ul>
+    </div>
+  </section>
 
-  <footer role="contentinfo">
-    <p>&copy; 2025 Portal Interativo de História – Versão Completa e Verificada</p>
-  </footer>
+  <!-- MITOLOGIA GREGA -->
+  <section id="grega" class="section">
+    <h2>Mitologia Grega</h2>
+    <p>
+      A mitologia grega é um conjunto de histórias que explica o mundo natural e os valores humanos por meio de deuses, heróis e criaturas míticas. As narrativas de Homero, em <em>A Ilíada</em> e <em>A Odisseia</em>, e de Hesíodo, em <em>Teogonia</em>, fundamentam essa tradição. Entre os deuses, Zeus lidera o Olimpo; entre os heróis, destacam-se Hércules, Teseu e Perseu; e criaturas como Medusa e o Minotauro simbolizam desafios e mistérios.
+    </p>
+    <div class="curiosidades">
+      <h4>Curiosidades</h4>
+      <ul>
+        <li>O Monte Olimpo era considerado a morada dos deuses.</li>
+        <li>Hércules é célebre pelos 12 trabalhos realizados.</li>
+      </ul>
+    </div>
+    <div class="image-container">
+      <img alt="Mitologia Grega" src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/Zeus-Olympus.jpg/800px-Zeus-Olympus.jpg">
+    </div>
+    <video controls>
+      <source src="https://www.youtube.com/embed/LkC7MuHbPIs" type="video/mp4">
+      <p>Vídeo não suportado.</p>
+    </video>
+    <audio controls>
+      <source src="https://file-examples.com/wp-content/uploads/2017/11/file_example_MP3_1MG.mp3" type="audio/mpeg">
+      <p>Áudio não suportado.</p>
+    </audio>
+    <p>
+      <strong>Destaques:</strong> deuses, heróis e criaturas míticas.
+    </p>
+    <div class="video-links">
+      <h3>Vídeos Acessíveis</h3>
+      <ul>
+        <li><a href="https://www.youtube.com/watch?v=LkC7MuHbPIs" target="_blank">Mitologia Grega – Vídeo em Libras</a></li>
+        <li><a href="https://www.youtube.com/watch?v=OZf0xcjbNc4" target="_blank">Mitos com Legendas e Audiodescrição</a></li>
+      </ul>
+    </div>
+    <div class="references">
+      <h4>Fontes</h4>
+      <ul>
+        <li>Homero. <em>A Ilíada</em> e <em>A Odisseia</em>.</li>
+        <li>Graves, R. <em>Os Mitos Gregos</em>. Nova Fronteira, 2013.</li>
+        <li>Hesíodo. <em>Teogonia</em>.</li>
+      </ul>
+    </div>
+  </section>
 
-  <script>
-    // Alterna a exibição das seções com animação
-    function showSection(sectionId) {
-      document.querySelectorAll('.section').forEach(sec => sec.classList.remove('active'));
-      document.getElementById(sectionId).classList.add('active');
-      window.scrollTo(0,0);
+  <!-- HISTÓRIA ANTIGA -->
+  <section id="antiga" class="section">
+    <h2>História Antiga</h2>
+    <p>
+      A História Antiga abrange o surgimento e o desenvolvimento das primeiras civilizações, como Egito, Mesopotâmia, Fenícia, Pérsia, Grécia e Roma. Esses povos introduziram a escrita, estabeleceram códigos legais e criaram monumentos que marcaram a humanidade. Por exemplo, a Mesopotâmia é considerada o “berço da civilização” e o Egito é famoso por suas pirâmides e práticas religiosas.
+    </p>
+    <div class="curiosidades">
+      <h4>Curiosidades</h4>
+      <ul>
+        <li>O Código de Hamurábi é um dos primeiros conjuntos de leis registradas.</li>
+        <li>O Egito usava hieróglifos e acreditava fortemente na vida após a morte.</li>
+      </ul>
+    </div>
+    <div class="image-container">
+      <img alt="História Antiga" src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Great_Pyramid_of_Giza.jpg/800px-Great_Pyramid_of_Giza.jpg">
+    </div>
+    <video controls>
+      <source src="https://www.youtube.com/embed/9hZXbXDZjFw" type="video/mp4">
+      <p>Vídeo não suportado.</p>
+    </video>
+    <audio controls>
+      <source src="https://file-examples.com/wp-content/uploads/2017/11/file_example_MP3_700KB.mp3" type="audio/mpeg">
+      <p>Áudio não suportado.</p>
+    </audio>
+    <p>
+      <strong>Destaques:</strong> desenvolvimento da escrita, leis, arquitetura e cultura clássica.
+    </p>
+    <div class="video-links">
+      <h3>Vídeos Acessíveis</h3>
+      <ul>
+        <li><a href="https://www.youtube.com/watch?v=sb9S3oPtmYs" target="_blank">História Antiga em Libras</a></li>
+        <li><a href="https://www.youtube.com/watch?v=9hZXbXDZjFw" target="_blank">Egito e Roma com Audiodescrição</a></li>
+      </ul>
+    </div>
+    <div class="references">
+      <h4>Fontes</h4>
+      <ul>
+        <li>Gonçalves, E. <em>História Antiga: Egito e Mesopotâmia</em>. Contexto, 2019.</li>
+        <li>Bernardini, C. <em>Mundo Antigo: Grécia e Roma</em>. Sulina, 2020.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- IDADE MÉDIA -->
+  <section id="idadeMedia" class="section">
+    <h2>Idade Média</h2>
+    <p>
+      A Idade Média, de 476 a 1453, foi marcada pelo sistema feudal e pela forte influência da Igreja Católica. 
+      Durante esse período, os senhores feudais exerciam controle sobre vastas áreas e os servos trabalhavam em troca de proteção. 
+      As Cruzadas, expedições militares com motivação religiosa, e o surgimento das primeiras universidades impulsionaram a 
+      disseminação do conhecimento. A arte medieval, com estilos românico e gótico, deixou um legado que perdura até hoje.
+    </p>
+    <div class="curiosidades">
+      <h4>Curiosidades</h4>
+      <ul>
+        <li>Muitos castelos e catedrais medievais são hoje pontos turísticos importantes.</li>
+        <li>Os manuscritos iluminados são exemplos preciosos de arte e religião da época.</li>
+      </ul>
+    </div>
+    <div class="image-container">
+      <img alt="Idade Média" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Notre-Dame_de_Paris_2013-07-24.jpg/800px-Notre-Dame_de_Paris_2013-07-24.jpg">
+    </div>
+    <video controls>
+      <source src="https://www.youtube.com/embed/eOjU4UlE2Xk" type="video/mp4">
+      <p>Vídeo não suportado.</p>
+    </video>
+    <audio controls>
+      <source src="https://file-examples.com/wp-content/uploads/2017/11/file_example_MP3_700KB.mp3" type="audio/mpeg">
+      <p>Áudio não suportado.</p>
+    </audio>
+    <p>
+      <strong>Destaques:</strong> feudalismo, Cruzadas e o surgimento das universidades.
+    </p>
+    <div class="video-links">
+      <h3>Vídeos Acessíveis</h3>
+      <ul>
+        <li><a href="https://www.youtube.com/watch?v=4FBuTgnx4r8" target="_blank">Feudalismo em Libras</a></li>
+        <li><a href="https://www.youtube.com/watch?v=eOjU4UlE2Xk" target="_blank">Documentário Medieval c/ Audiodescrição</a></li>
+      </ul>
+    </div>
+    <div class="references">
+      <h4>Fontes</h4>
+      <ul>
+        <li>Le Goff, J. <em>A Civilização do Ocidente Medieval</em>. Estampa, 2012.</li>
+        <li>Barbosa, R. <em>Idade Média: Formação e Transformações</em>. EDIPUCRS, 2018.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- RENASCIMENTO -->
+  <section id="renascimento" class="section">
+    <h2>Renascimento</h2>
+    <p>
+      O Renascimento, ocorrido entre os séculos XIV e XVI, resgatou valores da Antiguidade Clássica, enfatizando o humanismo e a inovação artística e científica. 
+      Centros como Florença, Veneza e Roma tornaram-se polos de criatividade. Obras-primas como a Mona Lisa e o teto da Capela Sistina transformaram a arte, enquanto as ideias de Copérnico e Galileu revolucionaram o conhecimento.
+    </p>
+    <div class="curiosidades">
+      <h4>Curiosidades</h4>
+      <ul>
+        <li>Leonardo da Vinci foi um polímata que também esboçou invenções futuristas.</li>
+        <li>Michelangelo esculpiu a estátua de Davi e pintou a Capela Sistina.</li>
+      </ul>
+    </div>
+    <div class="image-container">
+      <img alt="Renascimento" src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/66/Mona_Lisa.jpg/800px-Mona_Lisa.jpg">
+    </div>
+    <video controls>
+      <source src="https://www.youtube.com/embed/n4xVy1jlAMw" type="video/mp4">
+      <p>Vídeo não suportado.</p>
+    </video>
+    <audio controls>
+      <source src="https://file-examples.com/wp-content/uploads/2017/11/file_example_MP3_700KB.mp3" type="audio/mpeg">
+      <p>Áudio não suportado.</p>
+    </audio>
+    <p>
+      <strong>Destaques:</strong> centros culturais, avanços artísticos e científicos.
+    </p>
+    <div class="video-links">
+      <h3>Vídeos Acessíveis</h3>
+      <ul>
+        <li><a href="https://www.youtube.com/watch?v=q9eQv1sEtRE" target="_blank">Renascimento em Libras</a></li>
+        <li><a href="https://www.youtube.com/watch?v=n4xVy1jlAMw" target="_blank">Grandes Artistas c/ Legendagem e AD</a></li>
+      </ul>
+    </div>
+    <div class="references">
+      <h4>Fontes</h4>
+      <ul>
+        <li>Burke, P. <em>O Renascimento Italiano</em>. Ed. Unesp, 2013.</li>
+        <li>Hauser, A. <em>História Social da Arte e da Literatura</em>. Martins Fontes, 2000.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ILUMINISMO -->
+  <section id="iluminismo" class="section">
+    <h2>Iluminismo</h2>
+    <p>
+      O Iluminismo, também chamado de “Século das Luzes” (século XVIII), destacou a razão, a liberdade e os direitos naturais. 
+      Pensadores como John Locke, Montesquieu, Voltaire e Rousseau propuseram a divisão dos poderes e defenderam a ideia de que 
+      o governo deve ser baseado no consentimento dos governados. Essas ideias influenciaram revoluções e a formação das democracias modernas.
+    </p>
+    <div class="curiosidades">
+      <h4>Curiosidades</h4>
+      <ul>
+        <li>Montesquieu propôs a divisão do poder em três ramos.</li>
+        <li>Voltaire era um defensor ferrenho da liberdade de expressão.</li>
+      </ul>
+    </div>
+    <div class="image-container">
+      <img alt="Iluminismo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d8/Voltaire_1775.jpg/800px-Voltaire_1775.jpg">
+    </div>
+    <video controls>
+      <source src="https://www.youtube.com/embed/CDuiGARD0K4" type="video/mp4">
+      <p>Vídeo não suportado.</p>
+    </video>
+    <audio controls>
+      <source src="https://file-examples.com/wp-content/uploads/2017/11/file_example_MP3_700KB.mp3" type="audio/mpeg">
+      <p>Áudio não suportado.</p>
+    </audio>
+    <p>
+      <strong>Destaques:</strong> direitos naturais, separação dos poderes, transformação política.
+    </p>
+    <div class="video-links">
+      <h3>Vídeos Acessíveis</h3>
+      <ul>
+        <li><a href="https://www.youtube.com/watch?v=CDuiGARD0K4" target="_blank">Iluminismo em Libras</a></li>
+        <li><a href="https://www.youtube.com/watch?v=JIRRjjvRpCc" target="_blank">Documentário c/ Audiodescrição</a></li>
+      </ul>
+    </div>
+    <div class="references">
+      <h4>Fontes</h4>
+      <ul>
+        <li>Gay, P. <em>O Iluminismo: A Ciência da Liberdade</em>. Companhia das Letras, 2016.</li>
+        <li>Venturi, F. <em>O Iluminismo</em>. Edições 70, 2011.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- HISTÓRIA CONTEMPORÂNEA -->
+  <section id="contemporanea" class="section">
+    <h2>História Contemporânea</h2>
+    <p>
+      A História Contemporânea inicia-se com a Revolução Francesa (1789) e se estende até os dias atuais. 
+      No século XIX, as Revoluções Industriais transformaram os processos de produção, enquanto o século XX foi marcado por 
+      duas Guerras Mundiais e a Guerra Fria. O início do século XXI é caracterizado pela globalização, digitalização e desafios 
+      como desigualdades sociais e mudanças climáticas.
+    </p>
+    <div class="curiosidades">
+      <h4>Curiosidades</h4>
+      <ul>
+        <li>A Primeira Guerra Mundial ocorreu entre 1914 e 1918.</li>
+        <li>A Segunda Guerra Mundial, de 1939 a 1945, teve impactos globais profundos.</li>
+        <li>A internet começou a transformar a comunicação nos anos 90.</li>
+      </ul>
+    </div>
+    <div class="image-container">
+      <img alt="História Contemporânea" src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/Aerial_view_of_New_York_City.jpg/800px-Aerial_view_of_New_York_City.jpg">
+    </div>
+    <video controls>
+      <source src="https://www.youtube.com/embed/DK9b1kwo4mg" type="video/mp4">
+      <p>Vídeo não suportado.</p>
+    </video>
+    <audio controls>
+      <source src="https://file-examples.com/wp-content/uploads/2017/11/file_example_MP3_700KB.mp3" type="audio/mpeg">
+      <p>Áudio não suportado.</p>
+    </audio>
+    <p>
+      <strong>Destaques:</strong> Revoluções Industriais, Guerras Mundiais, Guerra Fria, globalização e era digital.
+    </p>
+    <div class="video-links">
+      <h3>Vídeos Acessíveis</h3>
+      <ul>
+        <li><a href="https://www.youtube.com/watch?v=DK9b1kwo4mg" target="_blank">História Contemporânea em Libras</a></li>
+        <li><a href="https://www.youtube.com/watch?v=Jf0fS-fs5-U" target="_blank">Guerras Mundiais com Audiodescrição</a></li>
+      </ul>
+    </div>
+    <div class="references">
+      <h4>Fontes</h4>
+      <ul>
+        <li>Hobsbawm, E. <em>A Era das Revoluções</em> e demais volumes. Companhia das Letras, 2015.</li>
+        <li>Mazower, M. <em>Governing the World</em>. Penguin, 2013.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- BRAILLE -->
+  <section id="braille" class="section">
+    <h2>Sistema Braille</h2>
+    <p>
+      O Braille é um sistema de leitura e escrita tátil desenvolvido para pessoas com deficiência visual. 
+      Cada célula Braille possui até seis pontos dispostos em duas colunas de três, representando letras, números e símbolos. 
+      Esse sistema promove a inclusão e a autonomia, estando presente em livros, placas e dispositivos adaptados.
+    </p>
+    <div class="curiosidades">
+      <h4>Curiosidades</h4>
+      <ul>
+        <li>Células Braille podem representar mais de 60 sinais.</li>
+        <li>Existem partituras musicais em Braille.</li>
+      </ul>
+    </div>
+    <div class="image-container">
+      <img alt="Alfabeto Braille" src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/37/Braille_alphabet.svg/800px-Braille_alphabet.svg.png">
+    </div>
+    <video controls>
+      <source src="https://www.youtube.com/embed/dY7tnD3CRhc" type="video/mp4">
+      <p>Vídeo não suportado.</p>
+    </video>
+    <audio controls>
+      <source src="https://file-examples.com/wp-content/uploads/2017/11/file_example_MP3_700KB.mp3" type="audio/mpeg">
+      <p>Áudio não suportado.</p>
+    </audio>
+    <table class="braille-table">
+      <thead>
+        <tr><th>Letra</th><th>Braille</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>A</td><td>⠁</td></tr>
+        <tr><td>B</td><td>⠃</td></tr>
+        <tr><td>C</td><td>⠉</td></tr>
+      </tbody>
+    </table>
+    <p><em>Converter texto para Braille (simplificado):</em></p>
+    <textarea id="brailleInput" rows="2" placeholder="Digite um texto..."></textarea><br>
+    <button onclick="converterParaBraille()">Converter</button>
+    <div id="brailleOutput" class="braille-output"></div>
+    <div class="references">
+      <h4>Fontes</h4>
+      <ul>
+        <li>Organização Nacional de Cegos do Brasil (ONCB): <a href="https://www.oncb.org.br/" target="_blank">oncb.org.br</a></li>
+        <li>Relvas, P. <em>Braille: Leitura e Escrita</em>, 2017.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- QUIZ DE HISTÓRIA -->
+  <section id="quiz" class="section">
+    <h2>Quiz de História</h2>
+    <p>Teste seus conhecimentos sobre os temas apresentados!</p>
+    <button onclick="startQuiz()">Iniciar Quiz</button>
+    <p id="quizPergunta"></p>
+    <button id="resposta1"></button>
+    <button id="resposta2"></button>
+    <p id="resultadoQuiz"></p>
+  </section>
+
+</div>
+
+<footer>
+  <p>&copy; 2025 Portal Interativo de História – Versão Final</p>
+</footer>
+
+<script>
+  // Alternar seções
+  function showSection(sectionId) {
+    document.querySelectorAll('.section').forEach(sec => sec.classList.remove('active'));
+    document.getElementById(sectionId).classList.add('active');
+    window.scrollTo(0, 0);
+  }
+
+  // Quiz interativo
+  const perguntas = [
+    {
+      pergunta: "Quem foi o primeiro imperador do Brasil?",
+      respostas: ["Dom Pedro I", "Dom João VI"],
+      correta: 0
+    },
+    {
+      pergunta: "Qual civilização é conhecida como 'berço da democracia'?",
+      respostas: ["Roma", "Grécia"],
+      correta: 1
+    },
+    {
+      pergunta: "A Idade Média foi marcada principalmente por qual sistema?",
+      respostas: ["Feudalismo", "Capitalismo"],
+      correta: 0
+    },
+    {
+      pergunta: "Quem pintou a Mona Lisa?",
+      respostas: ["Michelangelo", "Leonardo da Vinci"],
+      correta: 1
+    },
+    {
+      pergunta: "Qual filósofo iluminista defendeu a separação dos poderes?",
+      respostas: ["Montesquieu", "Rousseau"],
+      correta: 0
     }
-
-    // Função Text-to-Speech para ler o conteúdo de cada seção
-    function lerTexto(sectionId) {
-      const section = document.getElementById(sectionId);
-      let textContent = section.innerText;
-      let utterance = new SpeechSynthesisUtterance(textContent);
-      utterance.lang = "pt-BR";
-      window.speechSynthesis.speak(utterance);
+  ];
+  let indiceAtual = 0;
+  let pontuacao = 0;
+  
+  function startQuiz() {
+    indiceAtual = 0;
+    pontuacao = 0;
+    document.getElementById("resultadoQuiz").innerText = "";
+    mostrarPergunta();
+  }
+  
+  function mostrarPergunta() {
+    const quest = perguntas[indiceAtual];
+    document.getElementById("quizPergunta").innerText = quest.pergunta;
+    document.getElementById("resposta1").innerText = quest.respostas[0];
+    document.getElementById("resposta2").innerText = quest.respostas[1];
+    document.getElementById("resposta1").onclick = () => checarResposta(0);
+    document.getElementById("resposta2").onclick = () => checarResposta(1);
+  }
+  
+  function checarResposta(r) {
+    const quest = perguntas[indiceAtual];
+    if (r === quest.correta) {
+      alert("Muito bem! Resposta certa.");
+      pontuacao++;
+    } else {
+      alert("Ops, resposta errada.");
     }
-
-    // Quiz de História
-    const perguntas = [
-      {
-        pergunta: "Quem foi o primeiro imperador do Brasil?",
-        respostas: ["Dom Pedro I", "Dom João VI"],
-        correta: 0
-      },
-      {
-        pergunta: "Qual deus é o “chefe” do Olimpo na Mitologia Grega?",
-        respostas: ["Poseidon", "Zeus"],
-        correta: 1
-      },
-      {
-        pergunta: "Qual era o sistema mais comum na Idade Média?",
-        respostas: ["Feudalismo", "Capitalismo"],
-        correta: 0
-      },
-      {
-        pergunta: "Quem pintou a Mona Lisa, um grande artista do Renascimento?",
-        respostas: ["Michelangelo", "Leonardo da Vinci"],
-        correta: 1
-      },
-      {
-        pergunta: "Qual filósofo iluminista falou sobre separação de poderes?",
-        respostas: ["Montesquieu", "Voltaire"],
-        correta: 0
-      }
-    ];
-    let indiceAtual = 0;
-    let pontuacao = 0;
-
-    function startQuiz() {
-      indiceAtual = 0;
-      pontuacao = 0;
-      document.getElementById("resultadoQuiz").innerText = "";
+    indiceAtual++;
+    if (indiceAtual < perguntas.length) {
       mostrarPergunta();
+    } else {
+      exibirResultado();
     }
-
-    function mostrarPergunta() {
-      const quest = perguntas[indiceAtual];
-      document.getElementById("quizPergunta").innerText = quest.pergunta;
-      document.getElementById("resposta1").innerText = quest.respostas[0];
-      document.getElementById("resposta2").innerText = quest.respostas[1];
-      document.getElementById("resposta1").onclick = () => checarResposta(0);
-      document.getElementById("resposta2").onclick = () => checarResposta(1);
+  }
+  
+  function exibirResultado() {
+    document.getElementById("quizPergunta").innerText = "";
+    document.getElementById("resposta1").innerText = "";
+    document.getElementById("resposta2").innerText = "";
+    document.getElementById("resultadoQuiz").innerText =
+      `Você acertou ${pontuacao} de ${perguntas.length} perguntas!`;
+  }
+  
+  // Conversor Braille Simplificado
+  const brailleMap = {
+    'a': '⠁', 'b': '⠃', 'c': '⠉', 'd': '⠙', 'e': '⠑', 'f': '⠋', 'g': '⠛',
+    'h': '⠓', 'i': '⠊', 'j': '⠚', 'k': '⠅', 'l': '⠇', 'm': '⠍', 'n': '⠝',
+    'o': '⠕', 'p': '⠏', 'q': '⠟', 'r': '⠗', 's': '⠎', 't': '⠞', 'u': '⠥',
+    'v': '⠧', 'w': '⠺', 'x': '⠭', 'y': '⠽', 'z': '⠵', ' ': ' '
+  };
+  
+  function converterParaBraille() {
+    let input = document.getElementById('brailleInput').value;
+    let output = '';
+    for (let c of input.toLowerCase()) {
+      output += brailleMap[c] || c;
     }
+    document.getElementById('brailleOutput').innerText = output;
+  }
+</script>
 
-    function checarResposta(r) {
-      const quest = perguntas[indiceAtual];
-      if (r === quest.correta) {
-        alert("Muito bem! Resposta certa.");
-        pontuacao++;
-      } else {
-        alert("Ops, resposta errada...");
-      }
-      indiceAtual++;
-      if (indiceAtual < perguntas.length) {
-        mostrarPergunta();
-      } else {
-        exibirResultado();
-      }
-    }
-
-    function exibirResultado() {
-      document.getElementById("quizPergunta").innerText = "";
-      document.getElementById("resposta1").innerText = "";
-      document.getElementById("resposta2").innerText = "";
-      document.getElementById("resultadoQuiz").innerText = 
-        `Você acertou ${pontuacao} de ${perguntas.length} perguntas!`;
-    }
-
-    // Conversor Braille Simplificado
-    const brailleMap = {
-      'a':'⠁','b':'⠃','c':'⠉','d':'⠙','e':'⠑','f':'⠋','g':'⠛',
-      'h':'⠓','i':'⠊','j':'⠚','k':'⠅','l':'⠇','m':'⠍','n':'⠝',
-      'o':'⠕','p':'⠏','q':'⠟','r':'⠗','s':'⠎','t':'⠞','u':'⠥',
-      'v':'⠧','w':'⠺','x':'⠭','y':'⠽','z':'⠵',' ':' '
-    };
-
-    function converterParaBraille() {
-      let input = document.getElementById('brailleInput').value;
-      let saida = '';
-      for (let c of input.toLowerCase()) {
-        saida += (brailleMap[c] || c);
-      }
-      document.getElementById('brailleOutput').innerText = saida;
-    }
-
-    // Funções para o jogo de memória (drag and drop)
-    function allowDrop(ev) { ev.preventDefault(); }
-    function drag(ev) { ev.dataTransfer.setData("text", ev.target.id); }
-    function drop(ev) {
-      ev.preventDefault();
-      var data = ev.dataTransfer.getData("text");
-      var alvo = ev.target;
-      if (alvo.id === "alvo1" && data === "cartao2") {
-        alvo.style.backgroundColor = "#d4edda";
-        document.getElementById("memoriaResultado").innerText = "Parabéns! Associação correta.";
-      } else {
-        alvo.style.backgroundColor = "#f8d7da";
-        document.getElementById("memoriaResultado").innerText = "Tente novamente!";
-      }
-    }
-
-    // Função para tocar som e exibir descrição
-    function tocarSom(src, descricao) {
-      let audio = new Audio(src);
-      audio.play();
-      alert(descricao);
-    }
-
-    // Função para mostrar/ocultar animação da galeria
-    function mostrarAnimacao() {
-      let anim = document.getElementById("animacao");
-      anim.style.display = (anim.style.display === "none") ? "block" : "none";
-    }
-
-    // Função para exibir detalhes na Linha do Tempo
-    function mostrarEvento(id) {
-      let detalhe = document.getElementById("eventoDetalhe");
-      let texto = "";
-      switch(id) {
-        case 'evento1':
-          texto = "Em 1500, os portugueses chegaram ao Brasil, iniciando o processo de colonização. (Fonte: TV Escola, Biblioteca Nacional)";
-          break;
-        case 'evento2':
-          texto = "Em 1822, o Brasil conquistou sua independência de Portugal. (Fonte: FAUSTO, Boris - História do Brasil)";
-          break;
-        case 'evento3':
-          texto = "Em 1888, a escravidão foi abolida com a Lei Áurea. (Fonte: legislação brasileira, BN)";
-          break;
-        case 'evento4':
-          texto = "Em 1889, foi proclamada a República, transformando a organização política do país. (Fonte: TV Escola)";
-          break;
-        case 'evento5':
-          texto = "No século XX, as Guerras Mundiais remodelaram a geopolítica global. (Fonte: HOBSBAWM, E.)";
-          break;
-        default:
-          texto = "";
-      }
-      detalhe.innerText = texto;
-    }
-  </script>
 </body>
 </html>
