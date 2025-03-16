@@ -2,502 +2,128 @@
 <html lang="pt">
 <head>
   <meta charset="UTF-8">
-  <title>Portal Interativo de História – Versão Completa</title>
-  <meta name="description" content="Portal interativo de História com conteúdos completos e interativos para crianças, com adaptações para deficiências (cegas, surdas, mudas, autistas, etc.).">
-  <meta name="keywords" content="História, Brasil, Mitologia, Inclusão, Acessibilidade, Crianças, Braille, Libras">
-  <meta name="author" content="Gabriel Silveira Lima, Jordana França Soares">
+  <title>Portal Interativo de História – Versão Final</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
-    /* Reset e estilos gerais */
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
       font-family: Arial, sans-serif;
-      background-color: #f4f4f4;
+      background-color: #f5f5f5;
       color: #333;
-      line-height: 1.6;
+      text-align: center;
       padding-bottom: 60px;
-      text-align: center;
     }
-    header {
-      background-color: #2c3e50;
-      padding: 15px;
-      color: #fff;
-    }
-    nav ul {
-      list-style: none;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      padding: 0;
-      margin: 0;
-    }
+    header, footer { background-color: #2c3e50; color: #fff; padding: 15px; }
+    nav ul { list-style: none; display: flex; justify-content: center; flex-wrap: wrap; }
     nav ul li { margin: 10px; }
-    nav ul li a {
-      text-decoration: none;
-      color: #fff;
-      font-size: 18px;
-      transition: transform 0.3s ease;
-    }
-    nav ul li a:hover {
-      transform: scale(1.1);
-      text-decoration: underline;
-    }
-    .container {
-      max-width: 900px;
-      margin: 20px auto;
-      padding: 20px;
-      background: #fff;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-      text-align: left;
-    }
-    .section {
-      display: none;
-      margin-bottom: 40px;
-      text-align: left;
-    }
-    .section.active {
-      display: block;
-      animation: fadeIn 0.6s forwards;
-    }
+    nav ul li a { text-decoration: none; color: #fff; font-size: 18px; transition: transform 0.3s ease; }
+    nav ul li a:hover { transform: scale(1.1); text-decoration: underline; }
+    .container { max-width: 900px; margin: auto; padding: 20px; background: #fff; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+    .section { display: none; }
+    .section.active { display: block; animation: fadeIn 0.6s forwards; }
     @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-    h2 {
-      color: #2c3e50;
-      border-bottom: 2px solid #2c3e50;
-      padding-bottom: 10px;
-      margin-bottom: 15px;
-    }
-    p {
-      font-size: 17px;
-      margin-bottom: 15px;
-      text-align: justify;
-    }
-    .image-container {
-      margin: 20px 0;
-      text-align: center;
-    }
-    .image-container img {
-      width: 100%;
-      max-height: 300px;
-      border-radius: 10px;
-      object-fit: cover;
-      transition: transform 0.3s ease;
-    }
-    .image-container img:hover { transform: scale(1.02); }
-    iframe {
-      width: 100%;
-      height: 315px;
-      margin-top: 10px;
-      border: none;
-    }
-    video, audio { width: 100%; margin-top: 10px; }
-    button {
-      background-color: #3498db;
-      border: none;
-      color: #fff;
-      padding: 10px 20px;
-      font-size: 16px;
-      border-radius: 5px;
-      margin: 10px;
-      cursor: pointer;
-      transition: background-color 0.3s ease, transform 0.3s ease;
-    }
+    h2 { color: #2c3e50; border-bottom: 2px solid #2c3e50; padding-bottom: 10px; }
+    .image-container img { width: 100%; max-height: 300px; border-radius: 10px; }
+    iframe { width: 100%; height: 315px; }
+    button { background-color: #3498db; color: #fff; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; }
     button:hover { background-color: #2980b9; transform: scale(1.05); }
-    .content { display: none; font-size: 18px; margin-top: 20px; }
-    .author-info {
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-      text-align: left;
-    }
-    .author-info div {
-      background-color: #f4f4f4;
-      padding: 10px;
-      border-radius: 5px;
-    }
-    .references {
-      margin-top: 15px;
-      font-size: 0.9em;
-    }
-    .references ul {
-      list-style-type: circle;
-      margin-left: 40px;
-    }
-    .curiosidades {
-      background-color: #ecf0f1;
-      padding: 10px;
-      border-radius: 5px;
-      margin: 20px 0;
-    }
-    .curiosidades h4 { color: #2980b9; margin-bottom: 10px; }
-    .curiosidades ul { list-style-type: square; margin-left: 40px; }
-    .braille-container { text-align: left; margin-top: 20px; }
-    .braille-container textarea { width: 100%; margin-top: 10px; }
-    .quiz-container { text-align: left; margin-top: 20px; }
-    footer {
-      background-color: #2c3e50;
-      color: #fff;
-      text-align: center;
-      padding: 15px;
-      font-size: 14px;
-      position: fixed;
-      width: 100%;
-      bottom: 0;
-    }
-    @media (max-width: 600px) {
-      nav ul { flex-direction: column; }
-      .container { padding: 10px; }
-      header, footer { padding: 10px; }
-    }
   </style>
 </head>
 <body>
 
-  <!-- Cabeçalho e Navegação -->
-  <header>
-    <h1>Portal Interativo de História</h1>
-    <nav>
-      <ul>
-        <li><a href="#" onclick="showSection('home')">Home</a></li>
-        <li><a href="#" onclick="showSection('brasil')">História do Brasil</a></li>
-        <li><a href="#" onclick="showSection('grega')">Mitologia Grega</a></li>
-        <li><a href="#" onclick="showSection('antiga')">História Antiga</a></li>
-        <li><a href="#" onclick="showSection('comunicacao')">Comunicação Inclusiva</a></li>
-        <li><a href="#" onclick="showSection('libras')">Libras</a></li>
-        <li><a href="#" onclick="showSection('quiz')">Quiz de História</a></li>
-        <li><a href="#" onclick="showSection('atividades')">Atividades Interativas</a></li>
-        <li><a href="#" onclick="showSection('autores')">Sobre os Autores</a></li>
-      </ul>
-    </nav>
-  </header>
+<header>
+  <h1>Portal Interativo de História – Versão Final</h1>
+  <nav>
+    <ul>
+      <li><a href="#" data-section="home">Home</a></li>
+      <li><a href="#" data-section="brasil">História do Brasil</a></li>
+      <li><a href="#" data-section="grega">Mitologia Grega</a></li>
+      <li><a href="#" data-section="antiga">História Antiga</a></li>
+      <li><a href="#" data-section="idadeMedia">Idade Média</a></li>
+      <li><a href="#" data-section="renascimento">Renascimento</a></li>
+      <li><a href="#" data-section="iluminismo">Iluminismo</a></li>
+      <li><a href="#" data-section="contemporanea">História Contemporânea</a></li>
+      <li><a href="#" data-section="quiz">Quiz de História</a></li>
+    </ul>
+  </nav>
+</header>
 
-  <!-- Conteúdo Principal -->
-  <div class="container">
+<div class="container">
+  <section id="home" class="section active">
+    <h2>Bem-vindo!</h2>
+    <p>Explore conteúdos históricos aprofundados com recursos acessíveis.</p>
+    <div class="image-container">
+      <img alt="Navio de Cabral" src="https://upload.wikimedia.org/wikipedia/commons/3/3f/Cabral_ship.jpg">
+    </div>
+    <iframe src="https://www.youtube.com/embed/CMdlcAPcXWA" frameborder="0" allowfullscreen></iframe>
+    <button id="btnNarrar">🔊 Ouvir Introdução</button>
+  </section>
+  
+  <section id="brasil" class="section">
+    <h2>História do Brasil</h2>
+    <p>A história do Brasil começa com a chegada dos portugueses em 1500, marcando o início da colonização...</p>
+    <iframe src="https://www.youtube.com/embed/nE5DkX0ByIQ" frameborder="0" allowfullscreen></iframe>
+  </section>
 
-    <!-- Seção Home -->
-    <section id="home" class="section active">
-      <h2>Bem-vindo ao Portal de História</h2>
-      <p>
-        Explore conteúdos interativos e educativos sobre História do Brasil, Mitologia Grega e História Antiga. Nosso portal foi desenvolvido para incluir crianças com diversas necessidades – sejam cegas, surdas, mudas, autistas ou com outras deficiências – garantindo uma experiência acessível e atraente.
-      </p>
-      <div class="image-container">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Cabral_ship.jpg/800px-Cabral_ship.jpg" alt="Navio de Cabral navegando">
-      </div>
-      <!-- Vídeo introdutório com legenda e audiodescrição -->
-      <iframe src="https://www.youtube.com/embed/CMdlcAPcXWA" allowfullscreen title="Introdução à História"></iframe>
-      <!-- Áudio introdutório -->
-      <audio controls>
-        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3" type="audio/mp3">
-        Seu navegador não suporta áudio.
-      </audio>
-      <button aria-label="Ouvir Introdução" onclick="speakText('Bem-vindo ao Portal de História. Explore conteúdos interativos e educativos.')">Ouvir Introdução</button>
-    </section>
+  <section id="grega" class="section">
+    <h2>Mitologia Grega</h2>
+    <p>A mitologia grega é um conjunto de histórias que explicam o mundo e a sociedade através de deuses e heróis...</p>
+    <iframe src="https://www.youtube.com/embed/LkC7MuHbPIs" frameborder="0" allowfullscreen></iframe>
+  </section>
 
-    <!-- Seção História do Brasil -->
-    <section id="brasil" class="section">
-      <h2>História do Brasil</h2>
-      <p>
-        A História do Brasil inicia-se em 1500, com a chegada dos portugueses liderados por Pedro Álvares Cabral. Durante o período colonial, a economia foi baseada na exploração do pau‑brasil, produção de açúcar e mineração – sustentada pela escravidão. Em 1822, o país conquistou a independência e, em 1889, a monarquia deu lugar à República.
-      </p>
-      <div class="curiosidades">
-        <h4>Curiosidades</h4>
-        <ul>
-          <li>Antes da colonização, diversas tribos indígenas habitavam o território.</li>
-          <li>O pau‑brasil foi um dos primeiros produtos de exportação.</li>
-          <li>A Lei Áurea, de 1888, aboliu oficialmente a escravidão.</li>
-        </ul>
-      </div>
-      <div class="image-container">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Map_of_Colonial_Brazil.jpg/800px-Map_of_Colonial_Brazil.jpg" alt="Mapa do Brasil Colonial">
-      </div>
-      <!-- Vídeo educativo com legendas e audiodescrição -->
-      <iframe src="https://www.youtube.com/embed/nE5DkX0ByIQ" allowfullscreen title="História do Brasil - Independência e Império"></iframe>
-      <!-- Áudio narrativo do período colonial -->
-      <audio controls>
-        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3" type="audio/mp3">
-        Seu navegador não suporta áudio.
-      </audio>
-      <button aria-label="Ouvir História do Brasil" onclick="speakText('Conheça a trajetória do Brasil, desde as civilizações indígenas até a formação da República.')">Ouvir História do Brasil</button>
-      <div class="references">
-        <h4>Fontes</h4>
-        <ul>
-          <li>Fausto, B. – <em>História do Brasil</em>, EdUSP, 2016.</li>
-          <li>Biblioteca Nacional: <a href="https://www.bn.gov.br/" target="_blank">bn.gov.br</a></li>
-        </ul>
-      </div>
-    </section>
+  <section id="idadeMedia" class="section">
+    <h2>Idade Média</h2>
+    <p>A Idade Média foi marcada pelo feudalismo e pela influência da Igreja Católica...</p>
+  </section>
 
-    <!-- Seção Mitologia Grega -->
-    <section id="grega" class="section">
-      <h2>Mitologia Grega</h2>
-      <p>
-        A mitologia grega é um conjunto de lendas que explica a origem do mundo e os valores humanos por meio dos deuses, heróis e criaturas fantásticas. Obras clássicas como <em>A Ilíada</em> e <em>A Odisseia</em> contam as façanhas de Zeus, Hércules, Atena e outros.
-      </p>
-      <div class="curiosidades">
-        <h4>Curiosidades</h4>
-        <ul>
-          <li>O Monte Olimpo era considerado a morada dos deuses.</li>
-          <li>Hércules é lembrado por seus doze trabalhos.</li>
-        </ul>
-      </div>
-      <div class="image-container">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/Zeus-Olympus.jpg/800px-Zeus-Olympus.jpg" alt="Deuses do Olimpo">
-      </div>
-      <!-- Vídeo educativo sobre mitos gregos -->
-      <iframe src="https://www.youtube.com/embed/LkC7MuHbPIs" allowfullscreen title="Mitologia Grega Explicada"></iframe>
-      <!-- Áudio narrativo sobre o mito de Prometeu -->
-      <audio controls>
-        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3" type="audio/mp3">
-        Seu navegador não suporta áudio.
-      </audio>
-      <button aria-label="Ouvir Mitologia Grega" onclick="speakText('Explore os mitos e lendas da Grécia Antiga, com histórias de deuses e heróis.')">Ouvir Mitologia Grega</button>
-      <div class="references">
-        <h4>Fontes</h4>
-        <ul>
-          <li>Homero – <em>A Ilíada</em> e <em>A Odisseia</em>.</li>
-          <li>Graves, R. – <em>Os Mitos Gregos</em>, Nova Fronteira, 2013.</li>
-        </ul>
-      </div>
-    </section>
+  <section id="renascimento" class="section">
+    <h2>Renascimento</h2>
+    <p>O Renascimento trouxe avanços culturais e científicos, resgatando ideias da Antiguidade...</p>
+  </section>
 
-    <!-- Seção História Antiga -->
-    <section id="antiga" class="section">
-      <h2>História Antiga</h2>
-      <p>
-        A História Antiga aborda o surgimento das primeiras civilizações – do Egito, com suas pirâmides e hieróglifos, à Mesopotâmia, berço da escrita, e aos impérios de Grécia e Roma, que estabeleceram os fundamentos do direito e da arquitetura.
-      </p>
-      <div class="curiosidades">
-        <h4>Curiosidades</h4>
-        <ul>
-          <li>O Código de Hamurábi é um dos primeiros conjuntos de leis escritos.</li>
-          <li>O Egito é famoso por suas pirâmides e pela escrita hieroglífica.</li>
-        </ul>
-      </div>
-      <div class="image-container">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Great_Pyramid_of_Giza.jpg/800px-Great_Pyramid_of_Giza.jpg" alt="Pirâmide de Gizé">
-      </div>
-      <!-- Vídeo educativo sobre civilizações antigas -->
-      <iframe src="https://www.youtube.com/embed/9hZXbXDZjFw" allowfullscreen title="Civilizações da Antiguidade"></iframe>
-      <!-- Áudio explicativo sobre a invenção da escrita -->
-      <audio controls>
-        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3" type="audio/mp3">
-        Seu navegador não suporta áudio.
-      </audio>
-      <button aria-label="Ouvir História Antiga" onclick="speakText('Descubra as civilizações antigas que moldaram o mundo, como os egípcios, mesopotâmicos, gregos e romanos.')">Ouvir História Antiga</button>
-      <div class="references">
-        <h4>Fontes</h4>
-        <ul>
-          <li>Gonçalves, E. – <em>História Antiga: Egito e Mesopotâmia</em>, Contexto, 2019.</li>
-          <li>Bernardini, C. – <em>Mundo Antigo: Grécia e Roma</em>, Sulina, 2020.</li>
-        </ul>
-      </div>
-    </section>
+  <section id="iluminismo" class="section">
+    <h2>Iluminismo</h2>
+    <p>O Iluminismo enfatizou o uso da razão, promovendo mudanças políticas e sociais...</p>
+  </section>
 
-    <!-- Seção Comunicação Inclusiva -->
-    <section id="comunicacao" class="section">
-      <h2>Comunicação Inclusiva</h2>
-      <p>
-        A comunicação inclusiva é fundamental para promover a participação de todos. O uso de legendas, audiodescrição, Libras e outras adaptações garante que o conteúdo seja acessível a crianças com diversas deficiências.
-      </p>
-      <div class="image-container">
-        <img src="https://source.unsplash.com/800x400/?inclusive,communication" alt="Comunicação Inclusiva">
-      </div>
-      <button aria-label="Ouvir Comunicação Inclusiva" onclick="speakText('Entenda a importância da comunicação inclusiva para promover a participação de todos.')">Ouvir Comunicação Inclusiva</button>
-    </section>
+  <section id="contemporanea" class="section">
+    <h2>História Contemporânea</h2>
+    <p>Com a Revolução Francesa, inicia-se a era contemporânea, marcada por revoluções e avanços tecnológicos...</p>
+  </section>
 
-    <!-- Seção Libras (Interpretação em Língua de Sinais) -->
-    <section id="libras" class="section">
-      <h2>Libras – Língua Brasileira de Sinais</h2>
-      <p>
-        Nesta seção, crianças podem assistir a vídeos com interpretação em Libras para acompanhar os conteúdos apresentados. A presença de Libras garante que crianças surdas ou com deficiência auditiva possam acessar o conteúdo de forma completa.
-      </p>
-      <div class="image-container">
-        <img src="https://source.unsplash.com/800x400/?sign,language" alt="Interpretação em Libras">
-      </div>
-      <!-- Vídeo com interpretação em Libras -->
-      <iframe src="https://www.youtube.com/embed/9ImEC9Rdb70" allowfullscreen title="Conteúdo em Libras"></iframe>
-      <button aria-label="Ouvir Libras" onclick="speakText('Assista ao vídeo com interpretação em Libras para acompanhar o conteúdo.')">Ouvir Libras</button>
-    </section>
+  <section id="quiz" class="section">
+    <h2>Quiz de História</h2>
+    <button id="btnIniciarQuiz">Iniciar Quiz</button>
+    <p id="quizPergunta"></p>
+    <button id="resposta1"></button>
+    <button id="resposta2"></button>
+    <p id="quizFeedback"></p>
+    <p id="resultadoQuiz"></p>
+  </section>
+</div>
 
-    <!-- Seção Quiz de História -->
-    <section id="quiz" class="section">
-      <h2>Quiz de História</h2>
-      <p>Teste seus conhecimentos de forma interativa!</p>
-      <div class="quiz-container">
-        <button aria-label="Iniciar Quiz" onclick="startQuiz()">Iniciar Quiz</button>
-        <p id="quizPergunta"></p>
-        <button id="resposta1"></button>
-        <button id="resposta2"></button>
-        <p id="resultadoQuiz"></p>
-      </div>
-    </section>
+<footer>
+  <p>&copy; 2025 Portal Interativo de História</p>
+</footer>
 
-    <!-- Seção Atividades Interativas -->
-    <section id="atividades" class="section">
-      <h2>Atividades Interativas</h2>
-      <p>
-        Divirta-se e aprenda com atividades lúdicas adaptadas! Clique nos botões para visualizar desafios e jogos simples que estimulam a criatividade e o raciocínio.
-      </p>
-      <button onclick="alert('Atividade: Complete a imagem! (Essa atividade pode ser implementada com jogos interativos.)')">Completar Imagem</button>
-      <button onclick="alert('Atividade: Relacione os fatos históricos! (Exemplo de atividade interativa para reforçar o conteúdo.)')">Relacionar Fatos</button>
-      <button onclick="alert('Atividade: Quebra-cabeça histórico! (Atividade lúdica adaptada para todos.)')">Quebra-Cabeça Histórico</button>
-    </section>
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    document.querySelectorAll('nav a').forEach(link => {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        document.querySelector('.section.active')?.classList.remove('active');
+        document.getElementById(this.dataset.section).classList.add('active');
+        window.scrollTo(0, 0);
+      });
+    });
 
-    <!-- Seção Sobre os Autores -->
-    <section id="autores" class="section">
-      <h2>Sobre os Autores</h2>
-      <div class="author-info">
-        <div>
-          <h3>Gabriel Silveira Lima</h3>
-          <p>Especialista em Segurança Pública, Bacharel em Direito e Bacharelando em Ciência da Computação.</p>
-        </div>
-        <div>
-          <h3>Jordana França Soares</h3>
-          <p>Licencianda em História, iniciadora de projetos e estudos científicos na área de interação e educação histórica.</p>
-        </div>
-      </div>
-      <audio controls>
-        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3" type="audio/mp3">
-        Seu navegador não suporta áudio.
-      </audio>
-      <button aria-label="Ouvir Sobre os Autores" onclick="speakText('Conheça os autores: Gabriel Silveira Lima e Jordana França Soares.')">Ouvir Sobre os Autores</button>
-    </section>
-
-    <!-- Área do Conversor Braille (para inclusão tátil) -->
-    <section id="braille" class="section">
-      <h2>Conversor Braille</h2>
-      <p>
-        Digite um texto para convertê-lo em Braille (simplificado), facilitando a leitura para crianças com deficiência visual.
-      </p>
-      <div class="braille-container">
-        <textarea id="brailleInput" rows="2" placeholder="Digite um texto..."></textarea><br>
-        <button onclick="converterParaBraille()">Converter para Braille</button>
-        <div id="brailleOutput" class="braille-output"></div>
-      </div>
-    </section>
-
-  </div>
-
-  <!-- Rodapé -->
-  <footer>
-    <p>&copy; 2025 Portal Interativo de História - Todos os direitos reservados.</p>
-  </footer>
-
-  <script>
-    // Alterna entre as seções do portal
-    function showSection(sectionId) {
-      const sections = document.getElementsByClassName("section");
-      for (let i = 0; i < sections.length; i++) {
-        sections[i].classList.remove("active");
-      }
-      document.getElementById(sectionId).classList.add("active");
-      window.scrollTo(0, 0);
-    }
-
-    // Função para síntese de fala (text-to-speech) para auxiliar crianças que se beneficiam de narração
-    function speakText(text) {
-      if ('speechSynthesis' in window) {
-        const msg = new SpeechSynthesisUtterance(text);
-        msg.lang = 'pt-BR';
-        window.speechSynthesis.speak(msg);
-      } else {
-        alert("Seu navegador não suporta síntese de fala.");
-      }
-    }
-
-    // Quiz Interativo
-    const quizPerguntas = [
-      {
-        pergunta: "Quem foi o primeiro imperador do Brasil?",
-        respostas: ["Dom Pedro I", "Dom João VI"],
-        correta: 0
-      },
-      {
-        pergunta: "Qual civilização é conhecida como 'berço da democracia'?",
-        respostas: ["Roma", "Grécia"],
-        correta: 1
-      },
-      {
-        pergunta: "A Idade Média foi marcada principalmente por qual sistema?",
-        respostas: ["Feudalismo", "Capitalismo"],
-        correta: 0
-      },
-      {
-        pergunta: "Quem pintou a Mona Lisa?",
-        respostas: ["Michelangelo", "Leonardo da Vinci"],
-        correta: 1
-      }
-    ];
-    let quizIndice = 0;
-    let quizPontuacao = 0;
-    
-    function startQuiz() {
-      quizIndice = 0;
-      quizPontuacao = 0;
-      document.getElementById("resultadoQuiz").innerText = "";
-      mostrarPerguntaQuiz();
-    }
-    
-    function mostrarPerguntaQuiz() {
-      if (quizIndice < quizPerguntas.length) {
-        const quest = quizPerguntas[quizIndice];
-        document.getElementById("quizPergunta").innerText = quest.pergunta;
-        document.getElementById("resposta1").innerText = quest.respostas[0];
-        document.getElementById("resposta2").innerText = quest.respostas[1];
-        document.getElementById("resposta1").style.display = "inline-block";
-        document.getElementById("resposta2").style.display = "inline-block";
-        document.getElementById("resposta1").onclick = () => checarRespostaQuiz(0);
-        document.getElementById("resposta2").onclick = () => checarRespostaQuiz(1);
-      }
-    }
-    
-    function checarRespostaQuiz(r) {
-      const quest = quizPerguntas[quizIndice];
-      if (r === quest.correta) {
-        alert("Muito bem! Resposta certa.");
-        quizPontuacao++;
-      } else {
-        alert("Ops, resposta errada.");
-      }
-      quizIndice++;
-      if (quizIndice < quizPerguntas.length) {
-        mostrarPerguntaQuiz();
-      } else {
-        exibirResultadoQuiz();
-      }
-    }
-    
-    function exibirResultadoQuiz() {
-      document.getElementById("quizPergunta").innerText = "";
-      document.getElementById("resposta1").style.display = "none";
-      document.getElementById("resposta2").style.display = "none";
-      document.getElementById("resultadoQuiz").innerText = `Você acertou ${quizPontuacao} de ${quizPerguntas.length} perguntas!`;
-      const restartButton = document.createElement("button");
-      restartButton.innerText = "Reiniciar Quiz";
-      restartButton.onclick = startQuiz;
-      document.getElementById("resultadoQuiz").appendChild(restartButton);
-    }
-    
-    // Conversor Braille Simplificado com suporte a letras, números e pontuação
-    const brailleMap = {
-      'a': '⠁', 'b': '⠃', 'c': '⠉', 'd': '⠙', 'e': '⠑', 'f': '⠋', 'g': '⠛',
-      'h': '⠓', 'i': '⠊', 'j': '⠚', 'k': '⠅', 'l': '⠇', 'm': '⠍', 'n': '⠝',
-      'o': '⠕', 'p': '⠏', 'q': '⠟', 'r': '⠗', 's': '⠎', 't': '⠞', 'u': '⠥',
-      'v': '⠧', 'w': '⠺', 'x': '⠭', 'y': '⠽', 'z': '⠵',
-      '1': '⠼⠁', '2': '⠼⠃', '3': '⠼⠉', '4': '⠼⠙', '5': '⠼⠑',
-      '6': '⠼⠋', '7': '⠼⠛', '8': '⠼⠓', '9': '⠼⠊', '0': '⠼⠚',
-      '.': '⠲', ',': '⠂', '?': '⠦', '!': '⠖', ' ': ' '
-    };
-    
-    function converterParaBraille() {
-      let input = document.getElementById('brailleInput').value;
-      let output = '';
-      for (let c of input.toLowerCase()) {
-        output += brailleMap[c] || c;
-      }
-      document.getElementById('brailleOutput').innerText = output;
-    }
-  </script>
+    document.getElementById('btnNarrar')?.addEventListener('click', function() {
+      let utterance = new SpeechSynthesisUtterance("Bem-vindo ao portal interativo de história!");
+      utterance.lang = 'pt-BR';
+      speechSynthesis.speak(utterance);
+    });
+  });
+</script>
 
 </body>
 </html>
