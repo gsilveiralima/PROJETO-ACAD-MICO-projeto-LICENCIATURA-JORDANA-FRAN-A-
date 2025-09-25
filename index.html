@@ -140,12 +140,126 @@
     }
     .memory-card.flipped { background-color: #27ae60; transform: rotateY(180deg); }
     .memory-card.matched { background-color: #7f8c8d; cursor: default; }
+    /* Estilos para Dashboard de Progresso */
+    .progress-dashboard {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      border-radius: 15px;
+      padding: 20px;
+      margin: 20px 0;
+      color: white;
+      position: relative;
+      overflow: hidden;
+    }
+    .progress-dashboard::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="2" fill="rgba(255,255,255,0.1)"/></svg>') repeat;
+      animation: float 20s infinite linear;
+    }
+    @keyframes float {
+      0% { transform: translateY(0px); }
+      100% { transform: translateY(-100px); }
+    }
+    .progress-summary {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 15px;
+      margin-top: 15px;
+    }
+    .progress-item {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      padding: 15px;
+      text-align: center;
+      backdrop-filter: blur(10px);
+    }
+    .progress-bar {
+      width: 100%;
+      height: 8px;
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 4px;
+      overflow: hidden;
+      margin: 10px 0;
+    }
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #4CAF50, #45a049);
+      border-radius: 4px;
+      transition: width 0.5s ease;
+      position: relative;
+    }
+    .progress-fill::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      background-image: linear-gradient(45deg, transparent 35%, rgba(255,255,255,.2) 35%, rgba(255,255,255,.2) 65%, transparent 65%, transparent);
+      background-size: 20px 20px;
+      animation: progress-animate 1s linear infinite;
+    }
+    @keyframes progress-animate {
+      0% { background-position: 0 0; }
+      100% { background-position: 20px 0; }
+    }
+    .badge {
+      display: inline-block;
+      background: #4CAF50;
+      color: white;
+      padding: 5px 10px;
+      border-radius: 15px;
+      font-size: 12px;
+      margin: 2px;
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
+    .background-status {
+      position: fixed;
+      bottom: 100px;
+      right: 20px;
+      background: rgba(0, 0, 0, 0.8);
+      color: white;
+      padding: 10px 15px;
+      border-radius: 25px;
+      font-size: 12px;
+      z-index: 1000;
+      transition: all 0.3s ease;
+      transform: translateX(100%);
+    }
+    .background-status.active {
+      transform: translateX(0);
+    }
+    .loading-spinner {
+      display: inline-block;
+      width: 12px;
+      height: 12px;
+      border: 2px solid #ffffff33;
+      border-top: 2px solid #ffffff;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin-right: 8px;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
     /* Responsividade */
     @media (max-width: 600px) {
       nav ul { flex-direction: column; }
       .container { padding: 10px; }
       header, footer { padding: 10px; }
       .memory-game { grid-template-columns: repeat(2, 1fr); }
+      .progress-summary { grid-template-columns: 1fr; }
+      .background-status { bottom: 80px; right: 10px; }
     }
   </style>
 </head>
@@ -168,6 +282,7 @@
         <li><a href="#" onclick="showSection('timeline')" aria-label="Linha do Tempo">Linha do Tempo</a></li>
         <li><a href="#" onclick="showSection('memoria')" aria-label="Jogo de Memória">Jogo de Memória</a></li>
         <li><a href="#" onclick="showSection('autores')" aria-label="Sobre os Autores">Sobre os Autores</a></li>
+        <li><a href="#" onclick="showSection('progresso')" aria-label="Meu Progresso">Meu Progresso</a></li>
         <li><a href="#" onclick="showSection('braille')" aria-label="Conversor Braille">Conversor Braille</a></li>
       </ul>
     </nav>
@@ -429,6 +544,71 @@
       <button aria-label="Ouvir Sobre os Autores" onclick="speakText('Conheça os autores: Gabriel Silveira Lima e Jordana França Soares.')">Ouvir Sobre os Autores</button>
     </section>
 
+    <!-- Seção Dashboard de Progresso -->
+    <section id="progresso" class="section">
+      <h2>Meu Progresso de Aprendizagem</h2>
+      <div class="progress-dashboard">
+        <h3>🎯 Painel de Progresso</h3>
+        <p>Acompanhe seu progresso através do Portal Interativo de História</p>
+        
+        <div class="progress-summary">
+          <div class="progress-item">
+            <h4>📚 Seções Visitadas</h4>
+            <div class="progress-bar">
+              <div class="progress-fill" id="sectionsProgress" style="width: 0%"></div>
+            </div>
+            <span id="sectionsCount">0 de 12</span>
+          </div>
+          
+          <div class="progress-item">
+            <h4>🎮 Quiz Completado</h4>
+            <div class="progress-bar">
+              <div class="progress-fill" id="quizProgress" style="width: 0%"></div>
+            </div>
+            <span id="quizScore">0% de acertos</span>
+          </div>
+          
+          <div class="progress-item">
+            <h4>📖 Histórias Lidas</h4>
+            <div class="progress-bar">
+              <div class="progress-fill" id="storiesProgress" style="width: 0%"></div>
+            </div>
+            <span id="storiesCount">0 de 3 capítulos</span>
+          </div>
+          
+          <div class="progress-item">
+            <h4>🧠 Jogos Jogados</h4>
+            <div class="progress-bar">
+              <div class="progress-fill" id="gamesProgress" style="width: 0%"></div>
+            </div>
+            <span id="gamesCount">0 jogos completados</span>
+          </div>
+        </div>
+        
+        <div style="margin-top: 20px;">
+          <h4>🏆 Conquistas Desbloqueadas</h4>
+          <div id="badgesContainer">
+            <!-- Badges serão adicionadas dinamicamente -->
+          </div>
+        </div>
+        
+        <div style="margin-top: 15px; text-align: center;">
+          <button onclick="resetProgress()" aria-label="Resetar Progresso">🔄 Resetar Progresso</button>
+          <button onclick="exportProgress()" aria-label="Exportar Progresso">📊 Exportar Dados</button>
+        </div>
+      </div>
+      
+      <div style="margin-top: 20px;">
+        <h3>📈 Estatísticas Detalhadas</h3>
+        <div id="detailedStats">
+          <p><strong>Tempo total no portal:</strong> <span id="totalTime">0 minutos</span></p>
+          <p><strong>Última atividade:</strong> <span id="lastActivity">Nenhuma</span></p>
+          <p><strong>Seção favorita:</strong> <span id="favoriteSection">Em análise...</span></p>
+          <p><strong>Streak de aprendizado:</strong> <span id="learningStreak">0 dias</span></p>
+        </div>
+      </div>
+    </section>
+
     <!-- Seção Conversor Braille -->
     <section id="braille" class="section">
       <h2>Conversor Braille</h2>
@@ -442,6 +622,12 @@
 
   </div>
 
+  <!-- Indicador de Status de Processamento em Segundo Plano -->
+  <div id="backgroundStatus" class="background-status">
+    <span class="loading-spinner"></span>
+    <span id="statusText">Inicializando...</span>
+  </div>
+
   <!-- Rodapé -->
   <footer>
     <p>&copy; 2025 Portal Interativo de História - Todos os direitos reservados.</p>
@@ -449,14 +635,360 @@
 
   <!-- Scripts JavaScript -->
   <script>
-    // Alternar seções
+    /* ======== Sistema de Progresso e Processamento em Segundo Plano ========= */
+    
+    // Configurações globais
+    const STORAGE_KEY = 'portal_historia_progress';
+    const BACKGROUND_TASKS = [];
+    let backgroundWorker = null;
+    let progressData = {
+      sectionsVisited: new Set(),
+      quizCompleted: false,
+      quizScore: 0,
+      storiesRead: 0,
+      gamesPlayed: new Set(),
+      badges: new Set(),
+      totalTime: 0,
+      lastActivity: null,
+      sectionTime: {},
+      startTime: Date.now()
+    };
+
+    // Sistema de Background Processing
+    class BackgroundProcessor {
+      constructor() {
+        this.tasks = new Map();
+        this.isRunning = false;
+        this.statusElement = document.getElementById('backgroundStatus');
+        this.statusText = document.getElementById('statusText');
+      }
+
+      start() {
+        this.isRunning = true;
+        this.statusElement.classList.add('active');
+        this.updateStatus('Sistema iniciado');
+        
+        // Auto-save a cada 30 segundos
+        setInterval(() => this.autoSave(), 30000);
+        
+        // Preload de conteúdo
+        setTimeout(() => this.preloadContent(), 2000);
+        
+        // Analytics em background
+        setInterval(() => this.collectAnalytics(), 60000);
+        
+        // Ocultação automática do status após 3 segundos
+        setTimeout(() => {
+          this.statusElement.classList.remove('active');
+        }, 3000);
+      }
+
+      updateStatus(message) {
+        this.statusText.textContent = message;
+        this.statusElement.classList.add('active');
+        
+        setTimeout(() => {
+          this.statusElement.classList.remove('active');
+        }, 2000);
+      }
+
+      autoSave() {
+        this.updateStatus('💾 Salvando progresso...');
+        saveProgressData();
+      }
+
+      preloadContent() {
+        this.updateStatus('⚡ Carregando conteúdo...');
+        
+        // Simula preload de imagens e conteúdo
+        const mediaElements = ['cabral_ship.jpg', 'map_brazil_colonial.jpg', 'great_pyramid_of_giza.jpg'];
+        mediaElements.forEach(media => {
+          const img = new Image();
+          img.src = `media/${media}`;
+        });
+      }
+
+      collectAnalytics() {
+        // Atualiza tempo total
+        progressData.totalTime = Math.floor((Date.now() - progressData.startTime) / 60000);
+        
+        // Determina seção favorita
+        let maxTime = 0;
+        let favoriteSection = 'Home';
+        for (const [section, time] of Object.entries(progressData.sectionTime)) {
+          if (time > maxTime) {
+            maxTime = time;
+            favoriteSection = section;
+          }
+        }
+        
+        // Atualiza interface
+        updateProgressDisplay();
+        
+        this.updateStatus('📊 Coletando dados...');
+      }
+
+      addTask(name, task) {
+        this.tasks.set(name, task);
+        this.updateStatus(`➕ Adicionada: ${name}`);
+      }
+
+      runTask(name) {
+        const task = this.tasks.get(name);
+        if (task) {
+          this.updateStatus(`⚙️ Executando: ${name}`);
+          return task();
+        }
+      }
+    }
+
+    // Inicialização do sistema
+    const backgroundProcessor = new BackgroundProcessor();
+
+    // Carregar dados salvos
+    function loadProgressData() {
+      const saved = localStorage.getItem(STORAGE_KEY);
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        progressData = {
+          ...progressData,
+          ...parsed,
+          sectionsVisited: new Set(parsed.sectionsVisited || []),
+          gamesPlayed: new Set(parsed.gamesPlayed || []),
+          badges: new Set(parsed.badges || []),
+          startTime: parsed.startTime || Date.now()
+        };
+      }
+      updateProgressDisplay();
+    }
+
+    // Salvar dados de progresso
+    function saveProgressData() {
+      const toSave = {
+        ...progressData,
+        sectionsVisited: Array.from(progressData.sectionsVisited),
+        gamesPlayed: Array.from(progressData.gamesPlayed),
+        badges: Array.from(progressData.badges)
+      };
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(toSave));
+    }
+
+    // Atualizar display de progresso
+    function updateProgressDisplay() {
+      // Seções visitadas
+      const sectionsCount = progressData.sectionsVisited.size;
+      const sectionsProgress = (sectionsCount / 12) * 100;
+      document.getElementById('sectionsProgress').style.width = `${sectionsProgress}%`;
+      document.getElementById('sectionsCount').textContent = `${sectionsCount} de 12`;
+
+      // Quiz
+      const quizProgress = progressData.quizCompleted ? 100 : 0;
+      document.getElementById('quizProgress').style.width = `${quizProgress}%`;
+      document.getElementById('quizScore').textContent = `${progressData.quizScore}% de acertos`;
+
+      // Histórias
+      const storiesProgress = (progressData.storiesRead / 3) * 100;
+      document.getElementById('storiesProgress').style.width = `${storiesProgress}%`;
+      document.getElementById('storiesCount').textContent = `${progressData.storiesRead} de 3 capítulos`;
+
+      // Jogos
+      const gamesProgress = progressData.gamesPlayed.size > 0 ? 100 : 0;
+      document.getElementById('gamesProgress').style.width = `${gamesProgress}%`;
+      document.getElementById('gamesCount').textContent = `${progressData.gamesPlayed.size} jogos completados`;
+
+      // Badges
+      updateBadges();
+
+      // Estatísticas detalhadas
+      if (document.getElementById('totalTime')) {
+        document.getElementById('totalTime').textContent = `${progressData.totalTime} minutos`;
+        document.getElementById('lastActivity').textContent = progressData.lastActivity || 'Nenhuma';
+        
+        // Seção favorita
+        let favoriteSection = 'Em análise...';
+        if (Object.keys(progressData.sectionTime).length > 0) {
+          favoriteSection = Object.keys(progressData.sectionTime).reduce((a, b) => 
+            (progressData.sectionTime[a] || 0) > (progressData.sectionTime[b] || 0) ? a : b
+          );
+        }
+        document.getElementById('favoriteSection').textContent = favoriteSection;
+        
+        // Streak
+        const streak = Math.floor(progressData.totalTime / 60) || 0;
+        document.getElementById('learningStreak').textContent = `${streak} dias`;
+      }
+    }
+
+    // Sistema de badges/conquistas
+    function updateBadges() {
+      const badgesContainer = document.getElementById('badgesContainer');
+      if (!badgesContainer) return;
+
+      badgesContainer.innerHTML = '';
+
+      // Verificar novas conquistas
+      checkAchievements();
+
+      // Mostrar badges
+      if (progressData.badges.size === 0) {
+        badgesContainer.innerHTML = '<p style="opacity: 0.7;">Nenhuma conquista desbloqueada ainda. Continue explorando!</p>';
+      } else {
+        progressData.badges.forEach(badge => {
+          const badgeElement = document.createElement('span');
+          badgeElement.className = 'badge';
+          badgeElement.textContent = badge;
+          badgesContainer.appendChild(badgeElement);
+        });
+      }
+    }
+
+    // Verificar conquistas
+    function checkAchievements() {
+      const newBadges = [];
+
+      if (progressData.sectionsVisited.size >= 3 && !progressData.badges.has('🗺️ Explorador')) {
+        newBadges.push('🗺️ Explorador');
+      }
+
+      if (progressData.sectionsVisited.size >= 8 && !progressData.badges.has('🌟 Historiador Junior')) {
+        newBadges.push('🌟 Historiador Junior');
+      }
+
+      if (progressData.quizCompleted && progressData.quizScore >= 75 && !progressData.badges.has('🧠 Mestre do Quiz')) {
+        newBadges.push('🧠 Mestre do Quiz');
+      }
+
+      if (progressData.storiesRead >= 3 && !progressData.badges.has('📚 Contador de Histórias')) {
+        newBadges.push('📚 Contador de Histórias');
+      }
+
+      if (progressData.totalTime >= 30 && !progressData.badges.has('⏰ Dedicado')) {
+        newBadges.push('⏰ Dedicado');
+      }
+
+      if (progressData.gamesPlayed.size > 0 && !progressData.badges.has('🎮 Jogador')) {
+        newBadges.push('🎮 Jogador');
+      }
+
+      // Adicionar novas badges
+      newBadges.forEach(badge => {
+        progressData.badges.add(badge);
+        showBadgeNotification(badge);
+      });
+
+      if (newBadges.length > 0) {
+        saveProgressData();
+      }
+    }
+
+    // Mostrar notificação de nova badge
+    function showBadgeNotification(badge) {
+      const notification = document.createElement('div');
+      notification.style.cssText = `
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: linear-gradient(135deg, #4CAF50, #45a049);
+        color: white;
+        padding: 20px;
+        border-radius: 15px;
+        z-index: 10000;
+        text-align: center;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        animation: bounceIn 0.6s ease;
+      `;
+      notification.innerHTML = `
+        <h3>🎉 Nova Conquista!</h3>
+        <p style="font-size: 24px; margin: 10px 0;">${badge}</p>
+        <p>Parabéns pelo seu progresso!</p>
+      `;
+
+      document.body.appendChild(notification);
+
+      setTimeout(() => {
+        notification.style.animation = 'bounceOut 0.6s ease';
+        setTimeout(() => notification.remove(), 600);
+      }, 3000);
+    }
+
+    // Funções de controle de progresso
+    function resetProgress() {
+      if (confirm('Tem certeza que deseja resetar todo o seu progresso? Esta ação não pode ser desfeita.')) {
+        localStorage.removeItem(STORAGE_KEY);
+        progressData = {
+          sectionsVisited: new Set(),
+          quizCompleted: false,
+          quizScore: 0,
+          storiesRead: 0,
+          gamesPlayed: new Set(),
+          badges: new Set(),
+          totalTime: 0,
+          lastActivity: null,
+          sectionTime: {},
+          startTime: Date.now()
+        };
+        updateProgressDisplay();
+        backgroundProcessor.updateStatus('🔄 Progresso resetado');
+      }
+    }
+
+    function exportProgress() {
+      const data = {
+        ...progressData,
+        sectionsVisited: Array.from(progressData.sectionsVisited),
+        gamesPlayed: Array.from(progressData.gamesPlayed),
+        badges: Array.from(progressData.badges),
+        exportDate: new Date().toISOString()
+      };
+
+      const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `portal_historia_progresso_${new Date().toISOString().split('T')[0]}.json`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+
+      backgroundProcessor.updateStatus('📊 Dados exportados');
+    }
+
+    // Tracking de seções
+    let currentSectionStartTime = Date.now();
+
+    // Alternar seções (modificado para incluir tracking)
     function showSection(sectionId) {
+      // Salvar tempo da seção anterior
+      const currentTime = Date.now();
+      const currentSection = document.querySelector('.section.active')?.id;
+      if (currentSection) {
+        const timeSpent = currentTime - currentSectionStartTime;
+        progressData.sectionTime[currentSection] = (progressData.sectionTime[currentSection] || 0) + timeSpent;
+      }
+
+      // Alternar seções
       const sections = document.getElementsByClassName("section");
       for (let sec of sections) {
         sec.classList.remove("active");
       }
       document.getElementById(sectionId).classList.add("active");
       window.scrollTo(0, 0);
+
+      // Tracking de progresso
+      progressData.sectionsVisited.add(sectionId);
+      progressData.lastActivity = `Visitou seção: ${sectionId}`;
+      currentSectionStartTime = currentTime;
+
+      // Auto-save
+      backgroundProcessor.addTask('saveProgress', () => saveProgressData());
+      setTimeout(() => backgroundProcessor.runTask('saveProgress'), 1000);
+
+      // Atualizar display se estiver na seção de progresso
+      if (sectionId === 'progresso') {
+        updateProgressDisplay();
+      }
     }
 
     // Síntese de fala para acessibilidade
@@ -516,7 +1048,22 @@
       document.getElementById("quizPergunta").innerText = "";
       document.getElementById("resposta1").style.display = "none";
       document.getElementById("resposta2").style.display = "none";
-      document.getElementById("resultadoQuiz").innerText = `Você acertou ${quizPontuacao} de ${quizPerguntas.length} perguntas!`;
+      
+      const scorePercentage = Math.round((quizPontuacao / quizPerguntas.length) * 100);
+      document.getElementById("resultadoQuiz").innerText = `Você acertou ${quizPontuacao} de ${quizPerguntas.length} perguntas! (${scorePercentage}%)`;
+      
+      // Atualizar progresso
+      progressData.quizCompleted = true;
+      progressData.quizScore = scorePercentage;
+      progressData.lastActivity = `Completou quiz com ${scorePercentage}% de acertos`;
+      
+      // Verificar conquistas
+      checkAchievements();
+      
+      // Auto-save
+      backgroundProcessor.updateStatus('💾 Salvando resultado do quiz...');
+      saveProgressData();
+      
       const restartButton = document.createElement("button");
       restartButton.innerText = "Reiniciar Quiz";
       restartButton.onclick = startQuiz;
@@ -557,12 +1104,29 @@
       if (currentChapter < storyChapters.length - 1) {
         currentChapter++;
         displayChapter();
+        
+        // Atualizar progresso de leitura
+        progressData.storiesRead = Math.max(progressData.storiesRead, currentChapter + 1);
+        progressData.lastActivity = `Leu capítulo ${currentChapter + 1}`;
+        
+        // Verificar conquistas
+        checkAchievements();
+        
+        // Auto-save em background
+        backgroundProcessor.addTask('saveStoryProgress', () => {
+          backgroundProcessor.updateStatus('📖 Salvando progresso da história...');
+          saveProgressData();
+        });
+        setTimeout(() => backgroundProcessor.runTask('saveStoryProgress'), 500);
       }
     }
     function prevChapter() {
       if (currentChapter > 0) {
         currentChapter--;
         displayChapter();
+        
+        // Tracking de navegação
+        progressData.lastActivity = `Voltou para capítulo ${currentChapter + 1}`;
       }
     }
     function speakStory() {
@@ -659,6 +1223,20 @@
         firstCard.cardElement.classList.add("matched");
         secondCard.cardElement.classList.add("matched");
         resetMemorySelection();
+        
+        // Verificar se o jogo foi completado
+        const allMatched = document.querySelectorAll('.memory-card.matched').length === memoryCards.length;
+        if (allMatched) {
+          progressData.gamesPlayed.add('memoria');
+          progressData.lastActivity = 'Completou o jogo de memória';
+          
+          // Notificação de sucesso
+          setTimeout(() => {
+            backgroundProcessor.updateStatus('🎉 Jogo de memória completado!');
+            checkAchievements();
+            saveProgressData();
+          }, 500);
+        }
       } else {
         lockBoard = true;
         setTimeout(() => {
@@ -698,6 +1276,57 @@
       }
       document.getElementById('brailleOutput').innerText = output;
     }
+
+    /* ======== Inicialização do Sistema ========= */
+    
+    // Inicializar quando a página carregar
+    document.addEventListener('DOMContentLoaded', function() {
+      // Carregar dados salvos
+      loadProgressData();
+      
+      // Iniciar processamento em background
+      backgroundProcessor.start();
+      
+      // Inicializar outros componentes
+      displayChapter();
+      generateMemoryCards();
+      
+      // Marcar página inicial como visitada
+      progressData.sectionsVisited.add('home');
+      progressData.lastActivity = 'Iniciou sessão no portal';
+      currentSectionStartTime = Date.now();
+      
+      console.log('🚀 Portal Interativo de História inicializado com sistema de progresso!');
+    });
+
+    // Salvar progresso antes de sair da página
+    window.addEventListener('beforeunload', function() {
+      // Salvar tempo da seção atual
+      const currentSection = document.querySelector('.section.active')?.id;
+      if (currentSection) {
+        const timeSpent = Date.now() - currentSectionStartTime;
+        progressData.sectionTime[currentSection] = (progressData.sectionTime[currentSection] || 0) + timeSpent;
+      }
+      
+      // Salvar dados finais
+      saveProgressData();
+    });
+
+    // Adicionar animações CSS dinamicamente
+    const style = document.createElement('style');
+    style.textContent = `
+      @keyframes bounceIn {
+        0% { transform: translate(-50%, -50%) scale(0.3); opacity: 0; }
+        50% { transform: translate(-50%, -50%) scale(1.05); }
+        70% { transform: translate(-50%, -50%) scale(0.9); }
+        100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+      }
+      @keyframes bounceOut {
+        0% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+        100% { transform: translate(-50%, -50%) scale(0.3); opacity: 0; }
+      }
+    `;
+    document.head.appendChild(style);
   </script>
   
 </body>
