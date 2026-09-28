@@ -10,11 +10,11 @@ Explorar uma interface web com conteúdos de História e recursos de interação
 
 O repositório contém uma aplicação HTML/CSS/JavaScript concentrada em `index.html`.
 
-## Limitação importante
+## Mídia da demonstração
 
-A versão atual referencia arquivos em `media/` — imagens, vídeos e áudios — que **não estão presentes no repositório**. Por isso, parte da experiência visual e multimídia não funciona quando o projeto é executado a partir do estado atual.
+A versão original referenciava imagens, vídeos e áudios que não estavam no repositório. Para evitar links quebrados e requisições 404, a versão atual usa placeholders explícitos para imagens e informa quando áudio/vídeo não está incluído.
 
-Esse ponto deve ser corrigido antes de usar o projeto como demonstração pública.
+Os arquivos multimídia só devem ser adicionados futuramente quando houver autoria/licença e origem documentadas.
 
 ## Executar localmente
 
@@ -30,7 +30,7 @@ http://localhost:8000
 
 ## Melhorias recomendadas
 
-- [ ] restaurar ou substituir os arquivos de mídia ausentes;
+- [x] eliminar referências quebradas de mídia e usar placeholders explícitos;
 - [ ] separar CSS e JavaScript do arquivo HTML principal;
 - [ ] revisar todas as fontes históricas e referências;
 - [ ] testar acessibilidade com teclado e leitor de tela;
