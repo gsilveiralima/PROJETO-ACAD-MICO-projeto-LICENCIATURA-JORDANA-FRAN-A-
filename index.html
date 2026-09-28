@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Portal Interativo de História - Versão Inclusiva</title>
-  <meta name="description" content="Portal Interativo de História com conteúdos reais e interativos para crianças, incluindo recursos para deficiências visuais, auditivas, autismo e outras necessidades.">
+  <meta name="description" content="Protótipo acadêmico de Portal Interativo de História com atividades e recursos de acessibilidade em estudo.">
   <meta name="keywords" content="História, Brasil, Mitologia Grega, História Antiga, Educação, Inclusão, Libras, Braille, Linha do Tempo, Jogo de Memória">
   <meta name="author" content="Gabriel Silveira Lima, Jordana França Soares">
   <style>
@@ -85,6 +85,15 @@
       width: 100%;
       margin-top: 10px;
       border: none;
+    }
+    .media-placeholder {
+      margin: 16px 0;
+      padding: 18px;
+      border: 1px dashed #7f8c8d;
+      border-radius: 8px;
+      background: #f8f9fa;
+      color: #4b5563;
+      text-align: center;
     }
     button {
       background-color: #3498db;
@@ -299,18 +308,12 @@
       </p>
       <div class="image-container">
         <!-- Imagem do Navio de Cabral -->
-        <img src="media/cabral_ship.jpg" alt="Navio de Cabral navegando">
+        <img src="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%27800%27 height=%27300%27%3E%3Crect width=%27100%25%27 height=%27100%25%27 fill=%27%23e5e7eb%27/%3E%3Ctext x=%2750%25%27 y=%2750%25%27 text-anchor=%27middle%27 dominant-baseline=%27middle%27 fill=%27%23374151%27 font-size=%2724%27%3EMidia demonstrativa nao incluida%3C/text%3E%3C/svg%3E" alt="Navio de Cabral navegando">
       </div>
       <!-- Vídeo introdutório com legendas e audiodescrição -->
-      <video controls>
-        <source src="media/intro.mp4" type="video/mp4">
-        Seu navegador não suporta o vídeo.
-      </video>
+      <p class="media-placeholder" role="note">Vídeo demonstrativo não incluído nesta versão do repositório.</p>
       <!-- Áudio introdutório -->
-      <audio controls>
-        <source src="media/intro.mp3" type="audio/mp3">
-        Seu navegador não suporta áudio.
-      </audio>
+      <p class="media-placeholder" role="note">Áudio demonstrativo não incluído nesta versão do repositório.</p>
       <button aria-label="Ouvir Introdução" onclick="speakText('Bem-vindo ao Portal de História. Explore conteúdos interativos e educativos.')">Ouvir Introdução</button>
     </section>
 
@@ -330,18 +333,12 @@
       </div>
       <div class="image-container">
         <!-- Imagem do Mapa do Brasil Colonial -->
-        <img src="media/map_brazil_colonial.jpg" alt="Mapa do Brasil Colonial">
+        <img src="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%27800%27 height=%27300%27%3E%3Crect width=%27100%25%27 height=%27100%25%27 fill=%27%23e5e7eb%27/%3E%3Ctext x=%2750%25%27 y=%2750%25%27 text-anchor=%27middle%27 dominant-baseline=%27middle%27 fill=%27%23374151%27 font-size=%2724%27%3EMidia demonstrativa nao incluida%3C/text%3E%3C/svg%3E" alt="Mapa do Brasil Colonial">
       </div>
       <!-- Vídeo educativo sobre História do Brasil -->
-      <video controls>
-        <source src="media/historia_brasil.mp4" type="video/mp4">
-        Seu navegador não suporta o vídeo.
-      </video>
+      <p class="media-placeholder" role="note">Vídeo demonstrativo não incluído nesta versão do repositório.</p>
       <!-- Áudio narrativo do período colonial -->
-      <audio controls>
-        <source src="media/historia_brasil.mp3" type="audio/mp3">
-        Seu navegador não suporta áudio.
-      </audio>
+      <p class="media-placeholder" role="note">Áudio demonstrativo não incluído nesta versão do repositório.</p>
       <button aria-label="Ouvir História do Brasil" onclick="speakText('Conheça a trajetória do Brasil, desde as civilizações indígenas até a formação da República.')">Ouvir História do Brasil</button>
       <div class="references">
         <h4>Fontes</h4>
@@ -367,18 +364,12 @@
       </div>
       <div class="image-container">
         <!-- Imagem dos Deuses do Olimpo -->
-        <img src="media/zeus_olympus.jpg" alt="Representação dos deuses do Olimpo">
+        <img src="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%27800%27 height=%27300%27%3E%3Crect width=%27100%25%27 height=%27100%25%27 fill=%27%23e5e7eb%27/%3E%3Ctext x=%2750%25%27 y=%2750%25%27 text-anchor=%27middle%27 dominant-baseline=%27middle%27 fill=%27%23374151%27 font-size=%2724%27%3EMidia demonstrativa nao incluida%3C/text%3E%3C/svg%3E" alt="Representação dos deuses do Olimpo">
       </div>
       <!-- Vídeo educativo sobre Mitologia Grega -->
-      <video controls>
-        <source src="media/mitologia_grega.mp4" type="video/mp4">
-        Seu navegador não suporta o vídeo.
-      </video>
+      <p class="media-placeholder" role="note">Vídeo demonstrativo não incluído nesta versão do repositório.</p>
       <!-- Áudio narrativo sobre mitos gregos -->
-      <audio controls>
-        <source src="media/mitologia_grega.mp3" type="audio/mp3">
-        Seu navegador não suporta áudio.
-      </audio>
+      <p class="media-placeholder" role="note">Áudio demonstrativo não incluído nesta versão do repositório.</p>
       <button aria-label="Ouvir Mitologia Grega" onclick="speakText('Explore os mitos e lendas da Grécia Antiga, com histórias de deuses e heróis.')">Ouvir Mitologia Grega</button>
       <div class="references">
         <h4>Fontes</h4>
@@ -404,18 +395,12 @@
       </div>
       <div class="image-container">
         <!-- Imagem da Pirâmide de Gizé -->
-        <img src="media/great_pyramid_of_giza.jpg" alt="Pirâmide de Gizé">
+        <img src="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%27800%27 height=%27300%27%3E%3Crect width=%27100%25%27 height=%27100%25%27 fill=%27%23e5e7eb%27/%3E%3Ctext x=%2750%25%27 y=%2750%25%27 text-anchor=%27middle%27 dominant-baseline=%27middle%27 fill=%27%23374151%27 font-size=%2724%27%3EMidia demonstrativa nao incluida%3C/text%3E%3C/svg%3E" alt="Pirâmide de Gizé">
       </div>
       <!-- Vídeo educativo sobre Civilizações da Antiguidade -->
-      <video controls>
-        <source src="media/civilizacoes_antigas.mp4" type="video/mp4">
-        Seu navegador não suporta o vídeo.
-      </video>
+      <p class="media-placeholder" role="note">Vídeo demonstrativo não incluído nesta versão do repositório.</p>
       <!-- Áudio explicativo sobre a invenção da escrita -->
-      <audio controls>
-        <source src="media/civilizacoes_antigas.mp3" type="audio/mp3">
-        Seu navegador não suporta áudio.
-      </audio>
+      <p class="media-placeholder" role="note">Áudio demonstrativo não incluído nesta versão do repositório.</p>
       <button aria-label="Ouvir História Antiga" onclick="speakText('Descubra as civilizações antigas que moldaram o mundo, como os egípcios, mesopotâmicos, gregos e romanos.')">Ouvir História Antiga</button>
       <div class="references">
         <h4>Fontes</h4>
@@ -434,7 +419,7 @@
       </p>
       <div class="image-container">
         <!-- Imagem para Comunicação Inclusiva -->
-        <img src="media/comunicacao_inclusiva.jpg" alt="Ilustração de comunicação inclusiva">
+        <img src="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%27800%27 height=%27300%27%3E%3Crect width=%27100%25%27 height=%27100%25%27 fill=%27%23e5e7eb%27/%3E%3Ctext x=%2750%25%27 y=%2750%25%27 text-anchor=%27middle%27 dominant-baseline=%27middle%27 fill=%27%23374151%27 font-size=%2724%27%3EMidia demonstrativa nao incluida%3C/text%3E%3C/svg%3E" alt="Ilustração de comunicação inclusiva">
       </div>
       <button aria-label="Ouvir Comunicação Inclusiva" onclick="speakText('Entenda a importância da comunicação inclusiva para promover a participação de todos.')">Ouvir Comunicação Inclusiva</button>
     </section>
@@ -447,12 +432,9 @@
       </p>
       <div class="image-container">
         <!-- Imagem para Libras -->
-        <img src="media/libras.jpg" alt="Interpretação em Libras">
+        <img src="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%27800%27 height=%27300%27%3E%3Crect width=%27100%25%27 height=%27100%25%27 fill=%27%23e5e7eb%27/%3E%3Ctext x=%2750%25%27 y=%2750%25%27 text-anchor=%27middle%27 dominant-baseline=%27middle%27 fill=%27%23374151%27 font-size=%2724%27%3EMidia demonstrativa nao incluida%3C/text%3E%3C/svg%3E" alt="Interpretação em Libras">
       </div>
-      <video controls>
-        <source src="media/libras.mp4" type="video/mp4">
-        Seu navegador não suporta o vídeo.
-      </video>
+      <p class="media-placeholder" role="note">Vídeo demonstrativo não incluído nesta versão do repositório.</p>
       <button aria-label="Ouvir Libras" onclick="speakText('Assista ao vídeo com interpretação em Libras para acompanhar o conteúdo.')">Ouvir Libras</button>
     </section>
 
@@ -492,10 +474,7 @@
         <button onclick="nextChapter()" aria-label="Próximo Capítulo">Próximo</button>
         <button onclick="speakStory()" aria-label="Ouvir História Atual">Ouvir História</button>
       </div>
-      <video controls>
-        <source src="media/historia_libras.mp4" type="video/mp4">
-        Seu navegador não suporta o vídeo.
-      </video>
+      <p class="media-placeholder" role="note">Vídeo demonstrativo não incluído nesta versão do repositório.</p>
     </section>
 
     <!-- Seção Linha do Tempo Interativa -->
@@ -537,10 +516,7 @@
           <p>Licencianda em História com ênfase em metodologias interativas e educacionais, atuante em projetos de inclusão e comunicação acessível.</p>
         </div>
       </div>
-      <audio controls>
-        <source src="media/autores.mp3" type="audio/mp3">
-        Seu navegador não suporta áudio.
-      </audio>
+      <p class="media-placeholder" role="note">Áudio demonstrativo não incluído nesta versão do repositório.</p>
       <button aria-label="Ouvir Sobre os Autores" onclick="speakText('Conheça os autores: Gabriel Silveira Lima e Jordana França Soares.')">Ouvir Sobre os Autores</button>
     </section>
 
@@ -1075,17 +1051,17 @@
       {
         titulo: "Capítulo 1: A Partida",
         texto: "Em 1500, os navegadores portugueses zarparam em direção ao desconhecido, iniciando a aventura que levaria à descoberta do Brasil.",
-        imagem: "media/cabral_ship.jpg"
+        imagem: "data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%27800%27 height=%27300%27%3E%3Crect width=%27100%25%27 height=%27100%25%27 fill=%27%23e5e7eb%27/%3E%3Ctext x=%2750%25%27 y=%2750%25%27 text-anchor=%27middle%27 dominant-baseline=%27middle%27 fill=%27%23374151%27 font-size=%2724%27%3EMidia demonstrativa nao incluida%3C/text%3E%3C/svg%3E"
       },
       {
         titulo: "Capítulo 2: A Chegada",
         texto: "Após uma longa viagem, a frota avistou novas terras e iniciou o contato com os povos indígenas, dando início a uma história de encontros e desafios.",
-        imagem: "media/map_brazil_colonial.jpg"
+        imagem: "data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%27800%27 height=%27300%27%3E%3Crect width=%27100%25%27 height=%27100%25%27 fill=%27%23e5e7eb%27/%3E%3Ctext x=%2750%25%27 y=%2750%25%27 text-anchor=%27middle%27 dominant-baseline=%27middle%27 fill=%27%23374151%27 font-size=%2724%27%3EMidia demonstrativa nao incluida%3C/text%3E%3C/svg%3E"
       },
       {
         titulo: "Capítulo 3: A Transformação",
         texto: "Com o tempo, a nova terra passou por profundas transformações culturais, econômicas e sociais, moldando a identidade de um país em construção.",
-        imagem: "media/great_pyramid_of_giza.jpg"
+        imagem: "data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%27800%27 height=%27300%27%3E%3Crect width=%27100%25%27 height=%27100%25%27 fill=%27%23e5e7eb%27/%3E%3Ctext x=%2750%25%27 y=%2750%25%27 text-anchor=%27middle%27 dominant-baseline=%27middle%27 fill=%27%23374151%27 font-size=%2724%27%3EMidia demonstrativa nao incluida%3C/text%3E%3C/svg%3E"
       }
     ];
     let currentChapter = 0;
@@ -1141,27 +1117,27 @@
       pre: {
         titulo: "Pré-História",
         descricao: "Período anterior à escrita, marcado pelas primeiras manifestações culturais e artísticas do homem.",
-        imagem: "media/prehistoric.jpg"
+        imagem: "data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%27800%27 height=%27300%27%3E%3Crect width=%27100%25%27 height=%27100%25%27 fill=%27%23e5e7eb%27/%3E%3Ctext x=%2750%25%27 y=%2750%25%27 text-anchor=%27middle%27 dominant-baseline=%27middle%27 fill=%27%23374151%27 font-size=%2724%27%3EMidia demonstrativa nao incluida%3C/text%3E%3C/svg%3E"
       },
       antiguidade: {
         titulo: "Antiguidade",
         descricao: "Época das grandes civilizações como a Egípcia, Grega e Romana, que estabeleceram as bases da cultura ocidental.",
-        imagem: "media/ancient.jpg"
+        imagem: "data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%27800%27 height=%27300%27%3E%3Crect width=%27100%25%27 height=%27100%25%27 fill=%27%23e5e7eb%27/%3E%3Ctext x=%2750%25%27 y=%2750%25%27 text-anchor=%27middle%27 dominant-baseline=%27middle%27 fill=%27%23374151%27 font-size=%2724%27%3EMidia demonstrativa nao incluida%3C/text%3E%3C/svg%3E"
       },
       media: {
         titulo: "Idade Média",
         descricao: "Período marcado pelo feudalismo, pela influência da Igreja e por importantes transformações culturais na Europa.",
-        imagem: "media/medieval.jpg"
+        imagem: "data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%27800%27 height=%27300%27%3E%3Crect width=%27100%25%27 height=%27100%25%27 fill=%27%23e5e7eb%27/%3E%3Ctext x=%2750%25%27 y=%2750%25%27 text-anchor=%27middle%27 dominant-baseline=%27middle%27 fill=%27%23374151%27 font-size=%2724%27%3EMidia demonstrativa nao incluida%3C/text%3E%3C/svg%3E"
       },
       moderna: {
         titulo: "Idade Moderna",
         descricao: "Período de grandes descobertas, revoluções e o surgimento dos Estados modernos.",
-        imagem: "media/renaissance.jpg"
+        imagem: "data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%27800%27 height=%27300%27%3E%3Crect width=%27100%25%27 height=%27100%25%27 fill=%27%23e5e7eb%27/%3E%3Ctext x=%2750%25%27 y=%2750%25%27 text-anchor=%27middle%27 dominant-baseline=%27middle%27 fill=%27%23374151%27 font-size=%2724%27%3EMidia demonstrativa nao incluida%3C/text%3E%3C/svg%3E"
       },
       contemporanea: {
         titulo: "Idade Contemporânea",
         descricao: "Época atual, marcada por avanços tecnológicos, transformações sociais e a globalização.",
-        imagem: "media/modern.jpg"
+        imagem: "data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%27800%27 height=%27300%27%3E%3Crect width=%27100%25%27 height=%27100%25%27 fill=%27%23e5e7eb%27/%3E%3Ctext x=%2750%25%27 y=%2750%25%27 text-anchor=%27middle%27 dominant-baseline=%27middle%27 fill=%27%23374151%27 font-size=%2724%27%3EMidia demonstrativa nao incluida%3C/text%3E%3C/svg%3E"
       }
     };
     function showEra(eraKey) {
